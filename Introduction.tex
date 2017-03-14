@@ -1,0 +1,24 @@
+\ifdefined\included
+\else
+\documentclass[a4paper,11pt,twoside]{StyleThese}
+\include{formatAndDefs}
+\sloppy
+\begin{document}
+\fi
+
+
+\chapter*{Introduction}
+\addstarredchapter{Introduction} %Sinon cela n'apparait pas dans la table des matières
+\begin{itemize}
+\item Context (general + PhD)
+\item Motivation + goal
+\item Organisation
+\item Publications
+\end{itemize}
+
+\ifdefined\included
+\else
+\bibliographystyle{acm}
+\bibliography{These}
+\end{document}
+\fi
