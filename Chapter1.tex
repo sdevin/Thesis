@@ -14,46 +14,209 @@
 
 \section{Joint Action Theory}
 
-What is Joint Action: sebanz06
+A first step to endow robots with the ability to perform Joint Actions with humans is to understand how humans act together. As a working definition of Joint Action, we will use the one from \cite{sebanz2006joint}:
 
-\subsection{What do we need to perform Joint Action?}
+\begin{quote}
+\textit{Joint action can be regarded as any form of social interaction whereby two or more individuals coordinate their actions in space and time to bring about a change in the environment.}
+\end{quote}
+
+A given number of prerequisites are needed for these individuals to achieve the so-called Joint Action. First of all, they need to agree on the change they want to bring in the environment, the conditions under which they will stay engaged in its realisation and the way to do it. A number of works have studied this prerequisite, named \textit{commitment}, which I will develop in Sec.~\ref{subsec:commitment}. Then, as mentioned in the definition, the individuals need to coordinate their actions in space and time. This will be studied in Sec.~\ref{subsec:coordination}. Finally, in order to coordinate, each individual needs to be aware of the other, he needs to be able to perceive him and predict his actions. This part will be develop in Sec.~\ref{subsec:prediction}.
 
 \subsection{Commitment}
 
+\label{subsec:commitment}
+
+The first prerequisite to achieve a Joint Action is to have a \textit{goal} to pursue and the \textit{intention} to achieve it. Let's define in a first time what is called a \textit{goal} and an \textit{intention} for a single person before going to a \textit{joint goal} and a \textit{joint intention}.
+
+In \cite{tomasello2005understanding}, Tomasello et al. define what they call a \textit{goal} and an \textit{intention} and illustrate these definitions with an example and an associated figure (fig.~\ref{fig:intention}) where a person wants to open a box.
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.8\textwidth]{figs/Chapter1/intention.png}
+    \caption{Illustrative example of an intentional action by Tomasello et al. Here the human has for \textit{goal} to open the box. He chooses a means to perform it and so forms an \textit{intention}.}
+    \label{fig:intention}
+\end{figure}
+
+A \textit{goal} is defined here as the representation of the desired state by the agent (in the example, the goal is an open box) and, based on Bratman's work \cite{bratman1989intention}, an \textit{intention} is defined as an action plan the agent commits itself in pursuit of a goal (in the example, the intention is to use a key to open the box). The \textit{intention} includes both a \textit{goal} and the means to achieve it. 
+
+In a same way, Cohen and Levesque propose in \cite{cohen1991teamwork} a formal definition of what they call a \textit{persistent goal}:
+
+\begin{quote}
+\textbf{Definition: } An agent has a \textit{persistent goal} relative to \textit{q} to achieve \textit{p} iff:
+\begin{enumerate}
+\item she believes that \textit{p} is currently false;
+\item she wants \textit{p} to be true eventually;
+\item it is true (and she knows it) that (2) will continue to hold until she comes to believe either that \textit{p} is true, or that it will neither be true, or that \textit{q} is false.
+\end{enumerate}
+\end{quote}
+
+However, their definition of an \textit{intention} differs a little from the previous one. They define an \textit{intention} as a commitment to act in a certain mental state:
+
+\begin{quote}
+\textbf{Definition:} An agent \textit{intends} relative to some conditions to do an action just in case she has a persistent goal (relative to that condition) of having done the action, and, moreover, having done it, believing throughout that she is doing it.
+\end{quote}
+
+The \textit{intention} still includes the \textit{goal} but here it concerns more the fact that the agent commits itself to achieve the goal than the way to achieve it.
+
+Let's now apply these principles to a Joint Action. One of the most known definition of \textit{joint intention} is the one of Bratman \cite{bratman1993shared}:
+
+\begin{quote}
+We intend to \textit{J} if and only if:
+\begin{enumerate}
+\item (a) I intend that we \textit{J} and (b) you intend that we \textit{J}.
+\item I intend that we \textit{J} in accordance with and because of 1\textit{a}, 1\textit{b}, and meshing subplans of 1\textit{a} and 1\textit{b}; you intend that we \textit{J} in accordance with and because of 1\textit{a}, 1\textit{b}, and meshing subplans of 1\textit{a} and 1\textit{b}.
+\item 1 and 2 are common knowledge between us.
+\end{enumerate}
+\end{quote}
+
+This definition is taking back and illustrated by Tomasello et al. in \cite{tomasello2005understanding} where they reuse the example of the box to open (fig~\ref{fig:intention_jointe}).
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.8\textwidth]{figs/Chapter1/intention_jointe.png}
+    \caption{Illustrative example of a collaborative activity by Tomasello et al. Here the humans have for \textit{shared goal} to open the box together. They choose a means to perform it which takes into account the other capabilities and so form a \textit{joint intention}.}
+    \label{fig:intention_jointe}
+\end{figure}
+
+The \textit{shared goal} is defined as the representation of a desired state plus the fact that it will be done in collaboration with other person(s) (in the example, they will open the box together) and a \textit{joint intention} is defined as a collaborative plan the agents commit to in order to achieve the \textit{shared goal} and which takes into account both agents individual plans (here an agent will hold the box with the clamp while the other open it with the cutter).
+
+In a same way, Cohen and Levesque extend their definition of \textit{persistent goal} and \textit{intention} to a collaborative activity. They first define a \textit{weak achievement goal} as:
+\begin{quote}
+\textbf{Definition: } An agent has a \textit{weak achievement goal} relative to \textit{q} and with respect to a team to bring about \textit{p} if either of these conditions holds:
+\begin{itemize}
+\item The agent has a normal achievement goal to bring about \textit{p}, that is, the agent does not yet believe that \textit{p} is true and has \textit{p} eventually being true as goal.
+\item The agent believes that \textit{p} is true, will never be true, or is irrelevant (that is, \textit{q} is false), \textit{but} has as a goal that the status of \textit{p} be mutually believed by all the team members.
+\end{itemize}
+\end{quote}
+
+They then use this definition to define a \textit{joint persistent goal}:
+\begin{quote}
+\textbf{Definition: } A team of agents have a \textit{joint persistent goal} relative to \textit{q} to achieve \textit{p} just in case
+\begin{itemize}
+\item they mutually believe that \textit{p} is currently false;
+\item they mutually know they all want \textit{p} to eventually be true;
+\item it is true (and mutual knowledge) that until they come to mutually believe that \textit{p is true}, that \textit{p} will never be true, or that \textit{q} is false, they will continue to mutually believe that they each have \textit{p} as a weak achievement goal relative to \textit{q} and with respect to the team.
+\end{itemize}
+\end{quote}
+
+They finally define a \textit{joint intention} as:
+\begin{quote}
+\textbf{Definition:} A team of agents \textit{jointly intends}, relative to some escape condition, to do an action iff the members have a joint persistent goal relative of that condition of their having done the action and, moreover, having done it mutually believing throughout that they were doing it.
+\end{quote}
+
+As previously, the definitions of Cohen and Levesque do no take into account the way to achieve the \textit{shared goal}, however, they introduce the interesting idea that agents are also engaged to communicate about the state of the \textit{shared goal}.
+
+Concerning the way to achieve a \textit{shared goal}, mentioned into the definition of the \textit{joint intention} of Tomasello et al., Grosz and Sidner initially introduce and formalize the notion of \textit{Shared Plan} in \cite{grosz1988plans}, which is extended in \cite{grosz1999evolution}. The key properties of their model are as follows:
+\begin{quote}
+\begin{enumerate}
+\item it uses individual intentions to establish commitment of collaborators to their joint activity
+\item it establishes an agent's commitments to its collaborating partners' abilities to carry out their
+individual actions that contribute to the joint activity
+\item it accounts for helpful behavior in the context of collaborative activity
+\item it covers contracting actions and distinguishes contracting from collaboration
+\item the need for agents to communicate is derivative, not stipulated, and follows from the general
+commitment to the group activity
+\item the meshing of subplans is ensured it is also derivative from more general constraints.
+\end{enumerate}
+\end{quote}
+
+With their definition, each agent does not necessarily know the all \textit{Shared Plan} but only his own individual plan and the meshing subparts of the plan. The group has a \textit{Shared Plan}, but no individual member necessarily has the whole \textit{Shared Plan}.
+
+In conclusion, the concepts concerning the commitment of agents to a collaborative activity that we will use in this thesis can be summarized as:
+\begin{itemize}
+\item A \textit{goal} will be represented as a desired state.
+\item A\textit{shared goal} will be considered as a \textit{goal} to be achieved in collaboration with other partner(s). An agent is considered engaged in a \textit{shared goal} if he believes the goal is currently false, he wants the goal to be true and he will not give up on the goal unless he knows that the goal is achieved, not feasible or not relevant any more and he knows that his partners are aware of it.
+\item A \textit{joint intention} will include a \textit{shared goal} and the way to realize it. This way will be represented as a \textit{Shared Plan} which will take into account each agent capacities and the potential conflicts between their actions. This \textit{Shared Plan} will not be necessarily completely known by all members of the group but all individuals will know their part of the plan and the meshing subparts.
+\end{itemize}
+
+
 \subsection{Perception and prediction}
+
+\label{subsec:prediction}
+
+Perception, Sebanz \cite{sebanz2006joint}:
+\begin{itemize}
+\item Joint attention
+\item Action observation
+\item Co-representation
+\end{itemize}
+
+Prediction:
+\begin{itemize}
+\item Pacherie: action-to-goal and goal-to-action \cite{pacherie2011phenomenology}
+\item sebanz: deduce from prediction: what, when, where \cite{sebanz2009prediction}
+\end{itemize}
+
++ Agency \cite{sebanz2006joint}, \cite{pacherie2011phenomenology}
 
 \subsection{Coordination}
 
+\label{subsec:coordination}
 
+Knoblich \cite{knoblich20113}
+\begin{itemize}
+\item emergent coordination: entertainment, affordances \cite{gibson2014theory}, corrspondance action-perception, action simulation
+\item planned coordination: coordination smoother (vesper, \cite{vesper2010minimal})
+\end{itemize}
+
++communication: Clark \cite{clark1996using}
 
 \section{How to endow a robot with Joint Action abilities}
 
+
 \subsection{Engagement and Intention recognition}
 
-\subsection{Perspective taking and humans mental states}
-
-\subsection{Actions realization}
+\begin{itemize}
+\item Intention recognition
+\item Goal reasoning
+\item Engagement in the task
+\end{itemize}
 
 \subsection{High level decisions}
 
+\begin{itemize}
+\item human-aware task planning
+\item supervision
+\end{itemize}
+
+\subsection{Perspective taking and humans mental states}
+
+\begin{itemize}
+\item world state management
+\item perspective taking
+\item mental states
+\end{itemize}
+
+\subsection{Actions realization}
+
+\begin{itemize}
+\item human-aware motion planning
+\item human-aware control
+\item understanding effects of actions (agency)
+\end{itemize}
+
+
 \subsection{Communication for Joint Action}
 
-
+\begin{itemize}
+\item dialogue
+\item signalling
+\end{itemize}
 
 \section{A three levels architecture}
 
 \subsection{The three levels of Pacherie}
+
+\cite{pacherie2008phenomenology}, \cite{pacherie2011phenomenology}
 
 \subsection{A three levels robotics architecture}
 
 + related work on others robotics architecture
 
 
-Cited while no other citation: \cite{goossens93}
-
 \ifdefined\included
 \else
-\bibliographystyle{acm}
+\bibliographystyle{StyleThese}
 \bibliography{These}
 \end{document}
 \fi
