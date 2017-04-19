@@ -191,26 +191,33 @@ An other way to coordinate is through communication. Indeed, Clark argues that t
 
 \section{How to endow a robot with Joint Action abilities}
 
-In this part we will do an overview on how the theory on human-human Joint Action can be applied to human-robot Joint Action. Following to what has been discussed on commitment, we will first see in Sec.~\ref{subsec:engagement} how the robot can engage in Joint Action and understand the intention of its human partners. Then, we will see in Sec.~\ref{subsec:perspective_taking} how the robot perceives the humans and can predict their actions by taking into account their perspectives and mental states. We will also see how the robot can execute actions adapted to Joint Action with humans in Sec.~\ref{subsec:action} and, finally, we will see how it can coordinate during Joint Action in Sec.~\ref{subsec:coordination_robot}.
+In this part we will do an overview on how the theory on human-human Joint Action can be applied to human-robot Joint Action. Following to what has been discussed on commitment, we will first see in Sec.~\ref{subsec:engagement} how the robot can engage in Joint Action and understand the intention of its human partners. Then, we will see in Sec.~\ref{subsec:perspective_taking} how the robot perceives the humans and can predict their actions by taking into account their perspectives and mental states. We will also see how the robot can execute actions adapted to Joint Actions with humans in Sec.~\ref{subsec:action} and, finally, we will see how it can coordinate during Joint Action in Sec.~\ref{subsec:coordination_robot}.
+
+The parts which are linked to the work presented in this thesis will be more developed in the corresponding chapters.
 
 \subsection{Engagement and Intention}
 
 \label{subsec:engagement}
 
-\begin{itemize}
-\item Intention and plan recognition
-\item Goal reasoning
-\item Engagement in the task
-\item human-aware task planning
-\end{itemize}
+As for humans, robots need to be able to engage in Joint Action. A first prerequisite is to choose a goal to perform. This goal can be imposed by a direct order of the user, however, the robot also needs to be able to pro actively propose its help whenever a human needs it. To do so, the robot needs to be able to infer high-level goals by observing and reasoning on its human partners’ activities. This process is called plan recognition or, when a bigger focus is put on Human-Robot Interaction aspects, intention recognition. Many works have been done concerning plan recognition using approaches such as classical planning \cite{ramirez2009plan}, probabilistic planning \cite{bui2003general} or logic-based techniques \cite{singla2011abductive}. Concerning intention recognition, works such as \cite{breazeal2009embodied} and \cite{baker2014modeling} take into account theory of mind aspects to deduce what the human is doing.
+
+When direct orders have been received and humans intentions recognized, the robot needs to choose which goal to perform, also taking into account its own resources. This problem has not been addressed as a whole in the literature, however, some similar works can be seen as partial answer. For example, some deliberation systems allow to solve problems with multiple goals taking into account resources such as time \cite{georgeff1987reactive, ghallab1994representation, lemai2004interleaving} or energy level \cite{rabideau1999iterative}.
+
+Once the robot is engaged in a Joint Action, it needs to be able to monitor other agents engagement. Indeed, it needs to understand if, for a reason, a human aborts the current goal and react accordingly. This can be done using gaze cues and gestures \cite{rich2010recognizing}, postures \cite{sanghvi2011automatic} but also context and humans mental states \cite{salam2015multi}.
+
+Finally, once a goal chosen, the robot needs to be able to establish a Shared Plan to achieve it with its human partner(s). Several works have been done in task planning to takex into account the human \cite{cirillo2010human,Lallement2014hatp}. They allow the robot to reduce resource conflicts \cite{chakraborti2016planning}, take divergent beliefs into account \cite{guitton2012belief,talamadupula2014coordination} or promote stigmergic collaboration
+for agents in co-habitation \cite{chakraborti2015planning}. 
+Once the plan computed, the robot needs to be able to share/negotiate it with its partners. Several studies have been reported on how to communicate these plans. Some researchers studied how a system could acquire knowledge on plan decomposition from a user \cite{Mohseni2015} and how dialog can be used to teach new collaborative plans to the robot and to modify these plans \cite{petit2013coordinating}. In \cite{sorce2015proof}, the system is able to learn a plan from a user and transmit it to another user and in \cite{allen2002human} a computer agent is able to construct a plan in collaboration with a user. Finally, \cite{milliez2016using} presents a system where the robot shares the plan with a level of details which depends on the expertise of the user.
 
 \subsection{Perspective taking and humans mental states}
 
 \label{subsec:perspective_taking}
 
 \begin{itemize}
-\item world state management
-\item perspective taking
+\item Need to align robot representation of the world to humans one: x, y, theta to facts.
+\item the robot needs to be able to take the perspective of its partner
+\item perspective taking + basic usages (dialogue, ...)
+\item but robot not only needs to take the point of view of other agents concerning the environment
 \item mental states
 \end{itemize}
 
@@ -222,6 +229,7 @@ In this part we will do an overview on how the theory on human-human Joint Actio
 \item human-aware motion planning
 \item human-aware control
 \item understanding effects of actions (agency)
+\item learning affordances
 \end{itemize}
 
 
