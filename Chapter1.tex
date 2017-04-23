@@ -191,7 +191,7 @@ An other way to coordinate is through communication. Indeed, Clark argues that t
 
 \section{How to endow a robot with Joint Action abilities}
 
-In this part we will do an overview on how the theory on human-human Joint Action can be applied to human-robot Joint Action. Following to what has been discussed on commitment, we will first see in Sec.~\ref{subsec:engagement} how the robot can engage in Joint Action and understand the intention of its human partners. Then, we will see in Sec.~\ref{subsec:perspective_taking} how the robot perceives the humans and can predict their actions by taking into account their perspectives and mental states. We will also see how the robot can execute actions adapted to Joint Actions with humans in Sec.~\ref{subsec:action} and, finally, we will see how it can coordinate during Joint Action in Sec.~\ref{subsec:coordination_robot}.
+In this part we will do an overview on how the theory on human-human Joint Action can be applied to human-robot Joint Action. Following to what has been discussed on commitment, we will first see in Sec.~\ref{subsec:engagement} how the robot can engage in Joint Action and understand the intention of its human partners. Then, we will see in Sec.~\ref{subsec:perspective_taking} how the robot perceives the humans and can predict their actions by taking into account their perspectives and mental states. We will also see how the robot can coordinate during Joint Action in Sec.~\ref{subsec:coordination_robot}.
 
 The parts which are linked to the work presented in this thesis will be more developed in the corresponding chapters.
 
@@ -213,36 +213,30 @@ Once the plan computed, the robot needs to be able to share/negotiate it with it
 
 \label{subsec:perspective_taking}
 
-\begin{itemize}
-\item Need to align robot representation of the world to humans one: x, y, theta to facts.
-\item the robot needs to be able to take the perspective of its partner
-\item perspective taking + basic usages (dialogue, ...)
-\item but robot not only needs to take the point of view of other agents concerning the environment
-\item mental states
-\end{itemize}
+One of the first difference between a human and a robot is the way they perceive the world. To perceive its environment, the robot uses sensors to recognize and localize entities. These sensors return positions and orientations in the form of coordinates (\textit{x, y, z}, $\theta$, $\phi$, $\psi$). In the other hand, humans use relations between objects to describe their positions (e.g. the mug is on the kitchen table, oriented toward the window). To understand the human references and to
+generate understandable utterances, the robot needs therefore
+to build a semantic representation of the world, based on the
+geometric data it collects from sensors. This process is called \textit{grounding} and has been developed in several works as \cite{mavridis2005grounded} or \cite{lemaignan2012grounding}.
 
-\subsection{Actions realization}
+However having its own semantic representation of the world is not enough for the robot, it also needs to take into account the point of view of its partners in order to better understand their goals and actions. To do so, the robot does what is called \textit{perspective taking}, it constructs a representation of the world from the humans perspectives \cite{breazeal2006using,milliez2014framework}. This ability can be used by the robot to choose its actions in order to influence others mental states \cite{gray2014manipulating}, solve ambiguous situations \cite{ros2010one} or to better interact during dialogue \cite{ferreira2015users}.
 
-\label{subsec:action}
+One important application of \textit{perspective taking} is human action recognition. Indeed, knowing what others are aware of is a first step to understand what they are doing. Then, the action recognition can be done based on Partially Observed Markov Decision Processes (POMDP) and Dynamic Bayesian Networks (DBN) \cite{baker2014modeling} or inverse reinforcement learning \cite{nagai2015probabilistic}.
 
-\begin{itemize}
-\item human-aware motion planning
-\item human-aware control
-\item understanding effects of actions (agency)
-\item learning affordances
-\end{itemize}
+This subject will be more developed and we will see, in Chapter \ref{ch:MS}, how we use \textit{perspective taking} to estimate mental states of the humans concerning the Shared Plan in order to ameliorate their execution.
 
 
 \subsection{Coordination}
 
 \label{subsec:coordination_robot}
 
-\begin{itemize}
-\item plan execution
-\item dialogue
-\item signalling
-\item joint actions (e.g. handover)
-\end{itemize}
+One of the most important and difficult challenge during human robot Joint Action is to coordinate. The problem appears at different levels during Joint Action. 
+
+At a higher one, the humans and the robot need to coordinate their actions to fluidly execute the Shared Plan. The robot needs to execute its actions at the right time, monitor the ones of its partners and correctly communicate when needed. Several systems have been developed to do so, has \textit{Chaski} \cite{shah2011improved}, a task-level executor which uses insights from human-human teaming in order to minimize human idle time or \textit{Pike} an online executive that unifies intention recognition and plan adaptation to deal with temporal uncertainties during Shared Plan execution \cite{karpas2015robust}. A part of the work presented in the thesis is the extension of \textit{SHARY}, a supervisor allowing to execute Shared Plans into a complete human-aware architecture \cite{clodic2009shary}. We will notably see in Chapter \ref{ch:SP} how we extend it in order to execute flexible Shared Plans where part of the decisions are let to the execution.
+ 
+One of the key aspects at this level of coordination is verbal and non-verbal communication. Concerning verbal communication, there is two ways to consider dialogue. The first one consists of seeing dialogue as a Joint Action. The second one is to see it as a tool for Joint Action. In practice, dialogue can be both, and, as developed in \cite{clark1996using}, there can be Joint Actions in Joint Actions. Several works in robotics developed modules allowing the robot to dialogue with humans in support to Joint Action \cite{roy2000spoken, lucignano2013dialogue, ferreira2015users}. To support dialogue and Joint Action in general, non verbal communication is very important. Its benefit has been shown for human-robot interaction \cite{breazeal2005effects} and ways to perform it have been studied, principally concerning gaze cues \cite{boucher2010facilitative, mutlu2009footing} but also postures \cite{hart2014gesture}. However, there is few works which study the use of non-verbal behavior during human-robot Joint Action where both partners are acting. This subject and the associated literature will be more developed in Chapter~\ref{ch:Acting}.
+
+At a lower level, the robot needs to coordinate with its partners during action execution. To execute a task, the robot can be led to perform actions in collaboration with one or several humans. The principal action studied in HRI is handover, an action which seems simple as we do it in every day life but which, in fact, raises a number of challenges as, among others, approaching the other person \cite{walters2007robotic}, finding an acceptable posture to give the object \cite{cakmak2011human, mainprice2012sharing} or releasing the object with the good timing \cite{mason2005grip}. But, the robot also needs to coordinate when it is executing an action on its own. Indeed, it needs to share space and resources and its actions need to be understandable enough for its partner. To do so, the robot not only has to execute its actions in an efficient way, but also in a legible, acceptable and predictable way. This process can be compared to the \textit{coordination smoothers} described in \cite{vesper2010minimal} and one way to do it is through human-aware motion planing \cite{sisbot2012human, kruse2013human}.
+
 
 \section{A three levels architecture}
 
@@ -252,7 +246,7 @@ Once the plan computed, the robot needs to be able to share/negotiate it with it
 
 \subsection{A three levels robotics architecture}
 
-+ related work on others robotics architecture
++ where is my work
 
 
 \ifdefined\included
