@@ -240,14 +240,84 @@ At a lower level, the robot needs to coordinate with its partners during action 
 
 \section{A three levels architecture}
 
+We saw previously the different prerequisites to Joint Action, both between humans and in HRI. We will see now how the monitoring of Joint Action is organized around three different levels first with the theory of Pacherie concerning humans Joint Actions in Sec.~\ref{subsec:Pacherie} and then in the LAAS robotics architecture in Sec.~\ref{subsec:Archi}.
+
 \subsection{The three levels of Pacherie}
 
-\cite{pacherie2008phenomenology}, \cite{pacherie2011phenomenology}
+\label{subsec:Pacherie}
+
+As for the prerequisite of Joint Action, we will first introduce the concepts developed by Pacherie on Action and then, extend them to Joint Action. Pacherie argues in \cite{pacherie2008phenomenology} that intention in Action is composed of three levels which all have a specific role to play and which are organized as in fig.~\ref{fig:Pacherie}. 
+
+\paragraph{Distal Intention:} 
+This is the higher level of intention. In a first time, this level is in charge of forming an intention to act. It means that it is in charge of choosing a goal, a time to execute it and finding a plan to achieve it. Then, once the time comes to execute the plan, this level has to ensure its good execution. To do so, Pacherie takes back the definition of what is called \textit{rational guidance and control} \cite{buekens2001indexicaliteit}. This control takes two forms: 'tracking control' where we ensure that each successive step in the action plan is successfully implemented before moving to the next step and 'collateral control' where we control for the side effects of accomplishing an action.
+
+\paragraph{Proximal Intention:}
+This level inherits an action plan from the \textit{Distal Intention}. Its responsibility is, first, to anchor the received action plan which is defined in an abstract way in the situation of the action. It needs to integrate conceptual information
+about the intended action inherited from the \textit{Distal Intention} with perceptual information about the current situation to yield a more definite representation of the action to be performed. Then, this level has to ensure that the imagined actions becomes current through situational control of their unfolding.
+
+\paragraph{Motor Intention:}
+This is the lower level on intention. As for the other levels, it first has to make choices and then to monitor their executions. At this level, these choices concern motor commands, it means the physical way to achieve the action inherited from the \textit{Proximal Intention}.
+
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.8\textwidth]{figs/Chapter1/Pacherie.png}
+    \caption{The intentional cascade by Pacherie. Distal, Proximal and Motor intentions coexist at the same time, each one controlling the action at a different level.}
+    \label{fig:Pacherie}
+\end{figure}
+
+In \cite{pacherie2011phenomenology}, Pacherie extends these three levels to Joint Action. In the same way as before, these three new levels coexist at the same time, each one controlling the Joint Action at a different level.
+
+\paragraph{Shared Distal Intention:}
+Where \textit{Distal Intention} was responsible of intention, \textit{Shared Distal Intention} is responsible of joint intention. When performing a Joint Action, this level is the one responsible of the shared goal and the Shared Plan. As said in Sec.~\ref{subsec:commitment}, the agent does not have a whole representation of the Shared Plan here and part of what he is representing will be executed by someone else.
+
+\paragraph{Shared Proximal Intention:}
+This level has the same responsibilities as \textit{Proximal Intention}, however, the anchoring of the action plan needs to take care of the Joint Action partners and to be done in a coordinated way. During the monitoring part, the choices made previously need to be adapted to the others behavior.
+
+\paragraph{Coupled Motor Intention:}
+As for \textit{Motor Intention}, this level is responsible of the motor commands of the agent. During Joint Action, this level will be the one responsible of precise spatio-temporal coordination for the actions which need it (e.g. holding an object together).
+
 
 \subsection{A three levels robotics architecture}
 
-+ where is my work
+\label{subsec:Archi}
 
+Ten years before Pacherie cames with her action theory with three levels, the field of autonomous robotics was trying to build architecture and was already intuitively designing three similar levels. A first implemented architecture for autonomous robots is presented in \cite{alami1998architecture}, organized around these three levels (fig.~\ref{fig:FirstArchi}).
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.8\textwidth]{figs/Chapter1/ArchitectureHold.png}
+    \caption{One of the first architecture for autonomous robots. The architecture is divided in three main parts: decision, execution and functional levels.}
+    \label{fig:FirstArchi}
+\end{figure}
+
+\paragraph{Decision level:}
+This level can be compared to the \textit{Distal Intention} level of Pacherie. It is the one responsible of producing a task plan and supervising it. It sends actions to execute and receives reports from the \textit{execution level}.
+
+\paragraph{Execution level:}
+This level can be compared to the \textit{Proximal Intention} level of Pacherie. It receives from \textit{decision level} the sequence of actions to be executed and selects, parametrizes and synchronizes dynamically the adequate functions of the \textit{functional level}.
+
+\paragraph{Functional level:}
+This level can be compared to the \textit{Motor Intention} level of Pacherie. In includes all the basic robot action and perception capacities (motion planning, vision, localization, tracking motion control...). 
+
+\bigskip
+In the past years, this architecture has been developed and adapted to the field of HRI. In recent works, we presented in \cite{devin2016some} a theoretical version of the architecture adapted to human-robot Joint Action and still based on the three levels of Pacherie (fig.~\ref{fig:ArchiThreeLevels}). The implemented version of this architecture will be present in Chapter~\ref{ch:Sup} as well as the place of the work presented in this thesis in the architecture.
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=\textwidth]{figs/Chapter1/architecture.png}
+    \caption{Recent architecture for human-robot Joint Action. The architecture is organized in three levels corresponding to the ones defined by Pacherie.}
+    \label{fig:ArchiThreeLevels}
+\end{figure}
+
+\paragraph{Distal level:}
+As for \textit{Shared Distal Intention}, this level is responsible of goals and Shared Plans management. At this level, the robot is supposed to reason on its environment with high level representations. To do so, the robot is equipped with a \textbf{Situation Assessment} module which builds a symbolic representation of the robot environment. To be able to also reason about the humans knowledge, the robot is equipped with a \textbf{Mental State Management} module which constantly estimates humans mental states. With these information, the \textbf{Intention prediction} module allows to estimate humans intention ands whereas the robot should propose its help or not. This module determines the goal of the robot and allows, during its execution, to monitor other agents engagement. Once the goal chosen, the \textbf{Shared Plan Elaboration} module allows the robot to construct and negotiate a Shared Plan to achieve the goal. Then, the \textbf{Shared Plan Achievement} module monitors the good execution of this Shared Plan. The last part of this level is the \textbf{Communication for Joint Action} module which allows the robot to verbally and non-verbally communicate during Joint Action. 
+
+\paragraph{Proximal level:}
+As for \textit{Shared Proximal Intention}, this level is in charge of anchoring the Shared Plan actions in the current situation. This level is composed of two parts: the \textbf{Actions Achievement} module which allows to call the adequate motor modules at the right time in order to perform robot actions and the \textbf{Human Actions Monitoring} module which allows to recognize and interpret humans actions with regard to the Shared Plan. These two modules communicates in order to coordinate robot actions to the humans ones.
+
+\paragraph{Motor level:}
+As for \textit{Coupled Motor Intention}, this level is in charge of motor commands of the robot. This level includes all modules allowing to control the robot actuators and interpret data from sensors. These modules, or at least a part of them, also take into account the humans as, for example, the human-aware geometric task and motion planner.
 
 \ifdefined\included
 \else
