@@ -16,11 +16,7 @@
 
 \section{Role of the supervisor in the global architecture}
 
-\begin{itemize}
-\item Scheme of the complete architecture
-\item quick description of each module
-\item quick description of supervisor role
-\end{itemize}
+One of the goal of the research group in which one I was integrated at LAAS-CNRS is to build a fully autonomous robot which interacts and performs Joint Actions with humans. To do so, an architecture for human-robot interaction has been developed and is constantly improved. This architecture is composed of several modules and a simplified scheme of it can be found in Fig.~\ref{fig:GlobalArchi}.
 
 \begin{figure}[!h]
 	\centering
@@ -29,16 +25,29 @@
     \label{fig:GlobalArchi}
 \end{figure}
 
-\cite{Lallement2014hatp}
+\paragraph{Sensorimotor layer:}
+The lower level of the architecture is composed of modules which allow to communicate and control sensors and actuators. Among others, this layer is composed of modules interpreting sensors data to detect humans and objects and a module allowing to execute given trajectories by calling the adequate actuators.
 
+\paragraph{Situation Assessment:}
+The situation assessment is done by a soft called TOASTER \cite{milliezThesis}. One of the functionalities of TOASTER is to build and maintain a consistent world state based on data coming from the sensorimotor layer. Geometrics computation are done on this world state to compute symbolic predicates concerning the environment (e.g. \textit{<object, isOn, support>}, \textit{<object, isIn, box>}) and agents abilities and behavior (e.g. \textit{object, isVisibleBy, human}, \textit{<object, isReachableBy, robot>}, \textit{human, isLookingToward, object}). TOASTER is also in charge of perspective taking: the previous predicates are contently estimated and maintained from the point of view of all humans.
+
+\paragraph{Geometric Planner:}
+In order to perform actions and movements adapted to the human proximity, our architecture is equipped with a geometric task and motion planner called GTP \cite{waldhart2016novel}. GTP allows to compute trajectories as well as objects placements and grasps in order to refine actions such as Pick or Place while taking into account the human safety and comfort.
+
+\paragraph{Symbolic Planner:}
+For the robot to be able to synthesize Shared Plans, our architecture is equipped with HATP, a human-aware HTN (Hierarchical Task Network) task planner which allows the robot to compute and refine a plan both for itself and its humans partners, taking into account a number of social rules \cite{Lallement2014hatp}.
+
+HATP has been specially designed to integrate a number of features that are meant to promote the synthesis of plans that are acceptable by humans and easily if not trivially understandable by them. It allows to specify the humans and robot capabilities in terms of actions they can execute. Several aspects such as human preferences and comfort, estimation of human effort to achieve a task in a given context and "social rules" are used in a cost-based approach to build "sufficiently good" human-robot Shared Plans.
+
+\paragraph{Dialogue Manager:}
+In order for the robot to communicate with humans, a basic dialogue manager has been integrated to the architecture. This module allows to give humans information, ask basic questions and understand basic answers.
+
+\paragraph{Supervisor:}
+The last module of the architecture is the supervisor. It is the one in charge of controlling collaborative activities. It chooses the robot goals and monitors the Shared Plan execution. To do so, it estimates humans mental states concerning the Shared Plan and takes them into account to decide when to perform actions or to communicate (verbally and/or non-verbally). It also interprets the information coming from the Situation Assessment module in order to recognize human actions like Pick or Place with regard to the Shared Plan. This module is an extension of \cite{clodic2009shary} and \cite{fiore2016planning} and is the major technical contribution of the thesis. Its internal architecture will be detailed in the next section.
 
 \section{The supervisor architecture}
 
-\begin{itemize}
-\item Scheme of the architecture
-\item introduction datas
-\item details for each modules
-\end{itemize}
+The supervisor is composed of several modules and is fully implemented in ROS\footnote{http://www.ros.org/}. The complete scheme of its architecture can be found in Fig.~\ref{fig:archiSup}, however, as the figure is quite complex, each composing part of the supervisor will be described individually in the next subsections. 
 
 \begin{figure}[!h]
 	\centering
@@ -47,7 +56,7 @@
     \label{fig:archiSup}
 \end{figure}
 
-\paragraph{Goal Manager}
+\subsection{Goal Manager}
 
 \begin{figure}[!h]
 	\centering
@@ -56,7 +65,7 @@
     \label{fig:goalManager}
 \end{figure}
 
-\paragraph{Plan elaboration}
+\subsection{Plan elaboration}
 
 \begin{figure}[!h]
 	\centering
@@ -65,7 +74,7 @@
     \label{fig:planElaboration}
 \end{figure}
 
-\paragraph{Goal Manager}
+\subsection{Plan Maintainer}
 
 \begin{figure}[!h]
 	\centering
@@ -74,7 +83,7 @@
     \label{fig:planMaintainer}
 \end{figure}
 
-\paragraph{Human Monitor}
+\subsection{Human Monitor}
 
 \begin{figure}[!h]
 	\centering
@@ -83,7 +92,7 @@
     \label{fig:humanMonitor}
 \end{figure}
 
-\paragraph{Mental State Manager}
+\subsection{Mental State Manager}
 
 \begin{figure}[!h]
 	\centering
@@ -92,7 +101,7 @@
     \label{fig:MSManager}
 \end{figure}
 
-\paragraph{Robot Decision}
+\subsection{Robot Decision}
 
 \begin{figure}[!h]
 	\centering
@@ -101,7 +110,7 @@
     \label{fig:robotDecition}
 \end{figure}
 
-\paragraph{Action Executor}
+\subsection{Action Executor}
 
 \begin{figure}[!h]
 	\centering
@@ -110,13 +119,13 @@
     \label{fig:actionExecutor}
 \end{figure}
 
-\paragraph{Non-Verbal Behavior}
+\subsection{Non-Verbal Behavior}
 
 \begin{figure}[!h]
 	\centering
     \includegraphics[width=0.5\textwidth]{figs/Chapter2/NVBehavior.png}
     \caption{Interaction of the Non-Verbal Behavior module with the rest of the supervisor.}
-    \label{fig:GlobalArchi}
+    \label{fig:NVBehavior}
 \end{figure}
 
 \section{Data representation}
