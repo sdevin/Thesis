@@ -167,13 +167,14 @@ The current state of the world from the robot point of view $WS$ is composed of 
 $$p = <entity, attribute, value>$$
 For example, the fact that an object is on a table will be represented as $<object, isOn, table>$.
 
-The goal of the robot $g_R$ is represented as:
-$$g_R = <Name_g, Actors_g, Params_g, Obj_g>$$
+A goal $g$ is represented as:
+$$g = <Name_g, Actors_g, Params_g, Obj_g>$$
 where $Name_g$ allows to identify the goal, $Actors_g$ are the agents involved in the goal achievement, $Params_g$ are entities  (agents or objects) used to define precisely the goal and $Obj_g$ is a set of predicates representing the objective of the goal.
 For example, if the robot has for goal to clean the table of the kitchen in collaboration with Bob by removing all items on it, this goal will be represented as:
 $<Clean, <Robot, Bob>, <Kitchen\_table>, <<NULL, isOn, Kitchen\_table>>>$.
+Finally, at its end, each goal $g$ is stored and associated with a label noted $label_g$ which can be equal either to DONE or ABORTED.
 
-Then, the Shared Plan $SP$ used to achieve the goal is represented as:
+Then, a Shared Plan $SP$ is represented as:
 $$SP = <id_p, A_p, L_p>$$
 where $id_p$ is used to identify the plan, $A_p$ are the actions composing the plan and $L_p$ the links representing the order the actions should be executed (causal links).
 
@@ -196,6 +197,7 @@ For example the action for the robot to place an object on a support will be def
 
 The information concerning the state of its task by the robot are regrouped in what will be called the Task State $TS$:
 $$TS = <g_R, SP, WS>$$
+with $g_R$ the current goal of the robot, $SP$ the current Shared Plan and $WS$ the current world state from the robot point of view.
 
 The robot also have a representation of other agents mental state. The representation of the mental state $MS(H)$ of a human H is represented as:
 $$MS(H) = <g_H, g_R(H), SP(H), WS(H)>$$
