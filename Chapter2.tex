@@ -26,25 +26,27 @@ One of the goals of my research group at LAAS-CNRS is to build a fully autonomou
     \caption{The global architecture for human-robot interaction implemented at LAAS-CNRS.}
     \label{fig:GlobalArchi}
 \end{figure}
+\accom{à mon sens il faut revoir ce schéma de l’architecture, il manque une base de données par exemple, non ?}
 
 \paragraph{Sensorimotor layer:}
 The lower level of the architecture is composed of modules which allow to communicate and control sensors and actuators. Among others, this layer is composed of modules interpreting sensors data to detect humans and objects and a module allowing to execute given trajectories by calling the adequate actuators.
 
 \paragraph{Situation Assessment:}
-The situation assessment is done by a software called TOASTER \cite{milliezThesis}. One of the functionalities of TOASTER is to build and maintain a consistent world state based on data coming from the sensorimotor layer. Geometric computations are done on this world state to compute symbolic predicates concerning the environment (e.g. \textit{<object, isOn, support>}, \textit{<object, isIn, box>}) and agents abilities and behavior (e.g. \textit{<object, isVisibleBy, human>}, \textit{<object, isReachableBy, robot>}, \textit{human, isLookingToward, object}). TOASTER is also in charge of perspective taking: the previous predicates are constantly estimated and maintained from the point of view of all humans.
+The situation assessment is done by a software called TOASTER \cite{milliezThesis}. One of the functionalities of TOASTER is to build and maintain a consistent world state based on data coming from the sensorimotor layer. Geometric computations are done on this world state to compute symbolic predicates concerning the environment (e.g. \textit{<object, isOn, support>}, \textit{<object, isIn, box>}) and agents abilities and behavior \accom{behaviors ?} (e.g. \textit{<object, isVisibleBy, human>}, \textit{<object, isReachableBy, robot>}, \textit{human, isLookingToward, object}). TOASTER is also in charge of perspective taking: the previous predicates are constantly estimated and maintained \accom{not only from the robot’s point of view but also} from the point of view of all humans \acc{concerned and perceived in the current context ? (ou quelque chose d’approchant pour dire qu’il y a qd meme un focus)}.
 
 \paragraph{Geometric Planner:}
-In order to perform actions and movements adapted to the human proximity, our architecture is equipped with a geometric task and motion planner called GTP \cite{waldhart2016novel}. GTP allows to compute trajectories as well as objects placements and grasps in order to refine actions such as Pick or Place while taking into account the human safety and comfort.
+In order to perform actions and movements adapted to the human proximity, our architecture is equipped with a geometric task and motion planner called GTP \cite{waldhart2016novel}. GTP allows to compute trajectories as well as objects placements and grasps in order to refine actions \accom{je ne comprends pas l’utilisation de refine ici} such as Pick or Place while taking into account the human safety and comfort. \acccom{j’aurais plutot dit un truc du style : GTP allows to compute trajectories as well as objects placements and grasps. It does at a level that is human understandable and readable by giving access to high level tasks such as Pick or Place (an object (e.g. a cube), somewhere (e.g. on a table)). Computed trajectory takes into account the human safety and comfort. }
 
 \paragraph{Symbolic Planner:}
 For the robot to be able to synthesize Shared Plans, our architecture is equipped with HATP, a human-aware HTN (Hierarchical Task Network) task planner which allows the robot to compute and refine a plan both for itself and its humans partners, taking into account a number of social rules \cite{Lallement2014hatp}.
+\acccom{ce serait bien qu’apparaisse quelque part à quoi correspond le sigle HATP non ?}
 HATP has been specially designed to integrate a number of features that are meant to promote the synthesis of plans that are acceptable by humans and easily if not trivially understandable by them. It allows to specify the humans and robot capabilities in terms of actions they can execute. Several aspects such as human preferences and comfort, estimation of human effort to achieve a task in a given context and "social rules" are used in a cost-based approach to build "sufficiently good" human-robot Shared Plans.
 
 \paragraph{Dialogue Manager:}
-In order for the robot to communicate with humans, a basic dialogue manager has been integrated to the architecture. This module allows to give humans information, ask basic questions and understand basic answers.
+In order for the robot to communicate with humans, a basic dialogue manager has been integrated to the architecture. This module allows to give humans information, ask basic questions and understand basic answers. \acccom{c’est surement voulu mais c’est trop vague, peut être y revient-on plus tard ?}
 
 \paragraph{Supervisor:}
-The last module of the architecture is the supervisor. It is the one in charge of controlling collaborative activities. It chooses the robot goals and monitors the Shared Plan execution. To do so, it estimates humans mental states concerning the Shared Plan and takes them into account to decide when to perform actions or to communicate (verbally and/or non-verbally). It also interprets the information coming from the Situation Assessment module in order to recognize human actions like Pick or Place with regard to the Shared Plan. This module is an extension of \cite{clodic2009shary} and \cite{fiore2016planning} and is the major technical contribution of this thesis. Its internal architecture will be detailed in the next section.
+The last module of the architecture is the supervisor. It is the one in charge of controlling collaborative activities. It chooses the robot goals and monitors the Shared Plan execution. To do so, it estimates humans mental states concerning the Shared Plan and takes them into account to decide when to perform actions or to communicate (verbally and/or non-verbally). It also interprets the information coming from the Situation Assessment module \acccom{regarding the context ?} in order to recognize human actions like Pick or Place with regard to the Shared Plan. This module is an extension of \cite{clodic2009shary} and \cite{fiore2016planning} and is the major technical contribution of this thesis. Its internal architecture will be detailed in the next section.
 
 \section{The supervisor architecture}
 
@@ -60,6 +62,8 @@ The supervisor is composed of several modules and is fully implemented in ROS\fo
 \subsection{Goal Manager}
 
 The goal manager allows the robot to select and prioritize goals. It maintains a priority list of goals to perform which is updated with insert, abort or halt commands from dialogue or command line. 
+\acccom{It maintains a priority list of goals to perform. This list is updated with insert, abort or halt commands from dialogue or command line.}
+\acccom{est ce que tu expliques quelque part comment tu gères les priorités ? }
 
 \begin{figure}[!h]
 	\centering
@@ -67,10 +71,13 @@ The goal manager allows the robot to select and prioritize goals. It maintains a
     \caption{Interaction of the Goal Manager with the rest of the supervisor.}
     \label{fig:goalManager}
 \end{figure}
+\acccom{sur la figure, il y a marqué dialoge, d’après ce que tu as écrit avant il manque le u}
 
-The chosen goal is published in order for the Plan Elaboration module to find a Shared Plan to perform it. The stop and suspend orders are transmitted and the module receives reports from the Plan Elaboration module concerning the success of the goal.
+The chosen goal is published in order for the Plan Elaboration module to find a Shared Plan to perform it. The stop and suspend orders are transmitted \acccom{ce début de phrase n’est pas clair, je ne comprends pas} and the module receives reports from the Plan Elaboration module concerning the success of the goal \acccom{succès du but ou du calcul du plan ? et il n’y a pas que succès non ? (failed ?)}.
 
 This module is, for now, really basic. An interesting extension would be to integrate data coming from an intention recognition module concerning humans activities. This will allow the robot to choose if it should proactively offer its help based on this data and the goal orders it received. 
+
+\acccom{est ce qu’il n’y a qu’un et un seul but publié à chaque instant ? le lien entre la publication et les commandes « insert, abort et halt » ?}
 
 \subsection{Plan elaboration}
 
@@ -81,13 +88,13 @@ This module is, for now, really basic. An interesting extension would be to inte
     \label{fig:planElaboration}
 \end{figure}
 
-Once a goal received from the Goal Manager, the Plan Elaboration module is in charge of finding a Shared Plan to perform it. To do so, the module is able to call HATP (the Human Aware Task Planner described in Sec.~\ref{sec:globalArchi}) to compute a plan and the dialogue module to validate the plan or ask for missing information. One of the contributions of this thesis concerns the elaboration of more flexible Shared Plans where some decisions are left to the execution. This work is in part done in this module and will be developed in Chapter~\ref{ch:SP}.
+Once a goal received from the Goal Manager, the Plan Elaboration module is in charge of finding a Shared Plan to perform it. To do so, the module is able to call HATP (the Human Aware Task Planner described in Sec.~\ref{sec:globalArchi}) to compute a plan and the dialogue module to validate the plan or ask for missing information \acccom{comment tu t’assures que çà ne se marche pas sur les pieds par exemple qd tu fais appel au dialogue vu qu’il y a plusieurs modules qui peuvent y avoir accès ? y a t’il un ordre de priorité ou un séquencement ?}. One of the contributions of this thesis concerns the elaboration of more flexible Shared Plans where some decisions are left to the execution. This work is in part done in this module and will be developed in Chapter~\ref{ch:SP}.
 
-The computed Shared Plan is then published in order for the Plan Maintainer module to deal with it. The stop and suspend orders are transmitted and the module receives reports from the Plan Maintainer module concerning the success, failure or need of adaptation of the Shared Plan.
+The computed Shared Plan is then published in order for the Plan Maintainer module to deal with it. The stop and suspend orders are transmitted \acccom{ce début de phrase n’est pas clair, je ne comprends pas} and the module receives reports from the Plan Maintainer module concerning the success, failure or need of adaptation of the Shared Plan.
 
 \subsection{Plan Maintainer}
 
-The Plan Maintainer module is in charge of following the execution of the Shared Plan based on the current world state and current and past actions. It publishes the list of actions from the Shared Plan which need to be performed at a given time and the list of actions from the Shared Plan which need to be done later. It also checks the consistency of the plan and reports to the Plan Elaboration module in case of failure or unexpected situations.
+The Plan Maintainer module is in charge of following \acccom{monitoring ?} the execution of the Shared Plan based on the current world state and current and past actions. It publishes the list of actions from the Shared Plan which need to be performed at a given time \acccom{moment ?} and the list of actions from the Shared Plan which need to be done later. It also checks the consistency of the plan \acccom{est ce que tu expliques çà plus tard ?, en quoi çà consiste ?} and reports to the Plan Elaboration module in case of failure or unexpected situations.
 
 \begin{figure}[!h]
 	\centering
@@ -98,7 +105,7 @@ The Plan Maintainer module is in charge of following the execution of the Shared
 
 \subsection{Human Monitor}
 
-The Human Monitor module allows to interpret the current world state which contains humans activity information in order to recognize basic humans actions like Pick or Place. This module is, for now, really basic as it is based mainly on distances between humans and objects. However, there is room for improvements by taking into account the context during action recognition or using probabilistic models.
+The Human Monitor module allows to interpret the current world state which contains humans activity information in order to recognize basic humans actions like Pick or Place. This module is, for now, really basic as it is based mainly on distances between humans and objects. However, there is room for improvements by taking into account the context during action recognition or using probabilistic models. \acccom{est ce que tu prends en compte l’action qu’est sensé faire la personne ? (i.e. genre goal-to-action ?) si oui tu prends déjà un peu en compte le contexte non ?}
 
 
 \begin{figure}[!h]
