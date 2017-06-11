@@ -16,7 +16,7 @@
 
 \section{Motivations}
 
-When collaborating with humans, it is primordial for the robot to not consider humans as obstacles or tools impacting the environment. As humans are social creatures, the robot must take into account their comfort and so, their point of view. Several works already allow robots to estimate humans perspective and beliefs concerning its environment. In order to improve human-robot Joint Action, the robot must be able to take these information into account when taking decision on how to act or what to communicate. Even if several works have been done on how to integrate humans perspective in dialogue or use it to help the understanding of humans behavior, there is still a gap when it came to use it during Shared Plan execution. This work aims to start filling this gap by extending the robot knowledge on humans mental states to the joint task and using it to better communicate during Shared Plan execution. It has been the subject of a publication into the HRI conference \cite{devin2016implemented}.
+When collaborating with humans, it is primordial for the robot to not consider humans as obstacles or tools impacting the environment. As humans are social creatures, the robot must take into account their comfort and so, their point of view. Several works already allow robots to estimate humans perspective and beliefs concerning their environment. In order to improve human-robot Joint Action, the robot must be able to take this information into account when taking decision on how to act or what to communicate. Even if several works have been done on how to integrate humans perspective in dialogue or use it to help the understanding of humans behavior, there is still a gap when it comes to use it during Shared Plan execution. This work aims to start filling this gap by extending the robot knowledge on humans mental states to the joint task and using it to better communicate during Shared Plan execution. It has been the subject of a publication into the HRI conference \cite{devin2016implemented}.
 
 \section{Theory of Mind}
 
@@ -27,7 +27,7 @@ Theory of the Mind (ToM) refers to the ability humans have to recognize and attr
 "To have a first-order ToM is to assume that someone’s beliefs,
 thoughts and desires influence one’s behavior. A first-order thought could be: ‘He does not know that his book is on the table’. In second-order ToM it is also recognized that to predict others’ behavior, the desires and beliefs that they have of one’s self and the predictions of oneself by others must be taken into account. So, for example, you can realize that what someone expects you to do will affect his behavior. For example, ‘(I know) he does not know that I know his book is on the table’ would be part of my second-order ToM. To have a third-order ToM is to assume others to have a second-order ToM, etc."
 \end{quote}
-There is an infinitesimal numbers of orders, however, studies shown that orders above the second one do not help in cooperative tasks \cite{de2014theory} and above the third one do not help for competitive games \cite{de2014theory}.
+There is an infinite number of orders, however, studies have shown that orders above the second one do not help in cooperative tasks \cite{de2014theory} and those above the third one do not help for competitive games \cite{de2014theory}.
 
 
 \begin{figure*}[!h]
@@ -46,7 +46,7 @@ There is an infinitesimal numbers of orders, however, studies shown that orders 
     \caption{Illustration of perceptual and conceptual perspective taking.}
 \end{figure*}
 
-ToM includes the notion of perspective taking: the capacity for a person to reason by taking the point of view of someone else. Studied in literature \cite{tversky1999speakers, flavell1992perspectives}, perspective taking is crucial during humans interaction and studies have demonstrate that individuals who lack of this ability have difficulties in their daily social interactions \cite{frick2014picturing}. Two levels of perspective taking are defined in \cite{flavell1977development}: perceptual and conceptual perspective taking. Perceptual perspective taking design the capacity of a person to understand that others have a different perception of the world (fig~\ref{subfig:perceptual}). Conceptual perspective taking designs the capacity of a person to attribute beliefs and feelings to others (fig~\ref{subfig:conceptual}).
+ToM includes the notion of perspective taking: the capacity for a person to reason by taking the point of view of someone else. Studied in literature \cite{tversky1999speakers, flavell1992perspectives}, perspective taking is crucial during humans interaction and studies have demonstrated that individuals who lack of this ability have difficulties in their daily social interactions \cite{frick2014picturing}. Two levels of perspective taking are defined in \cite{flavell1977development}: perceptual and conceptual perspective taking. Perceptual perspective taking designates the capacity of a person to understand that others have a different perception of the world (fig~\ref{subfig:perceptual}). Conceptual perspective taking designates the capacity of a person to attribute beliefs and feelings to others (fig~\ref{subfig:conceptual}).
 
 \begin{figure}[!h]
 	\centering
@@ -65,7 +65,7 @@ Then, several works have been done in order to endow robots with perspective tak
 
 Perspective taking abilities have been used in robotics for several purposes. It has been used in \cite{hiatt2011accommodating} to deal with uncertainty in humans behavior and in \cite{ros2010solving} to solve ambiguous references to an object. One important application of perspective taking is action recognition. \cite{johnson2005perceptual} takes the visual point of view of humans to improve action recognition, Dynamic Bayesian Networks (DBN) are used in \cite{baker2014modeling} or inverse reinforcement learning  in \cite{nagai2015probabilistic}. The human perspective is also used in \cite{breazeal2006using} to learn a task from a situation that can be ambiguous from the robot point of view and in \cite{gray2014manipulating} to choose actions with the adequate effects in order to manipulate humans mental models. Finally, \cite{gorur2017toward} uses perspective taking to infer humans intention and adapt robot decision.
 
-Concerning Shared Plans, perspective taking can be used to help their elaboration in order to add communication actions to solve divergent beliefs \cite{guitton2012belief}. Then, the human perspective is used to share the plan with a level of details depending of human knowledge \cite{milliez2016using}. However, there is no works for now concerning the management of Shared Plans execution taking into account the human point of view. 
+Concerning Shared Plans, perspective taking can be used to help their elaboration in order to add communication actions to solve divergent beliefs \cite{guitton2012belief}. Then, the human perspective is used to share the plan with a level of details depending of human knowledge \cite{milliez2016using}. However, there is no previous work concerning the management of Shared Plans execution taking into account the human point of view. 
 
 \section{Assumptions}
 
@@ -84,7 +84,7 @@ also assume that when he is present, the human is able to hear and understand th
 \paragraph{Robot capacities:} we consider that the robot is able to perform simple high level actions like Pick, Place or Drop. We also assume that the robot is able to ask to a human to perform an action and to inform him about the state of the environment, the goal or an action. The robot is able to detect and localize objects and agents
 and to recognize simple high level actions performed by a human like Pick, Place or Drop. Let us also note that the ways the robot achieves actions (e.g. human-aware motion planning and execution) and recognizes humans’ actions are outside of the scope of this chapter.
 
-\paragraph{Communication:} this work consists mainly in finding which information to give to the human and at which time. We do not focus here on the how we give these information (here we use the basic dialogue module described in Chapter~\ref{ch:Sup} but more complex communication mechanisms can be envisioned). 
+\paragraph{Communication:} this work consists mainly in finding which information to give to the human and at which time. We do not focus here on how we give this information (here we use the basic dialogue module described in Chapter~\ref{ch:Sup} but more complex communication mechanisms can be envisioned). 
 
 \section{Estimating Humans Mental States}
 
@@ -109,7 +109,7 @@ We also make the basic assumption that all humans who see the robot are aware of
 $$ \forall H  \ | <Robot, isVisibleBy, H> \in WS, \ g_R(H) = g_R$$
 For a goal to be considered achieved by an agent (it holds for human mental states as well as the robot mental state), this agent needs to have all the objectives of the goal in its knowledge (it means that accordingly to its knowledge, the desired world state has been reached):
 $$ \forall H, \ \forall g  \ | \ Obj_g \in WS(H), \ label_g = DONE$$
-The robot will consider a goal failed if it does not find a plan any more to achieve it. Concerning the humans, they can be informed through dialogue by the robot of the failure (or success) of a goal.
+The robot will consider a goal failed if it can not find any plan to achieve it. Concerning the humans, they can be informed through dialogue by the robot of the failure (or success) of a goal.
 
 \subsection{Shared Plan management ($SP(H)$ computation)}
 
@@ -120,13 +120,13 @@ where $id_p(H)$ is used to identify the plan, $A_p(H)$ are the actions composing
 As we consider in this thesis Shared Plans with action allocation evolving during the execution, we made the choice not to share the plan and communicate about actions only when it is not implicit (more details in Chapter~\ref{ch:SP}). Hence, we consider that the Shared Plan of the human is always the same as the robot one, only the state of the actions composing the plan will change:
 $$SP(H) = <id_p, A_p(H), L_p>$$
 
-A link $l \in L_p$ can be describe as:
+A link $l \in L_p$ can be described as:
  $$l = \langle prev_l, \ next_l \rangle$$
 where $prev_l$ is the id of the action which needs to be achieved before the action with the id $next_l$ is performed. 
 
 The actions composing the plan $A_p(H)$ can be decomposed as:
 $$A_p(H) = <A_{prev}(H), A_{cur}(H), A_{next}(H), A_{later}(H)>$$
-where $A_{prev(H)}$ are the actions of the plan the human thinks already executed, $A_{cur}(H)$ the actions the human thinks currently executed, $A_{next}(H)$ the actions the human thinks which can be performed and $A_{later}(H)$ the actions the human thinks to be executed in the future. Each action $a$ in $A_{prev}(H)$ is associated with a label noted $label_a$ which can be equal either to DONE, FAILED or ABORTED.
+where $A_{prev(H)}$ are the actions of the plan the human thinks are already executed, $A_{cur}(H)$ the actions the human thinks are being executed, $A_{next}(H)$ the actions the human thinks  can be performed and $A_{later}(H)$ the actions the human thinks have to be executed in the future. Each action $a$ in $A_{prev}(H)$ is associated with a label noted $label_a$ which can be equal either to DONE, FAILED or ABORTED.
 
 By default, when a Shared Plan is computed by the robot, all actions are put in $A_{later}(H)$. When the robot performs an action or detects an action execution from a human, it considers the human is aware of the action if he can see the actors of the action:
 
@@ -136,9 +136,9 @@ $a \in A_{cur} \ \& \ (<Ag_a, isVisibleBy, Human> \in WS \ \| \ Human \in Ag_a)$
 $\Rightarrow a \in A_{cur}(H)$
 \end{center}
 
-In a same way, at the end of the execution, the action goes in $A_{prev}(H)$ with the label corresponding to the success or the failure of the action if the human performs or saw the actors of the actions at the end of the action.
+Likewise, at the end of the execution, the action goes in $A_{prev}(H)$ with the label corresponding to the success or the failure of the action if the human performs or saw the actors of the actions at the end of the action.
 
-We also consider that a human can infer that an action has been done if it knows that the action was in progress or on its way to be done and it can see the effects of the action:
+We also consider that a human can infer that an action has been done if he knows that the action was in progress or needed to be done and it can see the effects of the action:
 
 \begin{center}
 $(a \in A_{cur}(H) \ \| \ a \in A_{next}(H)) \ \& \ Effects_{a} \in WS(H)$ 
@@ -146,7 +146,7 @@ $(a \in A_{cur}(H) \ \| \ a \in A_{next}(H)) \ \& \ Effects_{a} \in WS(H)$
 $\Rightarrow a \in A_{prev}(H) \ \& \ label_a(H) = DONE$
 \end{center}
 
-In a same way, we consider that if a human knows that an action was in progress and can see the actors of the action while there are not performing the action any more, he considers the action DONE:
+Likewise, we consider that if a human knows that an action was in progress and can see the actors of the action while there are not performing the action any more, he considers the action DONE:
 
 \begin{center}
 $a \in A_{next}(H) \ \& \ a \in A_{prev} \ \& \ <Ag_a, isVisibleBy, Human> \in WS$
@@ -162,7 +162,7 @@ $a \in A_{next}(H) \Leftrightarrow Precs_{a} \in WS(H) \ \& \ (\forall l \in L_p
 $| \ next_l = id_a, \exists \ ap \in A_{prev}(H) \ | \ (id_{ap} = prev_l \ \& \ label_{ap}(H)  = DONE))$
 \end{center}
 
-The robot can also inform a human about the state of an action, in which case the given information will be add to the human mental state.
+The robot can also inform a human about the state of an action, in which case the given information will be added to the human mental state.
 
 \subsection{World State management ($WS(H)$ computation)}
 \label{subsec:worldstate}
@@ -170,7 +170,7 @@ The robot can also inform a human about the state of an action, in which case th
 We saw that the perspective taking abilities of the robot allow it to estimate the human perception of his environment \cite{milliez2014framework}. However, this previous work only concerns information about the environment which are perceivable. Indeed, for this work we will consider two kinds of predicates to describe the state of the environment:
 \begin{itemize}
 \item \textbf{Observable predicates:} they concern what the agent can observe about the world state. These predicates mainly represent the affordances of all agents (e.g. isVisibleBy, isReachableBy) and the relations between objects (e.g. isOn, isIn) visible to them. They are computed continuously by the Situation Assessment module (TOASTER) from the robot and humans point of views based on geometric computations and perspective taking algorithms.
-\item \textbf{Non-observable predicates:} they concern information that the agent can not observe (e.g. the fact that an opaque bottle is empty). These predicates are not managed by TOASTER which reason on what is visible by the agents. We consider two ways for an agent to be aware of a non-observable predicate. First, it can perform or see an action which has this predicate in its side effects:
+\item \textbf{Non-observable predicates:} they concern information that the agent can not observe (e.g. the fact that an opaque bottle is empty). These predicates are not managed by TOASTER which reasons only on what is visible by the agents. We consider two ways for an agent to be aware of a non-observable predicate. First, it can perform or see an action which has this predicate in its side effects:
 $$\forall a \ \in \ A_{prev} \ | \ label_{a} \ = \ DONE \Rightarrow Effects_{a} \rightarrow WS$$
 (likewise with $A_{prev}(H)$ and $WS(H)$). A human can also be aware of a non-observable predicate if he is informed of it by the robot.
 \end{itemize}
@@ -225,7 +225,7 @@ The given algorithm to solve this kind of divergent belief is summarized in Alg.
 
 \subsection{Preventing mistakes}
 
-A divergent belief of a human partner can also be an issue if it leads him to perform an action that should not be perform now according to the plan. To prevent this, for each action that the robot estimates the human thinks he has to execute (action in $A^H_{next}(H)$), the robot checks if the action really needs to be performed (the action should also be in $A^H_{next}$). In the same way, the robot also checks the actions not yet allocated as the human can perform them (action in $A^X_{next}(H)$ which is not in $A^X_{next}$). If there is a divergent belief, the robot corrects the human divergent belief by two different ways:
+A divergent belief of a human partner can also be an issue if it leads him to perform an action that should not be performed now according to the plan. To prevent this, for each action that the robot estimates the human thinks he has to execute (action in $A^H_{next}(H)$), the robot checks if the action really needs to be performed (the action should also be in $A^H_{next}$). In the same way, the robot also checks the actions not yet allocated as the human can perform them (action in $A^X_{next}(H)$ which is not in $A^X_{next}$). If there is a divergent belief, the robot corrects the human divergent belief by two different ways:
 \begin{itemize}
 \item The human can think that a previous action has been achieved successfully while it is not the case leading him to think he has to perform another action. The robot looks in all actions linked to the first one by the plan links and informs about their state if it is different in the estimation of the human knowledge and in the robot knowledge.
 \item The human can have a divergent belief concerning the world state that leads him to think that his action is possible while it is not the case. The robot looks into the preconditions of the action and informs about divergent beliefs.
@@ -268,7 +268,7 @@ When the robot is about to perform an action, it checks if it estimates that the
 
 \subsection{Inaction and uncertainty}
 
-Even if the robot estimates that the human is aware that he has to act (there is action(s) in $A^H_{next}(H)$), it is possible that the human still does not perform his action(s). If the human is already busy by something else (there is an action in $A^H_{cur}$) or if it is not currently engaged in the task, the robot waits for the human to be available. If the human is not considered busy by the robot, the robot first considers that its estimation of the human mental state can be wrong, and that, in reality, the human is not aware that he should act. Consequently, the robot asks the human specifically to perform the action. If the human still does not act while the action has been asked, the robot considers the action failed, aborts the current plan and tries to find an alternative plan excluding that action.
+Even if the robot estimates that the human is aware that he has to act (there is action(s) in $A^H_{next}(H)$), it is possible that the human still does not perform his action(s). If the human is already busy (there is an action in $A^H_{cur}$) or if it is not currently engaged in the task, the robot waits for the human to be available. If the human is not considered busy by the robot, the robot first considers that its estimation of the human mental state can be wrong, and that, in reality, the human is not aware that he should act. Consequently, the robot asks the human specifically to perform the action. If the human still does not act while the action has been asked, the robot considers the action failed, aborts the current plan and tries to find an alternative plan excluding that action.
 
 
 \section{Results}
@@ -292,7 +292,7 @@ In this example, a PR2 robot and a human have to clean a table together. To do s
 
 \paragraph{"Inventory" scenario}
 
-In this example, a human and a PR2 robot have to make an inventory together. At the beginning of the task, both agents have coloured objects near them as well as a coloured box (initial world state in Fig.~\ref{fig:initInventory}). These coloured objects need to be scanned and then, stored in the box of the same colour. To do so, both agents can pick objects and place them in the table in a way reachable by the other agent. They also both have the ability to drop objects in the box near them. Finally, only the robot can scan an object, it consists of orienting its head and turning on a red light in the direction of a reachable object. 
+In this example, a human and a PR2 robot have to make an inventory together. At the beginning of the task, both agents have colored objects near them as well as a colored box (initial world state in Fig.~\ref{fig:initInventory}). These colored objects need to be scanned and then, stored in the box of the same color. To do so, both agents can pick objects and place them in the table in a way reachable by the other agent. They also both have the ability to drop objects in the box near them. Finally, only the robot can scan an object, it consists of orienting its head and turning on a red light in the direction of a reachable object. 
 
 \begin{figure}[!h]
 	\centering
@@ -315,7 +315,7 @@ We will first illustrate the benefits of the work presented in this chapter with
 \end{figure}
 
 
-The robot starts to pick and place the grey book on the light-coloured shelf. The human picks and places the blue book on the dark-coloured shelf then leaves (Fig.~\ref{subfig:humanLeave}).
+The robot starts to pick and place the grey book on the light-colored shelf. The human picks and places the blue book on the dark-colored shelf then leaves (Fig.~\ref{subfig:humanLeave}).
 
 \begin{table}[!h]
 \begin{center}
@@ -335,7 +335,7 @@ $A_{prev}$ & $A_{cur}$ & $A_{next}$ & $A_{ready}$ & $A_{prev}$ & $A_{cur}$ & $A_
 \end{table}
 
 The robot ends its action. At this point, the only possible action of the plan has to be done by the human. The robot waits a few time for the human and then, as the human does not come back (and so does not execute its action), aborts the current plan and computes a new one where it removes the last book (Fig.~\ref{fig:newplan}).
-The robot picks and places the white book on the light-coloured shelf and sweeps the table (Fig.~\ref{subfig:robotSweep}).
+The robot picks and places the white book on the light-colored shelf and sweeps the table (Fig.~\ref{subfig:robotSweep}).
 
 \begin{figure}[!h]
 	\centering
@@ -361,7 +361,7 @@ $A_{prev}$ & $A_{cur}$ & $A_{next}$ & $A_{ready}$ & $A_{prev}$ & $A_{cur}$ & $A_
 \label{table:results}
 \end{table}
 
-The human comes back at this time (Fig.~\ref{subfig:humanComesBack}). As he can see that the grey book is on the shelf near the robot, the robot infers that he infers that the robot has achieved the action it was performing when the human left. Moreover, as the human can see that the white book is on the shelf near the robot, the robot infers that he infers that the robot moved the book. However, the human can not observe that the table has been swept by the robot (we consider here that the effects of the \textit{sweep} action are not observable). Consequently, the human does not know that he can puts back the book he removed.
+The human comes back at this time (Fig.~\ref{subfig:humanComesBack}). As he can see that the grey book is on the shelf near the robot, the robot infers that he infers that the robot has achieved the action it was performing when the human left. Moreover, as the human can see that the white book is on the shelf near the robot, the robot infers that he infers that the robot moved the book. However, the human can not observe that the table has been swept by the robot (we consider here that the effects of the \textit{sweep} action are not observable). Consequently, the human does not know that he can put back the book he removed.
 
 \begin{table}[!h]
 \begin{center}
@@ -400,7 +400,7 @@ $A_{prev}$ & $A_{cur}$ & $A_{next}$ & $A_{ready}$ & $A_{prev}$ & $A_{cur}$ & $A_
 \label{table:results}
 \end{table}
 
-The human has know all the information he needs to finish the task. The robot and him both perform their last actions and so achieve the task (Fig.~\ref{subfig:endClean}).
+The human has now all the information he needs to finish the task. The robot and him both perform their last actions and so achieve the task (Fig.~\ref{subfig:endClean}).
 
 
 \begin{figure*}[!h]
@@ -437,12 +437,12 @@ We will now evaluate the benefits of the presented work in simulation in the two
 
 When the interaction starts, we consider that the joint goal is already established and that a first Shared Plan has been computed by the robot. The robot executes the plan and the simulated human executes the actions planned for him. We randomly sample a time when the human leaves the scene and another time when the human comes back. While absent, the human does not execute actions and cannot see anything nor communicate.
 
-One objective of our contribution is to reduce unnecessary communication from the robot during the execution of a Shared Plan aiming at a more friendly and less intrusive behaviour of the robot. Consequently, in order to evaluate our system, we have chosen to measure the amount of information shared by the robot during a Shared Plan execution. During the interaction, we logged the number of facts (information chunks) given by the robot to the human. An information concerns either a change in the environment or the state of a previous action. 
+One objective of our contribution is to reduce unnecessary communication from the robot during the execution of a Shared Plan aiming at a more friendly and less intrusive behavior of the robot. Consequently, in order to evaluate our system, we have chosen to measure the amount of information shared by the robot during a Shared Plan execution. During the interaction, we logged the number of facts (information chunks) given by the robot to the human. An information concerns either a change in the environment or the state of a previous action. 
 
 We compared our system (called \textit{ToM system}) to:
 \begin{itemize}
 \item a system which informs about each action missed by the human (called \textit{Missed system}).
-\item a system informs about each action performed by the robot even if the human sees it (called \textit{Performed system}).
+\item a system which informs about each action performed by the robot even if the human sees it (called \textit{Performed system}).
 \end{itemize}
 
 The obtained results in 100 runs are given in Table~\ref{table:results}.
@@ -475,7 +475,7 @@ In the inventory scenario, as all objects and boxes are reachable only by one ag
 
 \section{Conclusion}
 
-In this chapter we shown how we extended the robot estimation of humans mental states (which initially concerned only the environment) to the state of the task and more specifically of the Shared Plan. Then, we shown how we use these mental states to better communicate during Shared Plan execution.
+In this chapter we showed how we extended the robot estimation of humans mental states (which initially concerned only the environment) to the state of the task and more specifically of the Shared Plan. Then, we showed how we use these mental states to better communicate during Shared Plan execution.
 
 The benefits of this work have been demonstrated with an illustrative example and simulation results. These results show that the proposed system allows to reduce communication by removing useless information given by the robot.
 
