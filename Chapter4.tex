@@ -300,7 +300,7 @@ Here we choose to put a lower cost on objects accessible only by the robot (we s
 
 \subsection{Task}
 
-To illustrate the work done in this chapter, we use a task adapted for the manipulation abilities of a PR2 robot and inspired from the one in \cite{clodic2014key}. A human and a robot have to build a blocks construction as represented in Fig. \ref{subfig:goal}. At the beginning of the task, the robot and the human have several coloured blocks they can access as in Fig. \ref{subfig:setUp}. Two identical placements are set on the table to indicate where to put the two red cubes.
+To illustrate the work done in this chapter, we use a task adapted for the manipulation abilities of a PR2 robot and inspired from the one in \cite{clodic2014key}. A human and a robot have to build a blocks construction as represented in Fig. \ref{subfig:goal}. At the beginning of the task, the robot and the human have several colored blocks they can access as in Fig. \ref{subfig:setUp}. Two identical placements are set on the table to indicate where to put the two red cubes.
 
 \begin{figure*}[!h]
 \centering
@@ -369,7 +369,7 @@ The presented scenario starts with the set-up in Fig.~\ref{subfig:setUp}. The pl
 
 \subsection{Quantitative results}
 
-In order to evaluate our system, we run it in simulation using the blocks building scenario. Different set-ups was used as initial state of the task and the robot was confronted to a simulated human with different types of behaviors:
+In order to evaluate our system, we run it in simulation using the blocks building scenario. Different set-ups was used as initial state of the task: we randomized the number of cubes of each color in the environment and their position (accessible by the robot or the human). The robot was confronted to a simulated human with different types of behaviors:
 
 \begin{itemize}
 \item \textbf{The "kind" human:} this human performs all actions that are feasible only by him and, when there is an action feasible by both him and the robot, he either chooses to perform it with 50 \% chance (noted "50\%-K"), systematically chooses to perform it (noted "hurry-K") or systematically chooses not to perform it (noted "lazy-K"). The "kind" human answers to robot questions and adapts his behavior to what the robot verbalizes (he does an action if the robot asks him and stops his action if the robot says it will perform it).
@@ -385,7 +385,7 @@ We compare the two different modes of our system ("negotiation" and "adaptation"
 
 We measured the number of verbal interactions between the human and the robot (Tab.~\ref{tab:incompatible}) and the number of human/robot incompatible decisions (Tab.~\ref{tab:incompatible}): either both decide to perform the same action (and the robot stops its own action to avoid the conflict) or both decide not to perform the action (the robot first asks the human to perform the action after a predefined time and, if after another period the human has still not executed the action, the robot looks for a new plan where it can proceed).
 
-\begin{table*}[!t]
+\begin{table*}[!h]
   \begin{tabular}{|c||c|c|c|c|c||}
   \hline
      & \textbf{RS-none} & \textbf{RS-human} & \textbf{RS-all} & \textbf{Neg} & \textbf{Adapt} \\
