@@ -328,6 +328,20 @@ As for \textit{Shared Proximal Intention}, this level is in charge of anchoring 
 \paragraph{Motor level:}
 As for \textit{Coupled Motor Intention}, this level is in charge of motor commands of the robot. This level includes all modules allowing to control the robot actuators and interprets data from sensors. These modules, or at least a part of them, also take into account the humans as, for example, the human-aware geometric task and motion planner.
 
+\subsection{Comparison to other robotics architectures}
+
+We saw previously that human-robot interaction is a very complex field with many interesting subjects to study. As a consequence, few architectures allow the robot to execute tasks with humans in a fully autonomous way. 
+
+In \cite{baxter2013cognitive}, Baxter et al. present a cognitive architecture built around DAIM (The Distributed Associative Interactive Memory), a memory component which allows the robot to classify the humans behavior. This architecture allows the robot to fluently align its behavior with the human while memorizing data on the interaction. However, several key aspects of human-robot Joint Action as human-aware action execution or theory of mind are missing in this architecture. 
+
+Another cognitive architecture is presented in \cite{trafton2013act}. ACT-R/E, a cognitive architecture based on the ACT-R architecture, is used for human-robot interaction tasks. The architecture aims at simulating how humans think, perceive and act in the world. ACT-R/E has been tested in different scenarios, such as theory of mind and hide and seek, to show its capacity of modeling human behaviors and tought. This architecture has a big focus on the theory of mind and decisional aspects letting less space to the human-aware action execution or understanding, which are also big HRI challenges. 
+
+\cite{beetz2010cram} proposes a cognitive architecture called CRAM (Cognitive Robot Abstract Machine) that integrates KnowRob \cite{tenorth2013knowrob}, a knowledge processing framework based on Prolog. CRAM is a very complete architecture dealing with problems such as manipulation, perception, plans or beliefs management. However, this architecture is more designed for a robot acting alone than a robot acting in collaboration with a human. Consequently, the architecture misses some key Joint Action aspects such as communication or humans actions monitoring.
+
+An architecture based on inverse and forward models is presented in \cite{demiris2006hierarchical}. This architecture integrates interesting mechanisms which use human point of view to achieve learning. However, these aspects are limited to action recognition and execution and the architecture does not allow to deal with higher level decisional issues.
+
+All of these architectures are really interesting and sharp in their respective predilection domains. However, even if our architecture may lack of some aspects as learning or memory management, its aim is to regroup a major part of the human-robot Joint Action aspects from higher level (intention management and decisional process) to lower level (human-aware execution, coordination and perception). Moreover, the architecture has been conceived in a modular enough way to allow the addition of new modules.
+
 \ifdefined\included
 \else
 \bibliographystyle{StyleThese}
