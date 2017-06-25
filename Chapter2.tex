@@ -33,12 +33,21 @@ The lower level of the architecture is composed of modules which allow to commun
 \paragraph{Situation Assessment:}
 The situation assessment is done by a software called TOASTER \cite{milliezThesis}. One of the functionalities of TOASTER is to build and maintain a consistent world state based on data coming from the sensorimotor layer. Geometric computations are done on this world state to compute symbolic predicates concerning the environment (e.g. \textit{<object, isOn, support>}, \textit{<object, isIn, box>}) and agents abilities and behaviors (e.g. \textit{<object, isVisibleBy, human>}, \textit{<object, isReachableBy, robot>}, \textit{human, isLookingToward, object}). TOASTER is also in charge of perspective taking: the previous predicates are constantly estimated and maintained not only from the robot’s point of view but also from the point of view of all humans concerned and perceived in the current context. All the data concerning the world state are stored and accessible through a temporal database.
 
+
 \paragraph{Geometric Planner:}
 In order to perform actions and movements adapted to the human proximity, our architecture is equipped with a geometric task and motion planner called GTP \cite{waldhart2016novel}. GTP allows to compute trajectories as well as objects placements and grasp. It does that at a level that is human understandable and readable by giving access to high level tasks such as Pick or Place while taking into account the human safety and comfort.
 
 \paragraph{Symbolic Planner:}
 For the robot to be able to synthesize Shared Plans, our architecture is equipped with HATP (Human-Aware Task Planner), a human-aware HTN (Hierarchical Task Network) task planner which allows the robot to compute and refine a plan both for itself and its humans partners, taking into account a number of social rules \cite{Lallement2014hatp}.
-HATP has been specially designed to integrate a number of features that are meant to promote the synthesis of plans that are acceptable by humans and easily if not trivially understandable by them. It allows to specify the humans and robot capabilities in terms of actions they can execute. Several aspects such as human preferences and comfort, estimation of human effort to achieve a task in a given context and "social rules" are used in a cost-based approach to build "sufficiently good" human-robot Shared Plans.
+HATP has been specially designed to integrate a number of features that are meant to promote the synthesis of plans that are acceptable by humans and easily if not trivially understandable by them. It allows to specify the humans and robot capabilities in terms of actions they can execute. Several aspects such as human preferences and comfort, estimation of human effort to achieve a task in a given context and "social rules" are used in a cost-based approach to build "sufficiently good" human-robot Shared Plans. An example of a plan computed by HATP can be found in Fig.~\ref{fig:planHATP}.
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.9\textwidth]{figs/Chapter2/SharedPlan.png}
+    \caption{An example of a Shared Plan computed by HATP. This plan allows a human and a robot to build a stack of coloured objects together by placing them one on-top of the others.}
+    \label{fig:planHATP}
+\end{figure}
+
 
 \paragraph{Dialogue Manager:}
 In order for the robot to communicate with humans, a basic dialogue manager has been integrated to the architecture. This module allows to give humans information concerning the environment (it verbalize predicates), ask basic questions (as asking if a human want to perform an action) and understand basic answers (mainly yes or no answers, the user can answer with buttons as there is no speech recognition in the system). 
@@ -47,7 +56,10 @@ In order for the robot to communicate with humans, a basic dialogue manager has 
 \paragraph{Supervisor:}
 The last module of the architecture is the supervisor. It is the one in charge of controlling collaborative activities. It chooses the robot goals and monitors the Shared Plan execution. To do so, it estimates humans mental states concerning the Shared Plan and takes them into account to decide when to perform actions or to communicate (verbally and/or non-verbally). It also interprets the information coming from the Situation Assessment module in order to recognize human actions like Pick or Place with regard to the Shared Plan. This module is an extension of \cite{clodic2009shary} and \cite{fiore2016planning} and is the major technical contribution of this thesis. Its internal architecture will be detailed in the next section.
 
+\newpage
 \section{The supervisor architecture}
+
+The supervisor is composed of several modules and is fully implemented in ROS\footnote{http://www.ros.org/}. The complete scheme of its architecture can be found in Fig.~\ref{fig:archiSup}, however, as the figure is quite complex, each composing part of the supervisor will be represented and described individually in the next subsections. 
 
 \begin{figure}[!h]
 	\centering
@@ -56,11 +68,11 @@ The last module of the architecture is the supervisor. It is the one in charge o
     \label{fig:archiSup}
 \end{figure}
 
-The supervisor is composed of several modules and is fully implemented in ROS\footnote{http://www.ros.org/}. The complete scheme of its architecture can be found in Fig.~\ref{fig:archiSup}, however, as the figure is quite complex, each composing part of the supervisor will be represented and described individually in the next subsections. 
-
 \subsection{Goal Manager}
 
 The goal manager allows the robot to select and prioritize goals. It maintains a priority list of goals to perform. This list is updated with insert, abort or halt commands from dialogue or command line.
+
+The chosen goal is published in order for the Plan Elaboration module to find a Shared Plan to perform it. The module sends stop and suspend orders to the Plan Elaboration from which it receives reports concerning the success of the plan or the impossibility to find a plan.
 
 \begin{figure}[!h]
 	\centering
@@ -69,11 +81,11 @@ The goal manager allows the robot to select and prioritize goals. It maintains a
     \label{fig:goalManager}
 \end{figure}
 
-The chosen goal is published in order for the Plan Elaboration module to find a Shared Plan to perform it. The module sends stop and suspend orders to the Plan Elaboration from which it receives reports concerning the success of the plan or the impossibility to find a plan.
-
 This module is, for now, really basic. An interesting extension would be to integrate data coming from an intention recognition module concerning humans activities. This will allow the robot to choose if it should proactively offer its help based on this data and the goal orders it received. 
 
 \subsection{Plan elaboration}
+
+Once a goal received from the Goal Manager, the Plan Elaboration module is in charge of finding a Shared Plan to perform it. To do so, the module is able to call HATP (the Human Aware Task Planner described in Sec.~\ref{sec:globalArchi}) to compute a plan and the dialogue module to validate the plan or ask for missing information. One of the contributions of this thesis concerns the elaboration of more flexible Shared Plans where some decisions are left to the execution. This work is in part done in this module and will be developed in Chapter~\ref{ch:SP}.
 
 \begin{figure}[!h]
 	\centering
@@ -81,8 +93,6 @@ This module is, for now, really basic. An interesting extension would be to inte
     \caption{Interaction of the Plan Elaboration with the rest of the supervisor.}
     \label{fig:planElaboration}
 \end{figure}
-
-Once a goal received from the Goal Manager, the Plan Elaboration module is in charge of finding a Shared Plan to perform it. To do so, the module is able to call HATP (the Human Aware Task Planner described in Sec.~\ref{sec:globalArchi}) to compute a plan and the dialogue module to validate the plan or ask for missing information. One of the contributions of this thesis concerns the elaboration of more flexible Shared Plans where some decisions are left to the execution. This work is in part done in this module and will be developed in Chapter~\ref{ch:SP}.
 
 The computed Shared Plan is then published in order for the Plan Maintainer module to deal with it. The stop and suspend orders received from the Goal Manager are transmitted to the Plan Maintainer module from which it receives reports concerning the success, failure or need of adaptation of the Shared Plan.
 
@@ -144,7 +154,7 @@ The Action Executor is in charge of supervising robot actions. It receives actio
     \label{fig:actionExecutor}
 \end{figure}
 
-\newpage
+
 \subsection{Non-Verbal Behavior}
 
 This module allows to control the non-verbal behavior of the robot. In the current supervisor version, only the robot head behavior is concerned, but other type of non-verbal behaviors can be envisioned. The principles behind this module will be developed in Chapter \ref{ch:Acting}.
