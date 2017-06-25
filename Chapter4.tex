@@ -16,16 +16,16 @@
 
 \section{Motivation}
 
-When performing a Joint Action and more particularly when executing Shared Plans, several choices have to be made. Some of them are implicit, while others require a negotiation or an adaptation between the Joint Action participants. To be a good partner when performing Joint Action with humans, the robot should be able to identify which decisions are implicit and correctly communicate about the other ones. Indeed, a robot which communicate about each detail of a Shared Plan would easily become too "chatty" when a robot which do not communicate can be confusing.
+When performing a Joint Action and more particularly when executing Shared Plans, several choices have to be made. Some of them are implicit, while others require a negotiation or an adaptation between the Joint Action participants. To be a good partner when performing Joint Action with humans, the robot should be able to identify which decisions are implicit and correctly communicate about the other ones. Indeed, a robot which communicates about each detail of a Shared Plan would easily become too "chatty" when a robot which does not communicate can be confusing.
 
-Let's takes for example a robot helping a human to build a flat-pack table: the legs of the table need to be assembled with a hammer, the tray with a screwdriver and finally someone needs to put the tray on the legs. The robot is equipped with several tools including a screwdriver but no hammer and the human has only one hammer. The human and the robot are both able to put the tray on the legs. It is common sense that the robot should assemble the tray while the human assemble the legs. However, a decision needs to be taken concerning who will put the tray on the legs. 
+Let's take for example a robot helping a human to build a flat-pack table: the legs of the table need to be assembled with a hammer, the tray with a screwdriver and finally someone needs to put the tray on the legs. The robot is equipped with several tools including a screwdriver but no hammer and the human has only one hammer. The human and the robot are both able to put the tray on the legs. It is common sense that the robot should assemble the tray while the human assemble the legs. However, a decision needs to be taken concerning who will put the tray on the legs. 
 In this scenario, the robot should assemble the tray without asking the human and negotiate or adapt its behavior to put the tray. 
 
 The work presented in this chapter consists in finding which decisions are implicit or not, when the decisions should be taken and how to take them. We identify three types of decisions to be taken during Shared Plans elaboration and execution:
 \begin{itemize}
-\item \textbf{Which action perform in which order:} this is one of the biggest concern during Shared Plan elaboration. We do not focus our work in this part. Indeed, we use for this part HATP, a human-aware HTN planner which has been demonstrated to be well suited to human-robot joint action \cite{Lallement2014hatp}.
-\item \textbf{Who will perform which action:} sometime this decision can be implicit when only one agent is able to perform an action. However, in others situations, the robot should be able to decide who will perform an action by negotiating or adapting its behavior to the human one.
-\item \textbf{With which object:} for practical reason, the robot reason on objects by attributing them a unique id. However, for the purpose of an action, two objects can be semantically identical. When there is a choice in which object to use for an action, the robot should be able to adapt to the human behavior in order to avoid potential conflicts.
+\item \textbf{Which action to perform in which order:} this is one of the biggest concern during Shared Plan elaboration. We do not focus our work in this part. Indeed, we use for this part HATP, a human-aware HTN planner which has been demonstrated to be well suited to human-robot joint action \cite{Lallement2014hatp}.
+\item \textbf{Who will perform which action:} sometimes this decision can be implicit when only one agent is able to perform an action. However, in other situations, the robot should be able to decide who will perform an action by negotiating or adapting its behavior to the human one.
+\item \textbf{With which object:} for practical reason, the robot reasons on objects by attributing them a unique id. However, for the purpose of an action, two objects can be semantically identical. When there is a choice in which object to use for an action, the robot should be able to adapt to the human behavior in order to avoid potential conflicts.
 \end{itemize}
 
 \section{Background}
@@ -48,7 +48,7 @@ In AI, the goal reasoning domains deals with some problems similar to Shared Pla
 
 \section{Assumptions}
 
-The work presented in this chapter treats of the needed decision during Shared Plan elaboration and execution. The focus is put here into the decisions concerning the action allocation and instantiations. To do so, we make several assumptions:
+The work presented in this chapter treats of the needed decision during Shared Plan elaboration and execution. The focus is put here into the decisions concerning the action allocation and instantiation. To do so, we make several assumptions:
 
 \paragraph{Single human:} the work presented in this chapter has been designed for a robot interacting with a single human. However, all the data structures and main principles are compatible with multi-humans set-up.
 
@@ -66,8 +66,11 @@ and to recognize simple high level actions performed by the human like Pick, Pla
 \paragraph{Communication:} the focus of this work is more on the what to communicate and when than on the how to communicate. Here we use the basic dialogue module described in Chapter~\ref{ch:Sup} to communicate with the human but more complex communication mechanisms can be envisioned. 
 
 \section{Main principles}
+COMMENT ELE: les algos seraient plus lisibles si les variables avaient des noms lisibles:
+SP-> Shared_plan, g_r -> goal_robot , WS -> word_state, TS -> ??, DB divergent_belief,a -> action, etc…  là je suis obligé d'aller chercher dans les pavés de txt en dessous pour comprendr l'algo. Aussi, pk tu as une notation de fonction pour MS(H) et pas une notation indicée?
 
-We will present in this section the main principles we use for Shared Plans management. Three main algorithms are used to allow the robot to elaborate and execute Shared Plans. They exchange between then through the Shared Plan data \textit{SP} and several signals (noted \textit{S\_X} where \textit{X} is the name of the signal). These three algorithm run constantly and in parallel.
+
+We will present in this section the main principles we use for Shared Plans management. Three algorithms are used to allow the robot to elaborate and execute Shared Plans.  They interact through the Shared Plan data \textit{SP} and several signals (noted \textit{S\_X} where \textit{X} is the name of the signal). These three algorithm run constantly and in parallel.They allow respectively to maintain the state of the shared plan, to choose actions for the robot, and to monitor the human.
 
 The Alg.~\ref{alg:mainPlan} allows the robot to elaborate a Shared Plan when needed, maintain the current Shared Plan and manage the human mental states.
 
@@ -155,10 +158,10 @@ Then, Alg.~\ref{alg:mainExec} allows the robot to decide when to act and which a
 
 When the robot has a Shared Plan $SP$, it looks for the action of this plan which need to and can be executed (see Sec. \ref{subsec:maintaining}):
 $$A_{next} \leftarrow GET\_NEXT\_ACTIONS(SP, WS)$$
-If there is no actions in $A_{next}$ nor actions in progress, it means that the plan is blocked, so the robot looks for another Shared Plan. If there is actions to do, the robot looks if there is an action it can execute (actions allocated to it or not allocated yet). If there is no, the robot waits the human performs an action ($A_{next}$ contains only actions from $A^H_{next}$):
+If there is no action in $A_{next}$ nor in progress, it means that the plan is blocked, so the robot looks for another Shared Plan. If there are actions to do, the robot looks if there is an action it can execute (actions allocated to it or not allocated yet). If there is none, the robot waits for the human to perform an action ($A_{next}$ contains only actions from $A^H_{next}$):
 $$actionExecuted \leftarrow WAIT\_ACTION(A^H_{next}, t)$$
 If after a time \textit{t}, the human did not execute any action, the robot looks for another plan.
-If there is actions the robot can execute, the robot selects an action $a$ (see Sec. \ref{subsec:selection}):
+If there are actions the robot can execute, the robot selects an action $a$ (see Sec. \ref{subsec:selection}):
 $$a \leftarrow SELECT\_ACTION\_TODO(A_{next})$$
 If the selected action is not yet allocated, the robot first tries to allocate it (see Sec. \ref{subsec:allocation}):
 $$actor \leftarrow ALLOCATE\_ACTION(SP, a, WS, Prefs)$$
@@ -206,7 +209,7 @@ As stated before, the human-aware HTN task planner HATP is used in this work to 
 
 First, when HATP returns a plan, it returns only one, which is assumed to be the best plan it has found given the situation and the associated costs. However, this plan is not always the only one possible (even at constant cost or computing time). Indeed, in such case, HATP makes some choices that could be preferably done on-line. For example, it can happen that one action can be done by several agents at the same cost. In a collaborative setting and more particularly when the human is concerned, it could be interesting to let the agents decide at execution time (or whenever it is interesting) who will do what. To handle this, we have adapted HATP by inserting what we call the\textit{X agent}. The capabilities of the \textit{X agent} correspond to the intersection of the capabilities of the human and the robot with a lower cost. Consequently, it will be chosen by the planner instead of the human or the robot whenever it is possible. If HATP returns a plan containing an action to be done by the \textit{X agent}, it means that this action could either be performed by the human or the robot. The decision concerning who will finally do this action is postponed. We will see in Sec. \ref{subsec:allocation} how \textit{X agent} actions will be finally allocated to the human or the robot.
 
-As inputs to a planner such as HATP, we give a set of objects that are present in the environment and on which it will be able to apply its operators. Basically, each object is tagged and is unique. That means that if we have two times the same object, they will be uniquely tagged (e.g. two identical red cubes will be taged as RED\_CUBE\_1 and RED\_CUBE\_2). When two similar objects can be used in a same way during a task, the planner will choose either one or the other when it will to. In a collaborative setting, it could be counter intuitive since even if there is no distinction between the two objects at planning time, there can be one during execution. To handle this, we have adapted HATP by inserting the notion of \textit{similar} objects which aims to group interchangeable objects under a common name: two \textit{similar} objects will have the same role in the task. 
+As inputs to a planner such as HATP, we give a set of objects that are present in the environment and on which it will be able to apply its operators. Basically, each object is tagged and is unique. That means that if we have the same object twice, they will be uniquely tagged (e.g. two identical red cubes will be tagged as RED\_CUBE\_1 and RED\_CUBE\_2). When two similar objects can be used in a same way during a task, the planner will choose either one. In a collaborative setting, it could be counter intuitive since even if there is no distinction between the two objects at planning time, there can be one during execution. To handle this, we have adapted HATP by inserting the notion of \textit{similar} objects which aims to group interchangeable objects under a common name: two \textit{similar} objects will have the same role in the task. 
 
 Finally, rather than in other works where we used HATP, we do not consider here that an agent is only capable to perform one action at a time. This allows the human to choose the order of his action when there is no impact in the global plan.
 
@@ -217,7 +220,7 @@ We will now see in more detail how the robot executes the flexible Shared Plans 
 \subsection{Plan maintaining}
 \label{subsec:maintaining}
 
-First, the robot needs to be able to follow the Shared Plan execution and to determine which actions need to be executed and which actions need to be left for latter. 
+First, the robot needs to be able to follow the Shared Plan execution and to determine which actions need to be executed and which actions need to be left for later. 
 
 As said before, the actions composing a Shared Plan can be decomposed as:
 $$A_p = <A_{prev}, A_{cur}, A_{next}, A_{later}>$$
@@ -229,23 +232,23 @@ An action will be put in $A_{next}$ if all previous actions in the plan are DONE
 $$a \in A_{next} \Leftrightarrow Precs_{a} \in WS \ \& \ (\forall l \in L_p \ | \ next_l = id_a,$$ 
 $$\exists \ ap \in A_{prev} \ | \ (id_{ap} = prev_l \ \& \ label_{ap}  = DONE))$$
 
-The $UPDATE\_PLAN$ operator updates the state of each actions of the plan and the $GET\_NEXT\_ACTIONS$ returns the actions in $A_{next}$.
+The $UPDATE\_PLAN$ operator updates the state of each action of the plan and the $GET\_NEXT\_ACTIONS$ operator returns the actions in $A_{next}$.
 
 
 \subsection{Action selection}
 \label{subsec:selection}
 
-Once the robot knows which actions need to be executed, it needs to choose one into the set of actions it can execute. To do so, it uses the $SELECT\_ACTION\_TODO$ operator which returns the action with the higher priority:
+Once the robot knows which actions need to be executed, it needs to choose one from the set of actions it can execute. To do so, it uses the $SELECT\_ACTION\_TODO$ operator which returns the action with the higher priority:
 
 $$\underset{a \in \{A^R_{next} \cup A^X_{next}\}}{\mathrm{argmax}} \ priority(a)$$
 
 \textbf{Priorities used:}
-In our case, we have chosen to give higher priority to the actions allocated to the robot compared to those not already allocated. In general for this work, we have made the choice to postpone as much as possible the decisions made by the robot. Indeed, this choice is made in order to let to the human the maximum latitude, which allows him to take the initiative until the last possible moment. In the current implementation of our system, the priorities of the different actions of the robot are the same, so the robot will simply select one. However, there is a possibility to later integrate costs as, for example, select the action the farthest of what the human is currently doing. Concerning the priorities of not allocated actions, we still follow the principle to postpone at most the robot decision. To do so, we put a higher priority on what we call \textit{analogous} actions. Two actions will be \textit{analogous} when they have exactly the same decomposition (same action name and same parameters). 
+In our case, we have chosen to give higher priority to the actions allocated to the robot compared to those not already allocated. In general for this work, we have made the choice to postpone as much as possible the decisions made by the robot. Indeed, this choice is made in order to give as much latitude as possible to the human, which allows him to take the initiative until the last possible moment. In the current implementation of our system, the priorities of the different actions of the robot are the same, so the robot will simply select one. However, there is a possibility to later integrate costs as, for example, select the action the farthest of what the human is currently doing. Concerning the priorities of not allocated actions, we still follow the principle to postpone as much as possible the robot decision. To do so, we put a higher priority on what we call \textit{analogous} actions. Two actions will be \textit{analogous} when they have exactly the same decomposition (same action name and same parameters). 
 
 \subsection{Action allocation}
 \label{subsec:allocation}
 
-Once a not yet allocated action is selected, the robot needs to decide if it should execute it or not ($ALLOCATE\_ACTION$ operator). To do so, the robot first looks for the possible actors of this action: agents which verify the preconditions of the action and which are not already busy. Note that even if the action was not allocated by HATP it is possible that there is only one possible actor. In this case, the robot automatically allocates the action to this agent. For example if the human is currently busy and there is an not allocated action  to perform, the robot will execute it. If there is more than one possible actor for the action, the robot follows the algorithm \ref{alg:allocate}.
+Once a not yet allocated action is selected, the robot needs to decide if it should execute it or not ($ALLOCATE\_ACTION$ operator). To do so, the robot first looks for the possible actors of this action: agents which verify the preconditions of the action and which are not already busy. Note that even if the action was not allocated by HATP it is possible that there is only one possible actor. In this case, the robot automatically allocates the action to this agent. For example if the human is currently busy and there is a not allocated action  to perform, the robot will execute it. If there is more than one possible actor for the action, the robot follows the algorithm \ref{alg:allocate}.
 
 \begin{algorithm}
 \caption{Action allocation: $SP \leftarrow ALLOCATE\_ACTION(SP, a, WS, Prefs)$}
@@ -276,7 +279,7 @@ Once a not yet allocated action is selected, the robot needs to decide if it sho
 \end{algorithmic}
 \end{algorithm}
 
-Then, the robot compares what it considers it costs to the human to perform the action and what it considers it costs to itself to perform the action. If it considers it is significantly less costly for it to perform the action, it will allocate the action to itself. Else, we have developed two possible modes for the robot. In the first mode, called \textbf{negotiation} mode, the robot directly asks to its human partner if he wants to perform the action and then allocates the action according to his answer. In the other mode, called \textbf{adaptation} mode, the robot waits a certain amount of time, and, if the human does not take the initiative to perform the action, it executes it. 
+Then, the robot compares the estimated cost for the human and for itself to perform the action. If it considers it significantly more costly for the human to perform the action, it will allocate the action to itself. Else, we have developed two possible modes for the robot. In the first mode, called \textbf{negotiation} mode, the robot directly asks its human partner if he wants to perform the action and then allocates the action according to his answer. In the other mode, called \textbf{adaptation} mode, the robot waits a certain amount of time, and, if the human does not take the initiative to perform the action, it executes it. 
 
 Allocating an action to an agent can lead to other actions being automatically allocated. For this reason, after each allocation of an action, a new plan is built taking into account the possible allocations of the actions remaining in $A_X$.
 
@@ -288,9 +291,9 @@ Other costs can be considered as human preferences. We can imagine having a list
 \subsection{Action execution}
 \label{subsec:execution}
 
-Once the robot has decided to execute an action ($EXECUTE$ operator), it needs to be able to deal with the \textit{similar} objects introduced before. To do so, we keep the principle that the robot waits until the last moment to take a decision. For example, if the robot and the humans have to pick objects and place them in several similar placements, the robot will first pick an object and only after choose a placement to place it. Then, when the robot has to choose an object, it will choose the one it considers the less costly.
+Once the robot has decided to execute an action ($EXECUTE$ operator), it needs to be able to deal with the \textit{similar} objects introduced before. To do so, we keep the principle that the robot waits until the last moment to take a decision. For example, if the robot and the human have to pick objects and place them in several similar placements, the robot will first pick an object and only after choose a placement to place it. Then, when the robot has to choose an object, it will choose the one it considers the less costly.
 
-Finally, if the human approaches an object which is involved in the current robot action (e.g. if he places an object in a placement the robot chose), the robot first halts its action. Then, the robot looks if it can find another \textit{similar} object. If it finds one, it continues its action with this object. If not, it waits the human to retreat from the object, and if the human actions did not lead to a new plan it continues its action if possible.
+Finally, if the human approaches an object which is involved in the current robot action (e.g. if he places an object in a placement the robot chose), the robot first halts its action. Then, the robot looks if it can find another \textit{similar} object. If it finds one, it continues its action with this object. If not, it waits for the human to retreat from the object, and if the human actions did not lead to a new plan it continues its action if possible.
 
 \textbf{Costs used for objects selection:}
 Here we choose to put a lower cost on objects accessible only by the robot (we still want to let the maximum choices to the human). Then, we use a simple cost based on distance. In our cost, we get the distances between the agents hands (here we have chosen the right hand) and objects. For objects accessible only by the robot the costs will be proportional to the distance between the robot hand and the objects, leading the robot to choose the closest one. Concerning objects accessible also by the human, the costs will be inversely proportional to the distance between the human hand and the objects, leading the robot to choose the farthest object from the human to minimize the efforts for the human to reach the objects left. 
@@ -315,7 +318,7 @@ To illustrate the work done in this chapter, we use a task adapted for the manip
         \includegraphics[width=0.4\textwidth]{figs/Chapter4/SetUp.png}
        \label{subfig:setUp}
    }
-    \caption{Description of the blocks building task. The human and the robot have to build the stack together. We assume that the robot and the human know where are all the available blocks. We would like the robot to adapt as much as possible to the human actions and decisions while avoiding useless or tiresome verbal interactions}
+    \caption{Description of the blocks building task. The human and the robot have to build the stack together. We assume that the robot and the human know where all the available blocks are. We would like the robot to adapt as much as possible to the human actions and decisions while avoiding useless or tiresome verbal interactions}
     \label{fig:blocksBuildingTask}
 \end{figure*}
 
@@ -369,7 +372,7 @@ The presented scenario starts with the set-up in Fig.~\ref{subfig:setUp}. The pl
 
 \subsection{Quantitative results}
 
-In order to evaluate our system, we run it in simulation using the blocks building scenario. Different set-ups was used as initial state of the task: we randomized the number of cubes of each color in the environment and their position (accessible by the robot or the human). The robot was confronted to a simulated human with different types of behaviors:
+In order to evaluate our system, we run it in simulation using the blocks building scenario. Different set-ups were used as initial state of the task: we randomized the number of cubes of each color in the environment and their position (accessible by the robot or the human). The robot was confronted to a simulated human with different types of behaviors:
 
 \begin{itemize}
 \item \textbf{The "kind" human:} this human performs all actions that are feasible only by him and, when there is an action feasible by both him and the robot, he either chooses to perform it with 50 \% chance (noted "50\%-K"), systematically chooses to perform it (noted "hurry-K") or systematically chooses not to perform it (noted "lazy-K"). The "kind" human answers to robot questions and adapts his behavior to what the robot verbalizes (he does an action if the robot asks him and stops his action if the robot says it will perform it).
@@ -445,11 +448,11 @@ We also measured execution time but no significant difference was found between 
    \label{tab:verb}
 \end{table*}
 
-We can see that with the reference system, even when the human is "kind", the less the robot speaks, the more there are incompatible decisions between the human and the robot. Indeed, with this system, as the robot decides in advance the actions allocation, it needs to inform the human in order for him to adapt to the robot plan. It is worst when the human is "stubborn" since, even if the robot informs the human, the conflicts remain. Note that even in the case where the robot was not supposed to verbalize anything (RS-none), there is still verbalization: this is due to the incompatible decisions where the human and the robot both choose not to execute the action, the robot tries to solve the conflict by asking the human to execute the action.
+We can see that with the reference system, even when the human is "kind", the less the robot speaks, the more there are incompatible decisions between the human and the robot. Indeed, with this system, as the robot decides in advance the actions allocation, it needs to inform the human in order for him to adapt to the robot plan. It is worse when the human is "stubborn" since, even if the robot informs the human, the conflicts remain. Note that even in the case where the robot was not supposed to verbalize anything (RS-none), there is still verbalization: this is due to the incompatible decisions where the human and the robot both choose not to execute the action, the robot tries to solve the conflict by asking the human to execute the action.
 
 With our new system, we can see that the robot is able to avoid conflicts in all cases without being too talkative (or without being talkative at all for the adaptation mode). This system allows more freedom to the human by letting him the choice to perform or not actions: with the "stubborn" human who performs the actions he wants to perform the robot still avoids conflicts without having to be more "chatty" (this is not the case with the reference system).
 
-Finally, here the adaptation mode performs better than the negotiation one since the human is simulated and always performs his actions in time. However, in a real context, the negotiation mode could have the benefit to ensure the absence of conflicts even if the robot is a little more talkative. Moreover, the human can be more comfortable with a robot which directly asks when (and only when) there is a decision to take compared to a robot which has unnecessary waiting time. Such measure of "satisfaction" will be treat in Chapter~\ref{ch:Eval} where a study with real participants has been made.
+Finally, here the adaptation mode performs better than the negotiation one since the human is simulated and always performs his actions in time. However, in a real context, the negotiation mode could have the benefit to ensure the absence of conflicts even if the robot is a little more talkative. Moreover, the human can be more comfortable with a robot which directly asks when (and only when) there is a decision to take compared to a robot which has unnecessary waiting time. Such measure of "satisfaction" will be treated in Chapter~\ref{ch:Eval} where a study with real participants has been made.
 
 \section{Conclusion}
 
