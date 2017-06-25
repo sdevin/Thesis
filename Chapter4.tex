@@ -66,9 +66,6 @@ and to recognize simple high level actions performed by the human like Pick, Pla
 \paragraph{Communication:} the focus of this work is more on the what to communicate and when than on the how to communicate. Here we use the basic dialogue module described in Chapter~\ref{ch:Sup} to communicate with the human but more complex communication mechanisms can be envisioned. 
 
 \section{Main principles}
-COMMENT ELE: les algos seraient plus lisibles si les variables avaient des noms lisibles:
-SP-> Shared_plan, g_r -> goal_robot , WS -> word_state, TS -> ??, DB divergent_belief,a -> action, etc…  là je suis obligé d'aller chercher dans les pavés de txt en dessous pour comprendr l'algo. Aussi, pk tu as une notation de fonction pour MS(H) et pas une notation indicée?
-
 
 We will present in this section the main principles we use for Shared Plans management. Three algorithms are used to allow the robot to elaborate and execute Shared Plans.  They interact through the Shared Plan data \textit{SP} and several signals (noted \textit{S\_X} where \textit{X} is the name of the signal). These three algorithm run constantly and in parallel.They allow respectively to maintain the state of the shared plan, to choose actions for the robot, and to monitor the human.
 
@@ -114,11 +111,12 @@ When an action from $A^X$ has been allocated ($S\_actionAllocated$), the robot l
 $$SP \leftarrow EVALUATE\_ PLAN(SP, WS)$$
 In addition to this, the robot also constantly checks if the goal is reached (the objectives of the goal are in the current World State).
 Finally, each time a change occurs in $WS(H)$ or $TS$, the robot estimates the human mental states as described in the previous chapter (see Chapter~\ref{ch:MS}):
-$$MS(H) \leftarrow ESTIMATE\_MS(MS(H), TS)$$,
+$$MS(H) \leftarrow ESTIMATE\_MS(MS(H), TS)$$
 If there is a conflict between the knowledge of the robot and the human mental state, the robot tries to solve it (see Chapter~\ref{ch:MS}): 
 $$SOLVE\_DB(MS(H), TS)$$
 
 Then, Alg.~\ref{alg:mainExec} allows the robot to decide when to act and which action to perform. 
+
 
 \begin{algorithm}
 \caption{Robot action decision}
