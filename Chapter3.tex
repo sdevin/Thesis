@@ -22,7 +22,7 @@ When collaborating with humans, it is primordial for the robot to not consider h
 
 \subsection{Social Sciences literature}
 
-Theory of the Mind (ToM) refers to the ability humans have to recognize and attribute mental states not only to themselves but to other people, to understand that feelings and beliefs we have may be different than others and to take others mental states into account when taking decisions. ToM has been deeply studied in psychology, notably in the developmental domain \cite{baron1985does, premack1978does}. \cite{verbrugge2008learning} defines what is called "order" of ToM:
+Theory of the Mind (ToM) refers to the ability humans have to recognize and attribute mental states not only to themselves but to other people, to understand that feelings and beliefs we have may be different than the one of the others and to take others mental states into account when taking decisions. ToM has been deeply studied in psychology, notably in the developmental domain \cite{baron1985does, premack1978does}. \cite{verbrugge2008learning} defines what is called "order" of ToM:
 \begin{quote}
 "To have a first-order ToM is to assume that someone’s beliefs,
 thoughts and desires influence one’s behavior. A first-order thought could be: ‘He does not know that his book is on the table’. In second-order ToM it is also recognized that to predict others’ behavior, the desires and beliefs that they have of one’s self and the predictions of oneself by others must be taken into account. So, for example, you can realize that what someone expects you to do will affect his behavior. For example, ‘(I know) he does not know that I know his book is on the table’ would be part of my second-order ToM. To have a third-order ToM is to assume others to have a second-order ToM, etc."
@@ -46,7 +46,7 @@ There is an infinite number of orders, however, studies have shown that orders a
     \caption{Illustration of perceptual and conceptual perspective taking.}
 \end{figure*}
 
-ToM includes the notion of perspective taking: the capacity for a person to reason by taking the point of view of someone else. Studied in literature \cite{tversky1999speakers, flavell1992perspectives}, perspective taking is crucial during humans interaction and studies have demonstrated that individuals who lack of this ability have difficulties in their daily social interactions \cite{frick2014picturing}. Two levels of perspective taking are defined in \cite{flavell1977development}: perceptual and conceptual perspective taking. Perceptual perspective taking designates the capacity of a person to understand that others have a different perception of the world (fig~\ref{subfig:perceptual}). Conceptual perspective taking designates the capacity of a person to attribute beliefs and feelings to others (fig~\ref{subfig:conceptual}).
+ToM includes the notion of perspective taking: the capacity for a person to reason by taking the point of view of someone else. Studied in literature \cite{tversky1999speakers, flavell1992perspectives}, perspective taking is crucial during humans interaction and studies have demonstrated that individuals who lack of this ability have difficulties in their daily social interactions \cite{frick2014picturing}. Two levels of perspective taking are defined in \cite{flavell1977development}: perceptual and conceptual perspective taking. Perceptual perspective taking refers to the capacity of a person to understand that others have a different perception of the world (fig~\ref{subfig:perceptual}). Conceptual perspective taking refers to the capacity of a person to attribute beliefs and feelings to others (fig~\ref{subfig:conceptual}).
 
 \begin{figure}[!h]
 	\centering
@@ -55,7 +55,7 @@ ToM includes the notion of perspective taking: the capacity for a person to reas
     \label{fig:sally}
 \end{figure}
 
-To check if an individual has ToM capacities, several tests have been developed in psychology. One of the most famous is the Sally and Anne test (fin~\ref{fig:sally}). This test allows to check the capacity of someone to attribute a false-belief to another person and have been reused in robotics to validate robots perspective taking abilities.
+To check if an individual has ToM capacities, several tests have been developed in psychology. One of the most famous is the Sally and Anne test (fin~\ref{fig:sally}). This test allows to check the capacity of someone to attribute a false-belief to another person and have been reused in robotics to validate robots perspective taking abilities \cite{hiatt2010cognitive, milliez2014framework}.
 
 \subsection{Robotics background}
 
@@ -74,9 +74,9 @@ The work presented in this chapter concerns the estimation of humans knowledge o
 
 \paragraph{Commitment:} we do not focus in this works on issues related to commitment. Consequently, we consider here that the joint goal has already been established. We also consider that none of the humans will abort the goal unless he knows that the goal is not achievable any more.
 
-\paragraph{Shared Plan:} the focus of this work concerns rather the Shared Plan execution than the Shared Plan elaboration. In the examples presented in Sec.~\ref{sec:resultsTOM}, the Shared Plan is computed by the robot, however, the processes presented in this chapter hold regardless of the way the robot gets the Shared Plan (e.g. it can be imposed by a human or negotiated through dialogue). This chapter will treat only the issues related to ToM usage in Shared Plan execution, the rest of Shared Plan management will be more developed in Chapter \ref{ch:SP}.
+\paragraph{Shared Plan:} the focus of this work concerns rather the Shared Plan execution than the Shared Plan elaboration. In the examples presented in Sec.~\ref{sec:resultsTOM}, the Shared Plan is computed by the robot, however, the processes presented in this chapter hold regardless of the way the robot gets the Shared Plan (e.g. it can be imposed by a human or negotiated through dialogue). This chapter will treat only the issues related to ToM usage in Shared Plan execution, the other aspects of Shared Plan management will be more developed in Chapter \ref{ch:SP}.
 
-\paragraph{ToM order:} this work implements a first-order ToM for the robot (i.e. the robot has knowledge about the human knowledge on the task), the higher orders are not managed for now.
+\paragraph{ToM order:} this work implements a first-order ToM for the robot (i.e. the robot has knowledge about the human knowledge on the task), the higher orders are not managed for now. It means that the robot has its knowledge concerning the task (0-order) and the knowledge of the human concerning the task (1st order) but does not have knowledge concerning what the human knows about what the robot knows about the task (2nd order).
 
 \paragraph{Humans perception:} we make the assumption here that a human will see and understand an action of another agent (mainly robot actions) when he is present and looking at the agent. We
 also assume that when he is present, the human is able to hear and understand the information verbalized by the robot.
@@ -84,7 +84,7 @@ also assume that when he is present, the human is able to hear and understand th
 \paragraph{Robot capacities:} we consider that the robot is able to perform simple high level actions like Pick, Place or Drop. We also assume that the robot is able to ask to a human to perform an action and to inform him about the state of the environment, the goal or an action. The robot is able to detect and localize objects and agents
 and to recognize simple high level actions performed by a human like Pick, Place or Drop. Let us also note that the ways the robot achieves actions (e.g. human-aware motion planning and execution) and recognizes humans’ actions are outside of the scope of this chapter.
 
-\paragraph{Communication:} this work consists mainly in finding which information to give to the human and at which time. We do not focus here on how we give this information (here we use the basic dialogue module described in Chapter~\ref{ch:Sup} but more complex communication mechanisms can be envisioned). 
+\paragraph{Communication:} this work consists mainly in finding which information to give to the human and when. We do not focus here on how we give this information (here we use the basic dialogue module described in Chapter~\ref{ch:Sup} but more complex communication mechanisms can be envisioned). 
 
 \section{Estimating Humans Mental States}
 
@@ -100,14 +100,14 @@ We will see now how we estimates each of the mental states components.
 
 \subsection{Goal management ($g_H$ and $g_R(H)$ computation)}
 
-As stated previously, the focus of this work is not put on the goal management. Consequently, the computation of humans mental states concerning goals remains basic. However, a more complex one can be envisioned, for example using intention recognition, with the same representation. As a reminder, a goal is defined as:
+As stated previously, we do not focus in this work on issues related to goal management. Consequently, the computation of humans mental states concerning goals remains basic. However, a more complex one can be envisioned, for example using intention recognition, with the same representation. As a reminder, a goal is defined as:
 $$g = <Name_g, Actors_g, Params_g, Obj_g>$$
 
 As we consider humans automatically engaged in the goal, as soon as the robot starts executing a goal, all actors of the goal are considered to have the same goal:
 $$ \forall H \in Actors_{g_R}, \ g_H = g_R$$
 We also make the basic assumption that all humans who see the robot are aware of its goal:
 $$ \forall H  \ | <Robot, isVisibleBy, H> \in WS, \ g_R(H) = g_R$$
-For a goal to be considered achieved by an agent (it holds for human mental states as well as the robot mental state), this agent needs to have all the objectives of the goal in its knowledge (it means that accordingly to its knowledge, the desired world state has been reached):
+For a goal to be considered achieved by an agent (it holds for human mental states as well as the robot mental state), this agent needs to have all the objectives of the goal in its knowledge (it means that according to its knowledge, the desired world state has been reached):
 $$ \forall H, \ \forall g  \ | \ Obj_g \in WS(H), \ label_g = DONE$$
 The robot will consider a goal failed if it can not find any plan to achieve it. Concerning the humans, they can be informed through dialogue by the robot of the failure (or success) of a goal.
 
@@ -117,7 +117,7 @@ As a reminder, the representation of the Shared Plan $SP$ from a human H point o
 $$SP(H) = <id_p(H), A_p(H), L_p(H)>$$
 where $id_p(H)$ is used to identify the plan, $A_p(H)$ are the actions composing the plan and $L_p(H)$ the links representing the order the actions should be executed (causal links).
 
-As we consider in this thesis Shared Plans with action allocation evolving during the execution, we made the choice not to share the plan and communicate about actions only when it is not implicit (more details in Chapter~\ref{ch:SP}). Hence, we consider that the Shared Plan of the human is always the same as the robot one, only the state of the actions composing the plan will change:
+As we consider in this thesis Shared Plans with action allocation evolving during the execution, we made the choice to communicate about actions only when it is not implicit and not share the whole plan (more details in Chapter~\ref{ch:SP}). Hence, we consider that the Shared Plan of the human is always the same as the robot one, only the state of the actions composing the plan will change:
 $$SP(H) = <id_p, A_p(H), L_p>$$
 
 A link $l \in L_p$ can be described as:
@@ -126,7 +126,7 @@ where $prev_l$ is the id of the action which needs to be achieved before the act
 
 The actions composing the plan $A_p(H)$ can be decomposed as:
 $$A_p(H) = <A_{prev}(H), A_{cur}(H), A_{next}(H), A_{later}(H)>$$
-where $A_{prev(H)}$ are the actions of the plan the human thinks are already executed, $A_{cur}(H)$ the actions the human thinks are being executed, $A_{next}(H)$ the actions the human thinks  can be performed and $A_{later}(H)$ the actions the human thinks have to be executed in the future. Each action $a$ in $A_{prev}(H)$ is associated with a label noted $label_a$ which can be equal either to DONE, FAILED or ABORTED.
+where $A_{prev(H)}$ are the actions of the plan the human thinks are already executed, $A_{cur}(H)$ the actions the human thinks are being executed, $A_{next}(H)$ the actions the human thinks can be performed and $A_{later}(H)$ the actions the human thinks have to be executed in the future. Each action $a$ in $A_{prev}(H)$ is associated with a label noted $label_a$ which can be equal either to DONE, FAILED or ABORTED.
 
 By default, when a Shared Plan is computed by the robot, all actions are put in $A_{later}(H)$. When the robot performs an action or detects an action execution from a human, it considers the human is aware of the action if he can see the actors of the action:
 
@@ -170,7 +170,7 @@ The robot can also inform a human about the state of an action, in which case th
 We saw that the perspective taking abilities of the robot allow it to estimate the human perception of his environment \cite{milliez2014framework}. However, this previous work only concerns information about the environment which are perceivable. Indeed, for this work we will consider two kinds of predicates to describe the state of the environment:
 \begin{itemize}
 \item \textbf{Observable predicates:} they concern what the agent can observe about the world state. These predicates mainly represent the affordances of all agents (e.g. isVisibleBy, isReachableBy) and the relations between objects (e.g. isOn, isIn) visible to them. They are computed continuously by the Situation Assessment module (TOASTER) from the robot and humans point of views based on geometric computations and perspective taking algorithms.
-\item \textbf{Non-observable predicates:} they concern information that the agent can not observe (e.g. the fact that an opaque bottle is empty). These predicates are not managed by TOASTER which reasons only on what is visible by the agents. We consider two ways for an agent to be aware of a non-observable predicate. First, it can perform or see an action which has this predicate in its side effects:
+\item \textbf{Non-observable predicates:} they concern information that the agent can not observe (e.g. the fact that an opaque bottle is empty). These predicates are not managed by TOASTER which reasons only on what is visible by the agents. We consider two ways for an agent to be aware of a non-observable predicate. It can perform or see an action which has this predicate in its side effects:
 $$\forall a \ \in \ A_{prev} \ | \ label_{a} \ = \ DONE \Rightarrow Effects_{a} \rightarrow WS$$
 (likewise with $A_{prev}(H)$ and $WS(H)$). A human can also be aware of a non-observable predicate if he is informed of it by the robot.
 \end{itemize}
@@ -201,9 +201,10 @@ If we follow the definition of \textit{weak achievement goal} in \cite{cohen1991
 A divergent belief of a human partner can be an issue when it is related to an action that he has to perform. To avoid that a human misses information to execute his part of the Shared Plan, each time the robot estimates that a human has to perform an action (action in $A^H_{next}$) it checks if the human is aware that he has to and can perform the action (the action should also be in $A^H_{next}(H)$).
 In order not to give too much information at the same time, and as not yet allocated actions can also be performed by the robot, the robot checks for actions in $A^X_{next}(H)$ only if the human does not have any other actions to perform. If there is a divergent belief, there are two possible reasons:
 \begin{itemize}
-\item The human misses information about previous achieved actions to know that his action has to be performed now according to the plan. The robot checks the label of all actions linked to the first one with the plan links and informs about the achievement of all actions with a label different of DONE in the estimation of the human knowledge.
+\item The human misses information about previous achieved actions to know that his action has to be performed now according to the plan. The robot checks the label of all actions linked to the first one with the plan links. If it finds one with a label different of DONE in the estimation of the human knowledge it informs about its achievement.
 \item The human misses information about the world state to know that his action is possible. In such case, the robot looks into the preconditions of the actions and informs the human about all those the human is not aware of.
 \end{itemize}
+The robot first looks for missing actions before looking for missing preconditions. Indeed, informing about an action can also give information about some missing preconditions.
 The given algorithm to solve this kind of divergent belief is summarized in Alg.~\ref{alg:checkHumanAction}.
 
 
@@ -227,7 +228,7 @@ The given algorithm to solve this kind of divergent belief is summarized in Alg.
 
 A divergent belief of a human partner can also be an issue if it leads him to perform an action that should not be performed now according to the plan. To prevent this, for each action that the robot estimates the human thinks he has to execute (action in $A^H_{next}(H)$), the robot checks if the action really needs to be performed (the action should also be in $A^H_{next}$). In the same way, the robot also checks the actions not yet allocated as the human can perform them (action in $A^X_{next}(H)$ which is not in $A^X_{next}$). If there is a divergent belief, the robot corrects the human divergent belief by two different ways:
 \begin{itemize}
-\item The human can think that a previous action has been achieved successfully while it is not the case leading him to think he has to perform another action. The robot looks in all actions linked to the first one by the plan links and informs about their state if it is different in the estimation of the human knowledge and in the robot knowledge.
+\item The human can think that a previous action has been achieved successfully while it is not the case (e.g. he saw the beginning of an action of the robot and though that the action succeeded) leading him to think he has to perform another action. The robot looks in all actions linked to the first one by the plan links and informs about their state if it is different in the estimation of the human knowledge and in the robot knowledge.
 \item The human can have a divergent belief concerning the world state that leads him to think that his action is possible while it is not the case. The robot looks into the preconditions of the action and informs about divergent beliefs.
 \end{itemize}
 The given algorithm to solve this kind of divergent belief is summarized in Alg.~\ref{alg:checkMistakes}.
@@ -277,7 +278,7 @@ Even if the robot estimates that the human is aware that he has to act (there is
 
 \subsection{Tasks}
 
-In order to evaluate the benefits of our method during human-robot interaction, we will use two different tasks. We will first show an illustrative example of one possible scenario of the first task, and then, we will run simulations on these two tasks in order to get objective measurement of the performance of the system in simulation. The system will be evaluated in a real situation latter in Chapter~\ref{ch:Eval}.
+In order to evaluate the benefits of our method during human-robot interaction, we will use two different tasks. In a first time, we will show an illustrative example based on one possible scenario of the first task. In a second time, we will run simulations on the two tasks in order to get objective measurement of the performance of the system in simulation. The system will be evaluated in a real situation latter in Chapter~\ref{ch:Eval}.
 
 \paragraph{"Clean the table" scenario}
 
@@ -381,7 +382,7 @@ $A_{prev}$ & $A_{cur}$ & $A_{next}$ & $A_{ready}$ & $A_{prev}$ & $A_{cur}$ & $A_
 \end{table}
 
 
-As the robot estimates that the human does not know that he has to put back the book he removed, it uses its knowledge on the plan to deduce that it is because the human does not know that the table has been swept. So, the robot informs the human about this (by verbalization). 
+As the robot estimates that the human does not know that he has to put back the book he removed, it uses its knowledge on the plan to infer that it is because the human does not know that the table has been swept. So, the robot informs the human about this (by verbalization). 
 
 \begin{table}[!h]
 \begin{center}
