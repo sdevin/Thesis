@@ -40,7 +40,7 @@ Even if we can find more and more interesting works in HRI concerning planing an
 
 \section{Experts presentation}
 
-Inspired from from neuroscience theories and based on the previous work of \cite{renaudo2014design} the aim of this work is to combine goal-directed and habitual behaviors in the context of human-robot Joint Action. To do so, we use two experts which implement these two kinds of behavior. The goal-directed behavior is produced here by HATP (Human-Aware Task Planer), a task planner which has proved its efficiency in the field of human-robot interaction. A Qlearning algorithm allows to implement the habitual behavior. We will describe in this section these two experts and their respective strengths and weakness. The next sections will show how we combined those two experts into two different architectures.
+Inspired from neuroscience theories and based on the previous work of \cite{renaudo2014design} the aim of this work is to combine goal-directed and habitual behaviors in the context of human-robot Joint Action. To do so, we use two experts which implement these two kinds of behavior. The goal-directed behavior is produced here by HATP (Human-Aware Task Planer), a task planner which has proved its efficiency in the field of human-robot interaction. A Qlearning algorithm allows to implement the habitual behavior. We will describe in this section these two experts and their respective strengths and weakness. The next sections will show how we combined those two experts into two different architectures.
 
 \subsection{HATP}
 
@@ -288,10 +288,10 @@ The MF should allow the robot to learn in which case an object is really reachab
 Finally, in the previous task, one of the reason HATP was performing very well was that the human always executed the actions planned for him. In real life, even if the human is collaborative, he does not necessarily take the same decisions as the ones HATP took for him. In this task, we introduced three different kinds of human behavior:
 \begin{itemize}
 \item \textbf{The collaborative human:} it picks all objects accessible by him (with a priority for blue ones), throws the blue objects in the blue box and participates to all handover engaged by the robot.
-\item \textbf{The anti-handover human:} it picks all the blue objects accessible by him, throws the blue objects in the blue box but does not participate to handover engaged by the robot
-\item \textbf{The lazy human:} it picks the blue objects accessible only by him (and not the ones the robot can access), throws the blue objects in the blue box and does not participate to handover engaged by the robot
+\item \textbf{The anti-handover human:} it picks all the blue objects accessible by him, throws the blue objects in the blue box but does not participate to handover engaged by the robot (he does not react when the robot tries to execute a handover, the robot waits a few time and abort the action).
+\item \textbf{The lazy human:} it picks the blue objects accessible only by him (and not the ones the robot can access), throws the blue objects in the blue box and does not participate to handover engaged by the robot.
 \end{itemize}
-COMMENTAIRE: Que fait le robot quand l'humain refuse les handover?
+
 \subsection{Results}
 
 \begin{figure*}[!h]
