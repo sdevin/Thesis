@@ -1,22 +1,85 @@
 \ifdefined\included
 \else
-\documentclass[a4paper,11pt,twoside]{StyleThese}
+\documentclass[english,a4paper,11pt,twoside]{StyleThese}
 \include{formatAndDefs}
 \sloppy
 \begin{document}
+\dominitoc
+\faketableofcontents
 \fi
 
 
 \chapter*{Introduction}
 \addstarredchapter{Introduction} %Sinon cela n'apparait pas dans la table des matières
+\minitoc
+
+\section*{Context}
+\addcontentsline{toc}{section}{Context}
+
+In the 1940s, researchers invented the first machines that we can call computers. Then, they quickly came to think that, this new tool which can easily manipulate numbers can also manipulate symbols, and they started to work on new "thinking machines". In 1956, at the Dartmouth conference, the domain of "Artificial Intelligence" is recognized as a fully academic field. Associated to the automaton technology, the first "robots" quickly arrived in our environment.
+
+Some of these robots are meant to work alone (e.g. rovers for space exploration) while others need to work in the vicinity and/or with humans. One possible example is robot "co-workers". These robots need to collaborate in a safe, efficient and fluent way with humans to accomplish more or less repetitive tasks. The last decades also witnessed the apparition of what is called "sociable robots" \cite{dautenhahn2007socially}. These robots can be used, for example, to help elderly or injured people in their daily life our to guide people in public spaces. 
+
+The aim of this thesis is to make a step toward robots which act jointly with humans in a natural, efficient and fluent way. We focus more especially on the decisional issues that can appear during a human-robot Joint Action. The subject of Joint Action between humans has been studied a lot in social sciences, however, many things remain to be discovered. Based on these results, the aim here is to build robots which are able to understand the humans (their beliefs and choices) and to adapt to them in order to be more pleasant and efficient companions.
+
+\section*{Contributions and manuscript organization}
+\addcontentsline{toc}{section}{Contributions and manuscript organization}
+
+In order to endow the robot with decisional abilities during Joint Action with humans, we bring several contributions to the field which are presented in the manuscript as follow:
 \begin{itemize}
-\item Context (general + PhD)
-\item Motivation + goal
-\item Organisation
-\item Publications
+\item In a first part, we study the basis of the Joint Action principles in order to build a supervisor for human-robot Joint Action. 
+\begin{itemize}
+\item In Chapter~\ref{ch:biblio}, we first study the bibliography about Joint Action between humans in social science in order to identify what are the needed components for a robot decision adapted to Joint Action. Secondly, we look how these components have already been applied in robotics and, finally, we study how to articulate all these components and how, inspired by models from philosophy, we can build a robotics architecture for human-robot interaction.
+\item In Chapter~\ref{ch:Sup}, we present the supervisor for human-robot collaboration which has been developed during the thesis. This supervisor is the main technical contribution of the thesis.
+\end{itemize}
+\item In a second part, we focus on the achievement by a robot of a \textit{Shared Plan} in collaboration with a human:
+\begin{itemize}
+\item In Chapter~\ref{ch:MS}, we present how we endowed the robot with the ability to estimate the humans mental states, not only about the environment, but also concerning the state of the task and more particularly of the Shared Plan. We also show how we use these mental states to allow the robot to better communicate about divergent beliefs during Shared Plan execution.
+\item In Chapter~\ref{ch:SP}, we describe the work done in order to allow the robot to gain acceptability and fluency during Shared Plan achievement by working with more flexible Shared Plans. We first identified the needed decisions during Shared Plan elaboration and execution and we endow the robot with the ability to decide which decisions should be taken at planning time and which one are better postponed at execution time. Then, we allowed the robot to take these decision by smoothly adapting to the human choices.
+\item Finally, in Chapter~\ref{ch:Eval}, we evaluate the new implemented system for the achievement of human-robot Shared Plan. This evaluation has been done quantitatively in simulation but also qualitatively with a user study with the real robot.
+\end{itemize} 
+In the last part, we present other contributions to the subject:
+\begin{itemize}
+\item In Chapter~\ref{ch:Acting}, we study the non-verbal behavior, and more especially the head -gaze- behavior, needed during Joint Action between humans and between a human and a robot. We identify the needed components of a robot head behavior adapted to the Joint Action and studied more deeply some of them with an on-line video based study. Finally, we present how these components can be implemented into a robot head behavior architecture.
+\item In Chapter~\ref{ch:Learning}, inspired from studies in neuroscience, we combine learning and planning for high level decisions during human-robot Joint Action. The idea it to take advantage from both sides in order to come up with decision level which is able to quickly learn how to smoothly adapt to the human choices during Joint Action execution.
+\end{itemize}
 \end{itemize}
 
-\cite{dautenhahn2007socially}
+\section*{Work environment}
+\addcontentsline{toc}{section}{Work environment}
+
+This thesis has been realized at LAAS-CNRS in the RIS team (Robotics and InteractionS). It was included in the general objective to build a robotics architecture for an autonomous robots which interacts with humans. 
+
+\paragraph{Robot:} in all this thesis, for practical reasons, the developed algorithms have been implemented in a PR2 robot from Clearpath Robotics (previously Willow Garage)\footnote{http://wiki.ros.org/Robots/PR2}. However, these algorithms are generic enough to be implemented in other robots. The PR2 robot is a semi-humanoid robot which is able to navigate and manipulate objects (see Fig.\ref{fig:PR2}).
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.3\textwidth]{figs/Introduction/PR2.png}
+    \caption{The PR2 robot.}
+    \label{fig:PR2}
+\end{figure}
+
+\paragraph{Humans and objects detection:} When interacting with humans during manipulation tasks, the robot needs to be able to localize and identify humans and objects. To avoid as much as possible perceptions issues which are not the focus of this thesis, the perception of humans and objects is simplified here. The humans are identified and perceived thanks to a motion capture system. They wear a helmet to get the position and orientation of their heads and a glove to get the position and orientation of their right hands (see Fig.~\ref{fig:Environment}). Concerning the objects, they are identified and localized with tags thanks to the robot cameras in its head.
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.7\textwidth]{figs/Introduction/SetUp.png}
+    \caption{The PR2 robot interacting with a human to build a stack of cubes. The human is detected thanks to a motion capture system (helmet and glove) and the objects with tags.}
+    \label{fig:Environment}
+\end{figure}
+
+\section*{Publications}
+\addcontentsline{toc}{section}{Publications}
+
+The work presented in this thesis has led to several publications. They are listed here bellow (from the most recent to the oldest):
+\begin{itemize}
+\item \textbf{Devin, S.}, Clodic, A., Alami, R. (2017). About Decisions During Human-Robot Shared Plan Achievement: Who Should Act and How? The Ninth International Conference on Social Robotics. \textit{Submitted}.
+\item \textbf{Devin, S.}, Alami, R. (2016). An implemented theory of mind to improve human-robot shared plans execution. In Human-Robot Interaction (HRI), 2016 11th ACM\/IEEE International Conference on (pp. 319-326). IEEE.
+\item \textbf{Devin, S}., Milliez, G., Fiore, M., Clodic, A., Alami, R. (2016). Some essential skills and their combination in an architecture for a cognitive and interactive robot. Workshop In Human-Robot Interaction (HRI), 2016 11th ACM\/IEEE International Conference on (pp. 319-326). IEEE.
+\item Khamassi, M., Girard, B., Clodic, A., \textbf{Sandra, D.}, Renaudo, E., Pacherie, E., Alami, R., Chatila, R. (2016). Integration of Action, Joint Action and Learning in Robot Cognitive Architectures. Intellectica (ARCo), 2016(65), 169-203.
+\item Renaudo, E., \textbf{Devin, S.}, Girard, B., Chatila, R., Alami, R., Khamassi, M., Clodic, A. (2015). Learning to interact with humans using goal-directed and habitual behaviors. In RoMan 2015, Workshop on Learning for Human-Robot Collaboration.
+\end{itemize}
+
 
 \ifdefined\included
 \else
