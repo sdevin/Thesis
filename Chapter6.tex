@@ -53,7 +53,7 @@ Concerning the gaze, \cite{imai2002robot} established that, in absence of eyes i
 
 Concerning the use of the head during Joint Action, \cite{lallee2013cooperative} shown that, in the absence of language, the use of a head behavior based on a known Shared Plan helps the coordination between the human and the robot. \cite{zaga2017simple} shown that, with a robot producing "social-gaze movements" (following co-player actions), perception of animacy and likeability significantly increases. Moreover, if we add a "deictic gaze" (providing helpful referential information for the completion of the task), perception of helpfulness significantly increases. The importance of the head behavior during human-robot Joint Action has also been studied in \cite{boucher2012reach} where they shown that humans are able to make anticipatory decisions based on robot gaze cues. 
 
-Several works studied what the robot should look at during handover \cite{moon2014meet, gharbi2015toward}. They shown that the handover is more efficient with the appropriate gaze cues. The robot should look at the place where the object will be exchanged in advance in order for the human to anticipate. Moreover, the handover is perceived as more natural if the robot looks at the human at the end.
+Several works studied what the robot should look at during handover \cite{moon2014meet, gharbi2015toward}. They shown that the handover is more efficient with the appropriate gaze cues. The robot should look at the place where the object will be exchanged in advance in order for the human to anticipate. Moreover, the handover is perceived as more natural if the robot looks at the human at the end. The use of gaze has also been studied during navigation tasks as approaching a person \cite{fischer2016between} or navigating between humans \cite{khambhaita_hfr_2016}. These works shown the importance of switching between the path to go and the human.
 
 
 \section{Reflection concerning the needed behaviors and signals}
@@ -280,7 +280,7 @@ The architecture can be found in Fig.~\ref{fig:headArchi}. We can find in this a
 In this architecture, a target is described as a point to look at (either an object or a part of the human body) and an associated priority.
 $$target = <point, priority>$$
 A signal is described as an ordered set of points to look at with associated durations, a priority, an expiration time and possibles expiration conditions (events).
-$$signal = <points, durations, priority, expiration_time, expiration_conditions>$$
+$$signal = <points, durations, priority, expiration\_time, expiration\_conditions>$$
 
 This architecture is still a work in progress, there are still needs of deepening for some parts and the parametrization of the priorities and durations are still needed.
 

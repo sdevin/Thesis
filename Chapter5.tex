@@ -186,13 +186,13 @@ At their arrival, the participants were introduced to the robot and the environm
 
 After each interaction with the robot (for each condition), the participants were asked to fill a questionnaire in order to evaluate their feeling concerning the robot and the interaction. To do so, several questionnaires have already been developed to evaluate human-robot interaction. \cite{hoffman2013evaluating} allows to evaluate several aspects of the interaction as the "trust" in the robot or the "fluency" of the interaction. It has been used in several studies as \cite{gombolay2015decision} or \cite{dragan2015effects}. However, this questionnaire lacks some aspects needed in our evaluation as "acceptability" or "usability". The Godspeed questionnaire \cite{bartneck2009measurement} allows to measure the perception of the robot by the human with questions relative to "anthropomorphism" or "perceived intelligence". However, this questionnaire is focused on the evaluation of the perception of the robot and lacks parts on the evaluation of the interaction and on the usability of the system. The SUS (System Usability Scale) questionnaire \cite{brooke1986system} allows to measure the interaction of a user with an electronic system with 10 affirmations which subjects need to evaluate with a Lickert scale from "totally agree" to "totally disagree". On the contrary of the Godspeed, the SUS questionnaire measures the usability of the system but lacks of measure concerning the perception of the robot or the interaction. Finally, \cite{heerink2009measuring} presents a toolkit to measure acceptance for assistive social robots. This toolkit is based on the UTAUT (Unified Theory of Acceptance and Use of Technology) questionnaire \cite{venkatesh2003user}. It has been well conceived in order to evaluate the perception and usability of the robot and more particularly for social robots. However, the questionnaire is more oriented toward the perception of the robot than the interaction and the collaboration. 
 
-For this study, like in \cite{heerink2010relating, fischer2016between}, we use a questionnaire that we conceived for the experiment. This questionnaire is composed of several parts:
+For this study, like in \cite{heerink2010relating, fischer2016between}, we use a questionnaire that we conceived for the experiment. This questionnaire is composed of several dimensions:
 \begin{itemize}
-\item \textit{Verbal:} this part, composed of 3 questions allows to evaluate how the human perceived the verbal interaction with the robot.
-\item \textit{Acting:} this part, composed of 3 questions allows to evaluate how the human perceived the decisions of the robot concerning its actions.
+\item \textit{Verbal:} this dimension, composed of 3 questions allows to evaluate how the human perceived the verbal interaction with the robot.
+\item \textit{Acting:} this dimension, composed of 3 questions allows to evaluate how the human perceived the decisions of the robot concerning its actions.
 \item \textit{Collaboration:} this part, based on \cite{weistroffer2014etude} and composed of 5 questions, allows to evaluate how the human perceived the collaboration between the human and the robot.
-\item \textit{Interaction:} this part, based on the AttrakDiff questionnaire \cite{lallemand2015creation} and composed of 5 questions, allows to evaluate how the human perceived the interaction between the human and the robot.
-\item \textit{Robot perception:} this part, based on the Godspeed questionnaire \cite{bartneck2009measurement} and composed of 8 questions, allows to evaluate how the human perceived the robot in general.
+\item \textit{Interaction:} this dimension, based on the AttrakDiff questionnaire \cite{lallemand2015creation} and composed of 5 questions, allows to evaluate how the human perceived the interaction between the human and the robot.
+\item \textit{Robot perception:} this dimension, based on the Godspeed questionnaire \cite{bartneck2009measurement} and composed of 8 questions, allows to evaluate how the human perceived the robot in general.
 \end{itemize}
 For all the questions, the subject was asked to place himself in a scale of 100 between two antonym adjectives. The English translation of the questionnaire can be found in Appendix~\ref{chap:annexe3}.
 
@@ -200,35 +200,35 @@ In addition to these two questionnaires, after each interaction with the robot (
 
 \subsection{Results}
 
-21 subjects took part in the study. They were all fluent in french and had no significant experience in robotics. The results for the questionnaire evaluating the subjects feeling concerning the robot and the interaction can be found in Fig.~\ref{fig:resUS}. We will discuss the results here bellow.
+21 subjects took part in the study (8 women and 13 men). They were all fluent in french and had no significant experience in robotics. The results for the questionnaire evaluating the subjects feeling concerning the robot and the interaction can be found in Fig.~\ref{fig:resUS}. We will discuss the results here bellow.
 
 \begin{figure*}[!h]
 \centering
-	\subfigure[Scores for the "Verbal" part of the questionnaire]{
+	\subfigure[Scores for the "Verbal" dimension of the questionnaire]{
         \centering
         \includegraphics[width=0.45\textwidth]{figs/Chapter5/Verbal.png}
        \label{subfig:resVerbal}
    }
     %~
-	\subfigure[Scores for the "Acting" part of the questionnaire]{
+	\subfigure[Scores for the "Acting" dimension of the questionnaire]{
         \centering
         \includegraphics[width=0.45\textwidth]{figs/Chapter5/Acting.png}
        \label{subfig:resActing}
    }
     %~
-	\subfigure[Scores for the "Collaboration" part of the questionnaire]{
+	\subfigure[Scores for the "Collaboration" dimension of the questionnaire]{
         \centering
         \includegraphics[width=0.45\textwidth]{figs/Chapter5/Collaboration.png}
        \label{subfig:resCollaboration}
    }
     %~
-	\subfigure[Scores for the "Interaction" part of the questionnaire]{
+	\subfigure[Scores for the "Interaction" dimension of the questionnaire]{
         \centering
         \includegraphics[width=0.45\textwidth]{figs/Chapter5/Interaction.png}
        \label{subfig:resInteraction}
    }
     %~
-	\subfigure[Scores for the "Robot perception" part of the questionnaire]{
+	\subfigure[Scores for the "Robot perception" dimension of the questionnaire]{
         \centering
         \includegraphics[width=0.45\textwidth]{figs/Chapter5/Robot.png}
        \label{subfig:resRobot}
@@ -237,8 +237,8 @@ In addition to these two questionnaires, after each interaction with the robot (
     \label{fig:resUS}
 \end{figure*}
 
-\paragraph{Verbal part:} 
-The scores of the different modes for the verbal part of the questionnaire can be found in Fig.~\ref{subfig:resVerbal}. The negotiation mode of the new system (NS-N) has been found significantly better than the RS-none condition and the adaptation mode (NS-A) (p < 0.05\footnote{The p values have been calculated with the Student's t-test when the data were normally distributed and with the Wilcoxon test otherwise}). Even if the negotiation mode had a higher score than the RS-all condition, the difference was not found significant. Indeed, when discussing with subjects after the experiment, we found that, for some of them, the fact that the robot was speaking a lot was reassuring. However, they also point out the fact that, even if they found it reassuring the first time, if they had to interact with the robot several time in this mode, they would quickly find it "annoying". Indeed, if we look at some details of the questions asked into the verbal part of the questionnaire, the verbal interaction of the robot have been found more superfluous in the RS-all mode than in the other modes (see Fig.~\ref{subfig:resSuperflus}). Moreover, the verbal interactions in the RS-none mode and the adaptation mode have been found less sufficient than in the other modes (see Fig.~\ref{subfig:resSuficient}). Indeed, the fact that the robot does not inform about its choices (and more particularly concerning the red objects) was found disturbing by the participants. 
+\paragraph{Verbal dimension:} 
+The scores of the different modes for the verbal dimension of the questionnaire can be found in Fig.~\ref{subfig:resVerbal}. The negotiation mode of the new system (NS-N) has been found significantly better than the RS-none condition and the adaptation mode (NS-A) (p < 0.05\footnote{The p values have been calculated with the Student's t-test when the data were normally distributed and with the Wilcoxon test otherwise}). Even if the negotiation mode had a higher score than the RS-all condition, the difference was not found significant. Indeed, when discussing with subjects after the experiment, we found that, for some of them, the fact that the robot was speaking a lot was reassuring. However, they also point out the fact that, even if they found it reassuring the first time, if they had to interact with the robot several time in this mode, they would quickly find it "annoying". Indeed, if we look at some details of the questions asked into the verbal part of the questionnaire, the verbal interaction of the robot have been found more superfluous in the RS-all mode than in the other modes (see Fig.~\ref{subfig:resSuperflus}). Moreover, the verbal interactions in the RS-none mode and the adaptation mode have been found less sufficient than in the other modes (see Fig.~\ref{subfig:resSuficient}). Indeed, the fact that the robot does not inform about its choices (and more particularly concerning the red objects) was found disturbing by the participants. 
 
 \begin{figure*}[!h]
 \centering
@@ -253,20 +253,46 @@ The scores of the different modes for the verbal part of the questionnaire can b
         \includegraphics[width=0.45\textwidth]{figs/Chapter5/Superflus.png}
        \label{subfig:resSuperflus}
    }
-    \caption{Details of the results on the part of the questionnaire concerning the verbal interactions. The different modes are for the reference system RS-all when the robot verbalizes everything and RS-none when the robot verbalize nothing and for the proposed system NS-N for the negotiation mode and NS-A for the adaptation mode.}
+    \caption{Details of the results on the verbal dimension of the questionnaire. The different modes are for the reference system RS-all when the robot verbalizes everything and RS-none when the robot verbalize nothing and for the proposed system NS-N for the negotiation mode and NS-A for the adaptation mode.}
     \label{fig:resUS}
 \end{figure*}
 
 
-\paragraph{Other parts:}
-Concerning the rest of the questionnaire, in all other parts, the new system (combination of the negotiation and adaptation modes) had scored significantly higher (p < 0.05) than the reference system (combination of RS-all and RS-none). The difference was particularly visible for the \textit{Acting} part of the questionnaire (p $\simeq$ 0.003). It shows that the algorithms developed for the robot to be able to take the appropriate decisions at the right time during Shared Plan achievement have been appreciated by the subjects.
+\paragraph{Other dimension:}
+Concerning the rest of the questionnaire, in all other dimension, the new system (combination of the negotiation and adaptation modes) had scored significantly higher (p < 0.05) than the reference system (combination of RS-all and RS-none). The difference was particularly visible for the \textit{Acting} part of the questionnaire (p $\simeq$ 0.003). It shows that the algorithms developed for the robot to be able to take the appropriate decisions at the right time during Shared Plan achievement have been appreciated by the subjects.
 
+\paragraph{Questionnaire validation:}
+In order to validate the coherence and uniformity of the questionnaire used during the study, we calculated Cronbach's alpha for each dimension of the questionnaire. We calculated these values for the RS-none condition which is the closest of based condition. These values can be found in Tab.~\ref{tab:validationQuestionnaire}. To consider that the coherence of a dimension is validated, alpha should be of 0.7 or higher. We can see that all dimensions of questionnaire (the french version) are validated here. 
 
+\begin{table*}[!h]
+\centering
+  \begin{tabular}{|c|c|}
+  \hline
+    \textbf{Dimensions} & \textbf{Cronbach's alpha} \\
+  \hline
+  	Verbal & 0.73 \\
+  \hline
+  	Acting & 0.85 \\
+  \hline
+  	Collaboration & 0.76 \\
+  \hline
+  	Interaction & 0.9 \\
+  \hline
+  	Robot perception & 0.84 \\
+  \hline
+  \end{tabular}
+   \caption{Cronbach's alpha for the different dimensions of the questionnaire. An alpha of 0.7 and higher means the dimension is validated.}
+   \label{tab:validationQuestionnaire}
+\end{table*}
+
+\newpage
 \section{Conclusion}
 
 The aim of this chapter was to evaluate the algorithms presented in the last two chapters in order to improve the Shared Plan elaboration and execution by the robot. The new system, with its two possible modes (negotiation and adaptation) has been compared to a reference system corresponding to the state of the art before the ameliorations (with two possible options for verbalization). The evaluation has been done both in simulation and with a real study in the real robot. 
 
 Both evaluations have shown that the new system performs better than the old one. In simulation, the adaptation mode performed a little better than the negotiation mode (a little less verbalizations). However, the naive users during the user study preferred the negotiation mode mainly because it was reassuring to have the robot asking when there was a choice. In conclusion, maybe the negotiation mode should be preferred for first or punctual interactions with the robot, and, when the user becomes more used to the robot, the adaptation mode should be preferred.
+
+Moreover, during the user study, we constructed a questionnaire in order to evaluate users feeling concerning the collaboration with the robot which has been validated (in therm of intern coherence) thanks to the study data. This tool is generic enough to be used for other studies where a robot collaborates with a human.
 
 \ifdefined\included
 \else

@@ -1,0 +1,36 @@
+\ifdefined\included
+\else
+\documentclass[english,a4paper,11pt,twoside]{StyleThese}
+\include{formatAndDefs}
+\sloppy
+\begin{document}
+\dominitoc
+\faketableofcontents
+\fi
+
+
+\chapter*{Abstract}
+
+In the future, robots will become our companions and co-workers. They will gradually appear in our environment, to help elderly or disabled people or to perform repetitive or unsafe tasks. However, we are still far from a real autonomous robot, which would be able to act in a natural, efficient and secure manner with humans. 
+To endow robots with the capacity to act naturally with human, it is important to study, first, how humans act together. Consequently, this manuscript starts with a state of the art on joint action in psychology and philosophy before presenting the implementation of the principles gained from this study to human-robot joint action. We will then describe the supervision module for human-robot interaction developed during the thesis.
+Part of the work presented in this manuscript concerns the management of what we call a shared plan. Here, a shared plan is a a partially ordered set of actions to be performed by humans and/or the robot for the purpose of achieving a given goal. First, we present how the robot estimates the beliefs of its humans partners  concerning the shared plan (called mental states) and how it takes these mental states into account during shared plan execution. It allows it to be able to communicate in a clever way about the potential divergent beliefs between the robot and the humans knowledge. Second, we present the abstraction of the shared plans and the postponing of some decisions. Indeed, in previous works, the robot took all decisions at planning time (who should perform which action, which object to use…) which could be perceived as unnatural by the human during execution as it imposes a solution preferentially to any other. This work allows us to endow the robot with the capacity to identify which decisions can be postponed to execution time and to take the right decision according to the human behavior in order to get a fluent and natural robot behavior. The complete system of shared plans management has been evaluated in simulation  and  with real robots in the context of a user study.
+Thereafter, we present our work concerning the non-verbal communication needed for human-robot joint action. This work is here focused on how to manage the robot head, which allows to transmit information concerning what the robot's activity and what it understands of the human actions, as well as coordination signals.
+Finally, we present how to mix planning and learning in order to allow the robot to be more efficient during its decision process. The idea, inspired from neuroscience studies, is to limit the use of planning (which is adapted to the human-aware context but costly) by letting the learning module made the choices when the robot is in a "known" situation. The first obtained results demonstrate the potential interest of the proposed solution.
+
+
+\chapter*{Resumé}
+
+Les robots sont les futurs compagnons et équipiers de demain. Que ce soit pour aider les personnes âgées ou handicapées dans leurs vies de tous les jours ou pour réaliser des tâches répétitives ou dangereuses, les robots apparaîtront petit à petit dans notre environnement. Cependant, nous sommes encore loin d'un vrai robot autonome, qui agirait de manière naturelle, efficace et sécurisée avec l'homme. 
+Afin de doter le robot de la capacité d'agir naturellement avec l'homme, il est important d'étudier dans un premier temps comment les hommes agissent entre eux. Cette thèse commence donc par un état de l'art sur l'action conjointe en psychologie et philosophie avant d'aborder la mise en application des principes tirés de cette étude à l'action conjointe homme-robot.  Nous décrirons ensuite le module de supervision pour l'interaction homme-robot développé durant la thèse.
+
+Une partie des travaux présentés dans cette thèse porte sur la gestion de ce que l'on appelle un plan partagé. Ici un plan partagé est une séquence d'actions partiellement ordonnées à effectuer par l'homme et/ou le robot afin d'atteindre un but donné. Dans un premier temps, nous présenterons comment le robot estime l'état des connaissances des hommes avec qui il collabore concernant le plan partagé (appelées états mentaux) et  les prend en compte pendant l'exécution du plan. Cela permet au robot de communiquer de manière pertinente sur les potentielles divergences entre ses croyances et celles des hommes. Puis, dans un second temps, nous présenterons l'abstraction de ces plan partagés et le report de certaines décisions. En effet, dans les précédents travaux, le robot prenait en avance toutes les décisions concernant le plan partagé (qui va effectuer quelle action, quels objets utiliser...) ce qui pouvait être contraignant et perçu comme non naturel par l'homme lors de l'exécution car cela pouvait lui imposer une solution par rapport à une autre. Ces travaux vise à permettre au robot d'identifier quelles décisions peuvent être reportées à l'exécution et de gérer leur résolutions suivant le comportement de l'homme afin d'obtenir un comportement du robot plus fluide et naturel. Le système complet de gestions des plan partagés à été  évalué en simulation et en situation réelle lors d'une étude utilisateur.
+
+Par la suite, nous présenterons nos travaux portant sur la communication non-verbale nécessaire lors de de l'action conjointe homme-robot. Ces travaux sont ici focalisés sur l'usage de la tête du robot, cette dernière permettant de transmettre des informations concernant ce que fait le robot et ce qu'il comprend de ce que fait l'homme, ainsi que des signaux de coordination.
+Finalement, il sera présenté comment coupler planification et apprentissage afin de permettre au robot d'être plus efficace lors de sa prise de décision. L'idée, inspirée par des études de neurosciences, est de limiter l'utilisation de la planification (adaptée au contexte de l'interaction homme-robot mais coûteuse) en laissant la main au module d'apprentissage lorsque le robot se trouve en situation "connue". Les premiers résultats obtenus démontrent sur le principe l'efficacité de la solution proposée.
+
+\ifdefined\included
+\else
+\bibliographystyle{StyleThese}
+\bibliography{These}
+\end{document}
+\fi

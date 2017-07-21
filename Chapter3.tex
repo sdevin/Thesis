@@ -280,10 +280,6 @@ Even if the robot estimates that the human is aware that he has to act (there is
 
 In order to evaluate the benefits of our method during human-robot interaction, we will use two different tasks. In a first time, we will show an illustrative example based on one possible scenario of the first task. In a second time, we will run simulations on the two tasks in order to get objective measurement of the performance of the system in simulation. The system will be evaluated in a real situation latter in Chapter~\ref{ch:Eval}.
 
-\paragraph{"Clean the table" scenario}
-
-In this example, a PR2 robot and a human have to clean a table together. To do so, they need to remove all items from this table, sweep it, and re-place all previous items. The initial world state is the one in Fig.~\ref{fig:initClean}. We consider that the grey book is reachable only by the robot, the blue book only by the human and the white book by both agents. The human and the robot have the ability to pick objects and place them into another support. Only the robot has the capacity to sweep the table. The initial plan produced to achieve the goal is shown in Fig.~\ref{fig:initPlanClean}.
-
 \begin{figure}[!h]
 	\centering
     \includegraphics[width=0.6\textwidth]{figs/Chapter3/cleanWithNames.png}
@@ -291,13 +287,17 @@ In this example, a PR2 robot and a human have to clean a table together. To do s
     \label{fig:initClean}
 \end{figure}
 
+\paragraph{"Clean the table" scenario}
+
+In this example, a PR2 robot and a human have to clean a table together. To do so, they need to remove all items from this table, sweep it, and re-place all previous items. The initial world state is the one in Fig.~\ref{fig:initClean}. We consider that the grey book is reachable only by the robot, the blue book only by the human and the white book by both agents. The human and the robot have the ability to pick objects and place them into another support. Only the robot has the capacity to sweep the table. The initial plan produced to achieve the goal is shown in Fig.~\ref{fig:initPlanClean}.
+
 \paragraph{"Inventory" scenario}
 
 In this example, a human and a PR2 robot have to make an inventory together. At the beginning of the task, both agents have colored objects near them as well as a colored box (initial world state in Fig.~\ref{fig:initInventory}). These colored objects need to be scanned and then, stored in the box of the same color. To do so, both agents can pick objects and place them in the table in a way reachable by the other agent. They also both have the ability to drop objects in the box near them. Finally, only the robot can scan an object, it consists of orienting its head and turning on a red light in the direction of a reachable object. 
 
 \begin{figure}[!h]
 	\centering
-    \includegraphics[width=0.6\textwidth]{figs/Chapter3/initInventory.png}
+    \includegraphics[width=0.5\textwidth]{figs/Chapter3/initInventory.png}
     \caption{Initial situation of the "Inventory" scenario.}
     \label{fig:initInventory}
 \end{figure}
@@ -315,7 +315,7 @@ We will first illustrate the benefits of the work presented in this chapter with
     \label{fig:initPlanClean}
 \end{figure}
 
-
+\newpage
 The robot starts to pick and place the grey book on the light-colored shelf. The human picks and places the blue book on the dark-colored shelf then leaves (Fig.~\ref{subfig:humanLeave}).
 
 \begin{table}[!h]
@@ -336,7 +336,6 @@ $A_{prev}$ & $A_{cur}$ & $A_{next}$ & $A_{ready}$ & $A_{prev}$ & $A_{cur}$ & $A_
 \end{table}
 
 The robot ends its action. At this point, the only possible action of the plan has to be done by the human. The robot waits a few time for the human and then, as the human does not come back (and so does not execute its action), aborts the current plan and computes a new one where it removes the last book (Fig.~\ref{fig:newplan}).
-The robot picks and places the white book on the light-colored shelf and sweeps the table (Fig.~\ref{subfig:robotSweep}).
 
 \begin{figure}[!h]
 	\centering
@@ -344,6 +343,9 @@ The robot picks and places the white book on the light-colored shelf and sweeps 
     \caption{Second plan of the "Clean the table" scenario.}
     \label{fig:newplan}
 \end{figure}
+
+The robot picks and places the white book on the light-colored shelf and sweeps the table (Fig.~\ref{subfig:robotSweep}).
+
 
 \begin{table}[!h]
 \begin{center}
@@ -363,6 +365,7 @@ $A_{prev}$ & $A_{cur}$ & $A_{next}$ & $A_{ready}$ & $A_{prev}$ & $A_{cur}$ & $A_
 \end{table}
 
 The human comes back at this time (Fig.~\ref{subfig:humanComesBack}). As he can see that the grey book is on the shelf near the robot, the robot infers that he infers that the robot has achieved the action it was performing when the human left. Moreover, as the human can see that the white book is on the shelf near the robot, the robot infers that he infers that the robot moved the book. However, the human can not observe that the table has been swept by the robot (we consider here that the effects of the \textit{sweep} action are not observable). Consequently, the human does not know that he can put back the book he removed.
+\newpage
 
 \begin{table}[!h]
 \begin{center}
@@ -448,6 +451,8 @@ We compared our system (called \textit{ToM system}) to:
 
 The obtained results in 100 runs are given in Table~\ref{table:results}.
 
+We can see that our system allows to reduce significantly the amount of information given by the robot. In the "Clean the table" scenario, depending on when the human leaves, the robot might change the initial plan and take care of the book reachable by both agents instead of the human. This explains why the average number for the \textit{Performed system} is higher than the number of actions initially planned for the robot: the robot performs more actions in the new plan. In this scenario, our system allows not to communicate about missed \textit{pickandplace} actions as the human can infer them by looking at the objects placements. However, the robot will inform the human if he missed the fact that the robot has swept the table as it is not observable and it is a necessary information for the human to know before he can put back objects on the table.
+
 \begin{table}[ht]
 \begin{center}
 \begin{tabular}{|r||c|c||c|c|}
@@ -468,8 +473,6 @@ Performed & 3.72 & 0.96 & 10.0 & 0.0\\
 \caption{Number of information given by the robot during the two presented scenarios for the three systems (\textit{TOM}, \textit{Missed} and \textit{Performed}).}
 \label{table:results}
 \end{table}
-
-We can see that our system allows to reduce significantly the amount of information given by the robot. In the "Clean the table" scenario, depending on when the human leaves, the robot might change the initial plan and take care of the book reachable by both agents instead of the human. This explains why the average number for the \textit{Performed system} is higher than the number of actions initially planned for the robot: the robot performs more actions in the new plan. In this scenario, our system allows not to communicate about missed \textit{pickandplace} actions as the human can infer them by looking at the objects placements. However, the robot will inform the human if he missed the fact that the robot has swept the table as it is not observable and it is a necessary information for the human to know before he can put back objects on the table.
 
 In the inventory scenario, as all objects and boxes are reachable only by one agent, the robot does not change the plan when the human leaves. This explains the fact that the standard deviation is null for the \textit{Performed system}: the number of actions performed by the robot never changes and there is no change in the plan. In this scenario, the \textit{pickanddrop} and \textit{scan} actions have non-observable effects (the human can not see an object in a box). However, we can see that our system still verbalizes less information than the \textit{Missed system}: the robot communicates only the information which the human really needs (as the fact that an object the human should drop in a box has been scanned) and does not give information which are not linked to the human part of the plan (as the fact that the robot scanned an object it have to drop in its box or that the robot dropped an object).
 

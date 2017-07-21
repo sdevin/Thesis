@@ -16,34 +16,53 @@
 \section*{Context}
 \addcontentsline{toc}{section}{Context}
 
-In the 1940s, researchers invented the first machines that we can call computers. Then, they quickly came to think that, this new tool which can easily manipulate numbers can also manipulate symbols, and they started to work on new "thinking machines". In 1956, at the Dartmouth conference, the domain of "Artificial Intelligence" is recognized as a fully academic field. Associated to the automaton technology, the first "robots" quickly arrived in our environment.
+In the 1940s, researchers invented the first machines that we can call computers. Then, they quickly came to think that this new tool which can easily manipulate numbers can also manipulate symbols and they started to work on new "thinking machines". In 1956, at the Dartmouth conference, the domain of "Artificial Intelligence" is recognized as a fully academic field. Associated to the automaton technology, the first "robots" quickly arrived in our environment.
 
 Some of these robots are meant to work alone (e.g. rovers for space exploration) while others need to work in the vicinity and/or with humans. One possible example is robot "co-workers". These robots need to collaborate in a safe, efficient and fluent way with humans to accomplish more or less repetitive tasks. The last decades also witnessed the apparition of what is called "sociable robots" \cite{dautenhahn2007socially}. These robots can be used, for example, to help elderly or injured people in their daily life our to guide people in public spaces. 
 
-The aim of this thesis is to make a step toward robots which act jointly with humans in a natural, efficient and fluent way. We focus more especially on the decisional issues that can appear during a human-robot Joint Action. The subject of Joint Action between humans has been studied a lot in social sciences, however, many things remain to be discovered. Based on these results, the aim here is to build robots which are able to understand the humans (their beliefs and choices) and to adapt to them in order to be more pleasant and efficient companions.
+The aim of this thesis is to make a step toward robots which act jointly with humans in a natural, efficient and fluent way. We focus more especially on the decisional issues that can appear during human-robot Joint Action. The subject of Joint Action between humans has been studied a lot in social sciences, however, many things remain to be discovered. Based on these results, the aim here is to build robots which are able to understand the humans (their beliefs and choices) and to adapt to them in order to be more pleasant and efficient companions.
+
+\newpage
+\section*{Human-Robot Joint Action challenges}
+\addcontentsline{toc}{section}{Human-Robot Joint Action challenges}
+
+Constructing robots which are able to smoothly execute Joint Action with humans brings a number of challenges. 
+
+A first prerequisite for the robot is to be engaged in the Joint Action. If the goal is not imposed by its human partner, the robot needs to pro-actively propose its help whenever it is needed. Then, the robot needs to monitor its partner engagement in the task and demonstrate its engagement in the same task.
+
+Once the robot has a goal to achieve, it needs to be able to find a plan to achieve this goal. This plan should be feasible in the current context of course, but it should also take the human into account, his abilities and preferences. Once a plan found, the robot should be able to share it or negotiate it with its partner. Only then, the execution of the task can begin.
+
+During the Joint Action execution, one first challenge for the robot is to be able to understand how the humans perceive their environment and what are their knowledge concerning the task. In other words, it needs to be able to constantly estimate the mental states of its partners. These mental states should be taken into account at every steps of the execution in order to unsure a good understanding between partners.
+
+Finally, the robot needs to be able to coordinate with the human. This coordination is needed at all level of the execution. At a lower level, the robot should exhibit an understandable and predictable behavior when performing actions. It also needs to be able to execute actions such as handover which require precise motor coordination. At a higher level, the robot needs to coordinate the Shared Plan execution. It not only needs to execute its actions at the right time but it should also give the appropriate information at the right time to its partners using either verbal or non-verbal communication.
 
 \section*{Contributions and manuscript organization}
 \addcontentsline{toc}{section}{Contributions and manuscript organization}
 
-In order to endow the robot with decisional abilities during Joint Action with humans, we bring several contributions to the field which are presented in the manuscript as follow:
+At the beginning of the thesis, I add to main starting points. One of these points was, as in almost all thesis I guess, the current states of the art both in robotics and in social sciences concerning human-human Joint Action. The second starting point was the current architecture for human-robot interaction developed in my research group and more especially the supervision part which I was asked to work on it. The aim with all of this being to bring innovating changes to the current system (again as in most thesis I guess). The process which I followed during this thesis and which I will explain now is graphically resumed in Fig.~\ref{fig:planIntro}.
+
+As a first step, I studied the bibliography concerning Joint Action between humans in order to better understand what are the needed components of a successful Joint Action. I also studied the current state of the art in robotics, and more especially in human-robot interaction, in order to have an overview of what robots was already capable of. Based on all of this, I identified the needed components of a successful Human-Robot Joint Action and I studied, always based on bibliography, how to articulate them into a coherent architecture. This part constitute the Chapter~\ref{ch:biblio} of the manuscript.
+
+Then, I took a look at the current state of the architecture for human-robot interaction developed in my research group. I especially focused on the supervision part of the architecture which I was in charge to develop. Based on the conclusion of my bibliographic study, I was able to identify several possible improvements to bring to the supervisor. The final version of the supervisor in presented in Chapter~\ref{ch:Sup} in order to help the understanding of the following of the manuscript and constitute the major technical contribution of the thesis.
+
+\begin{figure}[!t]
+	\centering
+    \includegraphics[width=\textwidth]{figs/Introduction/Plan.png}
+    \caption{Organization of the contributions presented in the manuscript.}
+    \label{fig:planIntro}
+\end{figure}
+
+One first subject where I saw possibilities of improvement was the way the robot elaborates and executes Shared Plans. This subject is treat in the second part of the manuscript and is decomposed in three chapters:
 \begin{itemize}
-\item In a first part, we study the basis of the Joint Action principles in order to build a supervisor for human-robot Joint Action. 
-\begin{itemize}
-\item In Chapter~\ref{ch:biblio}, we first study the bibliography about Joint Action between humans in social science in order to identify what are the needed components for a robot decision adapted to Joint Action. Secondly, we look how these components have already been applied in robotics and, finally, we study how to articulate all these components and how, inspired by models from philosophy, we can build a robotics architecture for human-robot interaction.
-\item In Chapter~\ref{ch:Sup}, we present the supervisor for human-robot collaboration which has been developed during the thesis. This supervisor is the main technical contribution of the thesis.
+\item First, I noticed that there was a gap between the perspective abilities of the robot and the Shared Plan execution. Indeed, several previous works endowed the robot with the ability to estimate how its human partners perceive the world and how to use this knowledge on several domains such as dialogue. However, there was no work to link this ability to the Shared Plan execution. In Chapter~\ref{ch:MS}, I will present how we endowed the robot with the ability to estimate the humans mental states, not only about the environment, but also concerning the state of the task and more particularly of the Shared Plan. Then, I will present how the robot is able to use these mental states to better communicate about divergent beliefs during Shared Plan execution.
+\item Then, coming from discussions with psychologists on the subject, we noticed that the way the robot was dealing with Shared Plans was not "natural" for humans and not enough flexible. Indeed, in the previous system, the robot was taking all decisions during Shared Plan elaboration. It was choosing for each action who should perform it and with which specific objects. Imagine a table with several identical objects on it that the robot needs to clean in collaboration with a human. The robot would have decided at the beginning for each object who should take it and in which exact order. The human would have simply removed objects and adapts to the robot decisions. The Chapter~\ref{ch:SP} aims to reduce this gap. We first identified the needed decisions during Shared Plan elaboration and execution and we endowed the robot with the ability to decide which decisions should be taken at planning time and which one are better postponed at execution time. Then, we allowed the robot to take these decision by smoothly adapting to the human choices.
+\item Finally, we wanted to evaluate the wholeness of the improvements bring to the Shared Plan achievement by the robot. We did it in Chapter~\ref{ch:Eval} both quantitatively in simulation and qualitatively with a user study in the real robot. These studies allowed to show the pertinence of the proposed ameliorations and to compare two different modes developed in the context of this work (in one mode the robot negotiates some needed decisions during Shared Plan execution while in the other the robot adapts to the human choices). Moreover, for the purpose of the user study, a questionnaire has been developed to evaluate the users feelings concerning the collaboration with the robot. This questionnaire has been validated (in term of inter coherence) thanks to the study data and is generic enough to be considered as a future tool for human-robot collaboration evaluation.
 \end{itemize}
-\item In a second part, we focus on the achievement by a robot of a \textit{Shared Plan} in collaboration with a human:
-\begin{itemize}
-\item In Chapter~\ref{ch:MS}, we present how we endowed the robot with the ability to estimate the humans mental states, not only about the environment, but also concerning the state of the task and more particularly of the Shared Plan. We also show how we use these mental states to allow the robot to better communicate about divergent beliefs during Shared Plan execution.
-\item In Chapter~\ref{ch:SP}, we describe the work done in order to allow the robot to gain acceptability and fluency during Shared Plan achievement by working with more flexible Shared Plans. We first identified the needed decisions during Shared Plan elaboration and execution and we endow the robot with the ability to decide which decisions should be taken at planning time and which one are better postponed at execution time. Then, we allowed the robot to take these decision by smoothly adapting to the human choices.
-\item Finally, in Chapter~\ref{ch:Eval}, we evaluate the new implemented system for the achievement of human-robot Shared Plan. This evaluation has been done quantitatively in simulation but also qualitatively with a user study with the real robot.
-\end{itemize} 
-In the last part, we present other contributions to the subject:
-\begin{itemize}
-\item In Chapter~\ref{ch:Acting}, we study the non-verbal behavior, and more especially the head -gaze- behavior, needed during Joint Action between humans and between a human and a robot. We identify the needed components of a robot head behavior adapted to the Joint Action and studied more deeply some of them with an on-line video based study. Finally, we present how these components can be implemented into a robot head behavior architecture.
-\item In Chapter~\ref{ch:Learning}, inspired from studies in neuroscience, we combine learning and planning for high level decisions during human-robot Joint Action. The idea it to take advantage from both sides in order to come up with decision level which is able to quickly learn how to smoothly adapt to the human choices during Joint Action execution.
-\end{itemize}
-\end{itemize}
+
+Then, I saw another interesting work subject concerning the non-verbal behavior of the robot. Indeed, during Joint Action between humans, Joint Action participants exchange a lot of information through non-verbal communication. It allows to increase fluency in the task execution and to align the knowledge of all participants. Consequently, for the robot to become a better Joint Action partner, it should be able to provide such information with its non-verbal behavior. In Chapter~\ref{ch:Acting}, we studied more especially the head behavior of the robot (there is plenty other ways to give information with non-verbal behavior, but it may more need a career than a thesis to study all of them). Based on the bibliography in social sciences and on previous works in robotics, we identified needed components of a robot head behavior adapted to the Joint Action. We studied more deeply some of them with an on-line video based study. To conclude this chapter, we present how these components can be implemented into a robot head behavior architecture.
+
+Finally, in the context of the RoboErgoSum ANR project\footnote{http://roboergosum.isir.upmc.fr/}, I have been brought to work in collaboration with ISIR at Paris where researchers work a lot in learning for robot high level decision. In Chapter~\ref{ch:Learning}, with another PhD student of ISIR Erwan Renaudo, we studied how to combine planning and learning in the context of human-robot Joint Action. The idea is to take advantage from both sides in order to come up with decision level which is able to quickly learn how to smoothly adapt to the human choices during Joint Action execution.
+
 
 \section*{Work environment}
 \addcontentsline{toc}{section}{Work environment}
@@ -54,7 +73,7 @@ This thesis has been realized at LAAS-CNRS in the RIS team (Robotics and Interac
 
 \begin{figure}[!h]
 	\centering
-    \includegraphics[width=0.3\textwidth]{figs/Introduction/PR2.png}
+    \includegraphics[width=0.25\textwidth]{figs/Introduction/PR2.png}
     \caption{The PR2 robot.}
     \label{fig:PR2}
 \end{figure}
@@ -68,6 +87,7 @@ This thesis has been realized at LAAS-CNRS in the RIS team (Robotics and Interac
     \label{fig:Environment}
 \end{figure}
 
+\newpage
 \section*{Publications}
 \addcontentsline{toc}{section}{Publications}
 

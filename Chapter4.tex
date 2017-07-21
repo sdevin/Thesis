@@ -71,6 +71,22 @@ We will present in this section the main principles we use for Shared Plans mana
 
 The Alg.~\ref{alg:mainPlan} allows the robot to elaborate a Shared Plan when needed, to maintain the current Shared Plan and to manage the human mental states. The terms used in the algorithms are reminded in Appendix \ref{chap:annexe1}.
 
+
+When the robot has a goal $g_R$ to achieve and no current plan or when a signal is received to compute a new plan ($S\_needReplan$), the robot computes a Shared Plan to perform the goal based on the current world state $WS$ (see Sec.~\ref{sec:elaboration}):
+$$SP \leftarrow PLAN(g_R, WS)$$
+
+When an action $a$ from the plan is performed by an agent a signal is received ($S\_needUpdate$) and the robot updates the plan (see Sec.~\ref{subsec:maintaining}):
+$$SP \leftarrow UPDATE\_PLAN(SP, a)$$
+
+When an action from $A^X$ has been allocated ($S\_actionAllocated$), the robot looks for the consequences of this allocation in the plan (see Sec.~\ref{subsec:allocation}):
+$$SP \leftarrow EVALUATE\_ PLAN(SP, WS)$$
+The robot also constantly checks if the goal is reached (the objectives of the goal are in the current World State).
+Finally, each time a change occurs in $WS(H)$ or $TS$, the robot estimates the human mental states as described in the previous chapter (see Chapter~\ref{ch:MS}):
+$$MS(H) \leftarrow ESTIMATE\_MS(MS(H), TS)$$
+If there is a conflict between the knowledge of the robot and the human mental state, the robot tries to solve it (see Chapter~\ref{ch:MS}): 
+$$SOLVE\_DB(MS(H), TS)$$
+
+\newpage
 \begin{algorithm}
 \caption{Shared Plan management}
 \label{alg:mainPlan}
@@ -101,21 +117,21 @@ The Alg.~\ref{alg:mainPlan} allows the robot to elaborate a Shared Plan when nee
 \end{algorithmic}
 \end{algorithm} 
 
-When the robot has a goal $g_R$ to achieve and no current plan or when a signal is received to compute a new plan ($S\_needReplan$), the robot computes a Shared Plan to perform the goal based on the current world state $WS$ (see Sec.~\ref{sec:elaboration}):
-$$SP \leftarrow PLAN(g_R, WS)$$
-
-When an action $a$ from the plan is performed by an agent a signal is received ($S\_needUpdate$) and the robot updates the plan (see Sec.~\ref{subsec:maintaining}):
-$$SP \leftarrow UPDATE\_PLAN(SP, a)$$
-
-When an action from $A^X$ has been allocated ($S\_actionAllocated$), the robot looks for the consequences of this allocation in the plan (see Sec.~\ref{subsec:allocation}):
-$$SP \leftarrow EVALUATE\_ PLAN(SP, WS)$$
-The robot also constantly checks if the goal is reached (the objectives of the goal are in the current World State).
-Finally, each time a change occurs in $WS(H)$ or $TS$, the robot estimates the human mental states as described in the previous chapter (see Chapter~\ref{ch:MS}):
-$$MS(H) \leftarrow ESTIMATE\_MS(MS(H), TS)$$
-If there is a conflict between the knowledge of the robot and the human mental state, the robot tries to solve it (see Chapter~\ref{ch:MS}): 
-$$SOLVE\_DB(MS(H), TS)$$
-
 In parallel to the first algorithm, Alg.~\ref{alg:mainExec} allows the robot to decide when to act and which action to perform. 
+
+
+When the robot has a Shared Plan $SP$, it looks for the action of this plan which need to and can be executed (see Sec. \ref{subsec:maintaining}):
+$$A_{next} \leftarrow GET\_NEXT\_ACTIONS(SP, WS)$$
+If there is no action in $A_{next}$ nor in progress, it means that the plan is blocked, so the robot looks for another Shared Plan. If there are actions to do, the robot looks if there is an action it can execute (actions allocated to it or not allocated yet). If there is none, the robot waits for the human to perform an action ($A_{next}$ contains only actions from $A^H_{next}$):
+$$actionExecuted \leftarrow WAIT\_ACTION(A^H_{next}, t)$$
+If after a time \textit{t}, the human did not execute any action, the robot looks for another plan.
+If there are actions the robot can execute, the robot selects an action $a$ (see Sec. \ref{subsec:selection}):
+$$a \leftarrow SELECT\_ACTION\_TODO(A_{next})$$
+If the selected action is not yet allocated, the robot first tries to allocate it (see Sec. \ref{subsec:allocation}):
+$$actor \leftarrow ALLOCATE\_ACTION(SP, a, WS, Prefs)$$
+If the action is allocated to the robot (after selection or allocation), the robot executes it:
+$$success \leftarrow EXECUTE(a)$$
+It will first instantiate the action if needed and then launch its execution (see Sec. \ref{subsec:execution}). If the action succeeds, the robot updates the plan, else it looks for another plan.
 
 
 \begin{algorithm}
@@ -154,20 +170,13 @@ In parallel to the first algorithm, Alg.~\ref{alg:mainExec} allows the robot to 
 \end{algorithmic}
 \end{algorithm} 
 
-When the robot has a Shared Plan $SP$, it looks for the action of this plan which need to and can be executed (see Sec. \ref{subsec:maintaining}):
-$$A_{next} \leftarrow GET\_NEXT\_ACTIONS(SP, WS)$$
-If there is no action in $A_{next}$ nor in progress, it means that the plan is blocked, so the robot looks for another Shared Plan. If there are actions to do, the robot looks if there is an action it can execute (actions allocated to it or not allocated yet). If there is none, the robot waits for the human to perform an action ($A_{next}$ contains only actions from $A^H_{next}$):
-$$actionExecuted \leftarrow WAIT\_ACTION(A^H_{next}, t)$$
-If after a time \textit{t}, the human did not execute any action, the robot looks for another plan.
-If there are actions the robot can execute, the robot selects an action $a$ (see Sec. \ref{subsec:selection}):
-$$a \leftarrow SELECT\_ACTION\_TODO(A_{next})$$
-If the selected action is not yet allocated, the robot first tries to allocate it (see Sec. \ref{subsec:allocation}):
-$$actor \leftarrow ALLOCATE\_ACTION(SP, a, WS, Prefs)$$
-If the action is allocated to the robot (after selection or allocation), the robot executes it:
-$$success \leftarrow EXECUTE(a)$$
-It will first instantiate the action if needed and then launch its execution (see Sec. \ref{subsec:execution}). If the action succeeds, the robot updates the plan, else it looks for another plan.
-
+\newpage
 In parallel to the other execution loops, the robot is constantly monitoring human activities (Alg.~\ref{alg:monitoring}).
+
+
+When the human performs an action, the robot first looks if the action is concurrent to the one it is performing (for example, if the human picks an object the robot was going to pick), and if it is the case, the robot stops its actions.  
+Then, if the human performs an expected action with respect to the plan and already allocated to him, the robot updates the plan accordingly. If the action executed by the human is expected with respect to the plan but was not yet allocated, the robot looks for the consequences of this actions in the plan (see Sec. \ref{subsec:allocation}).
+If the human performs an unexpected action with respect to the plan (action not in $A_{next}$ or in $A^R_{next}$), the robot looks for a new plan from the new situation induced by the human action.
 
 \begin{algorithm}
 \caption{Human monitoring}
@@ -190,10 +199,6 @@ In parallel to the other execution loops, the robot is constantly monitoring hum
 \ENDWHILE
 \end{algorithmic}
 \end{algorithm}
-
-When the human performs an action, the robot first looks if the action is concurrent to the one it is performing (for example, if the human picks an object the robot was going to pick), and if it is the case, the robot stops its actions.  
-Then, if the human performs an expected action with respect to the plan and already allocated to him, the robot updates the plan accordingly. If the action executed by the human is expected with respect to the plan but was not yet allocated, the robot looks for the consequences of this actions in the plan (see Sec. \ref{subsec:allocation}).
-If the human performs an unexpected action with respect to the plan (action not in $A_{next}$ or in $A^R_{next}$), the robot looks for a new plan from the new situation induced by the human action.
 
 The next sections will define more precisely the operators we just defined.
 

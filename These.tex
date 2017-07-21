@@ -36,12 +36,14 @@
 % language dependend this way, although you probably won't need it. Another use
 % of \iftoggle can be found at the end of this file.
 \iftoggle{ThesisInEnglish}{%
-\section*{Acknowledgments}
+\chapter*{Acknowledgments}
 }{%
-\section*{Remerciements}
+\chapter*{Remerciements}
 }
 
 TODO
+
+\include{Abstract}
 
 \tableofcontents
 
@@ -56,6 +58,7 @@ TODO
 %\mtcfixnomenclature
 
 \mainmatter
+
 
 \include{Introduction}
 
@@ -90,25 +93,5 @@ TODO
 \bibliographystyle{StyleThese}
 %\bibliographystyle{plain}
 \bibliography{These}
-
-\cleardoublepage
-\begin{vcenterpage}
-\noindent\rule[2pt]{\textwidth}{0.5pt}
-\\
-\iftoggle{ThesisInEnglish}{%
-{\large\textbf{Abstract:}}
-}{%
-{\large\textbf{Résumé :}}
-}
-resume
-\iftoggle{ThesisInEnglish}{%
-{\large\textbf{Keywords:}}
-}{%
-{\large\textbf{Mots clés :}}
-}
-mots, clefs
-\\
-\noindent\rule[2pt]{\textwidth}{0.5pt}
-\end{vcenterpage}
 
 \end{document}
