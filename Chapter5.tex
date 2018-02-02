@@ -16,15 +16,17 @@
 
 \section{Motivations}
 
-In the two previous chapters, we presented several ameliorations on the way the robot elaborates and executes Shared Plans. We first endowed the robot with the ability to take into account humans mental states during Shared Plans execution. In a second time, we saw how the robot is able to compute more flexible Shared Plans where it identifies which decisions have to be taken at planning time and which one are better to be postponed. Then, the robot is able to take these decisions while smoothly adapting to the human choices. 
+In the two previous chapters, we have presented several improvements on the way the robot elaborates and executes Shared Plans. We first endowed the robot with the ability to take into account humans mental state during Shared Plans execution. In a second time, we saw how the robot is able to compute more flexible Shared Plans where it identifies which decisions have to be taken at planning time and which one are better to be postponed. Then, the robot is able to take these decisions while smoothly adapting to the human choices. 
 
-These two ameliorations have been quantitatively and independently evaluated in simulation. In this chapter, we want to evaluate the global system including both ameliorations. Moreover, in addition to quantitative results, we want to evaluate the acceptance of the system by real users. To do so, we defined a task which allows to highlight the benefits of the system. This task has been used to evaluate the global system in simulation in order to get quantitative results. Then, the same task (with minor modifications) has been used during a user study in the real robot in order to get a subjective evaluation of the global system. 
+These two improvements have been quantitatively and independently evaluated in simulation. In this chapter, we want to evaluate the global system including both extensions. Moreover, in addition to quantitative results, we want to evaluate the acceptance of the system by real users. To do so, we have defined a task which allows to highlight the benefits of the system. This task has been used to evaluate the global system in simulation in order to get quantitative results. Then, the same task (with minor modifications) has been used during a user study in the real robot in order to get a subjective evaluation of the global system. 
+
+The user study has been realized with the help of Camille Vrignaud, a master student in psychology.
 
 \section{Task}
 
 \label{sec:task_us}
 
-The task used for the global evaluation is inspired from the "Inventory scenario" of Chapter~\ref{ch:MS}. In the task, the human and the robot have to scan several colored cubes and store them into a box of the same color. At the beginning of the interaction, both agents have a stack of colored cubes they can access (and only them can access). There are blue, green and red cubes. The stack of the human is located in another room, in a way that, to get an object, the human has to leave the sight of view of the robot (see Fig.~\ref{fig:setUpSimu}). For the cubes to be scanned, the agents need to put them on one of the two possible areas on the table in front of the robot (see Fig.~\ref{fig:setUpSimu}). Once a cube is on an area, the robot can scan it by orienting its head and turning on a red light in the direction of the object (see Fig.é\ref{fig:scan}). If the robot scans an object while the human is not looking at him (e.g. he is in another room to pick a cube), the human will not be aware that the object has been scanned unless the robot tells him. Once the cube scanned, it can be stored in a box of the same color (e.g. the blue cubes in a blue box). The robot has access to a blue box, the human to a green box, and both have access to a red box. Consequently, only the robot can store the blue cubes, only the human can store the green cubes and both can store the red cubes. As well as for his stack, the boxes of the human are located in another room (see Fig.~\ref{fig:setUpSimu}). 
+The task used for the global evaluation is inspired from the "Inventory scenario" of Chapter~\ref{ch:MS}. In the task, the human and the robot have to scan several colored cubes and store them into a box of the same color. At the beginning of the interaction, both agents have a stack of colored cubes they can access (and only them can access). There are blue, green and red cubes. The stack of the human is located in another room, in a way that, to get an object, the human has to leave the sight of view of the robot (see Fig.~\ref{fig:setUpSimu}). For the cubes to be scanned, the agents need to put them on one of the two possible areas on the table in front of the robot (see Fig.~\ref{fig:setUpSimu}). Once a cube is placed on a scanning area, the robot can scan it by orienting its head and turning on a red light in the direction of the object (see Fig.~\ref{fig:scan}). If the robot scans an object while the human is not looking at him (e.g. he is in another room to pick a cube), the human will not be aware that the object has been scanned unless the robot tells him. Once the cube is scanned, it can be stored in a box of the same color (e.g. the blue cubes in a blue box). The robot has access to a blue box, the human to a green box, and both have access to a red box. Consequently, only the robot can store the blue cubes, only the human can store the green cubes and both can store the red cubes. As well as for his stack, the boxes of the human are located in another room (see Fig.~\ref{fig:setUpSimu}). 
 
 
 \begin{figure}[!h]
@@ -52,14 +54,14 @@ Both in simulation and in the user study, we compared 4 different conditions:
 
 \subsection{Modalities}
 
-We first evaluated our system in simulation. Different set-ups were used as initial state of the task: we randomized the composition of the stack of the human and the robot. In each case there was three cubes of each color (red, blue and green) and the robot stack was composed of 4 cubes and the human one of 5 cubes. The dispositions of the cubes in the stacks were randomized. The robot was confronted to a simulated human with different kinds of behaviors. In all cases, the human was acting as bellow:
+We first evaluated our system in simulation. Different set-ups were used as initial state of the task: we randomized the composition of the stack of the human and the robot. In each case there was three cubes of each color (red, blue and green) and the robot stack was composed of 4 cubes and the human one of 5 cubes. The configuration of the cubes in the stacks were randomized. The robot was confronted to a simulated human with different kinds of behaviors. In all cases, the human was acting as below:
 \begin{itemize}
-\item when the human is in front of the robot with no cube in hand and there is a green cube he knows it is scanned, it goes to the boxes to store it.
-\item whenever the human is idle with no cube in hand, it goes to his stack to pick a cube and then comes back to the table.
+\item when the human is in front of the robot with no cube in hand and there is a green cube he knows it is scanned, he goes to the boxes to store it.
+\item whenever the human is idle with no cube in hand, he goes to his stack to pick a cube and then comes back to the table.
 \item if the human has a cube in hand to be scanned, he put it on a scan area (if free). If there is no free area, the human waits in front of the robot.
 \item if the human has no more cube in his stack he waits in front of the robot.
 \end{itemize}
-When the human is in front of the robot with no cube in hand and there is a red cube he knows it is scanned, the human chooses:
+When the human is in front of the robot with no cube in hand and there is a red cube he knows it has been scanned, the human chooses:
 \begin{itemize}
 \item to store it systematically (\textbf{hurry-case})
 \item not to store it systematically (\textbf{lazy-case})
@@ -72,7 +74,7 @@ Then, we settled two different human behaviors:
 \end{itemize}
 In all cases, the human answers to the robot questions concerning the red cubes with the answer corresponding to his decision.
 
-
+\bigskip
 We measured:
 \begin{itemize}
 \item \textit{the number of verbal interactions} between the human and the robot (either an information given by the robot or question asked), in Tab.~\ref{tab:incompatibleDecisions}.
@@ -102,7 +104,7 @@ We measured:
      \textbf{lazy-S} & 3.2 (0.92) & 25.2 (1.55) & 2.8 (1.68) & 1.8 (1.14)\\
   \hline
   \end{tabular}
-   \caption{Results for the reference system (RS) and the proposed system (NS-N for the negotiation mode and NS-A for the adaptation mode). Number of verbal interactions (i.e. question asked by the robot in the negotiation mode or an information given with the reference system). The numbers correspond to means in 10 runs and their associated standard deviations.}
+   \caption{\textbf{Number of verbal interactions}: question asked by the robot in the negotiation mode or an information given with the reference system. Results for the reference system (RS) and the proposed system (NS-N for the negotiation mode and NS-A for the adaptation mode). The numbers correspond to means in 10 runs and their associated standard deviations.}
    \label{tab:verbalInteraction}
 \end{table*}
 
@@ -132,12 +134,12 @@ Concerning the execution time, this mode is the one with the highest ones. The e
      \textbf{lazy-S} & 3.5 (0.97) & 2.6 (1.84) & 0.3 (0.67) & 0.4 (0.52)  \\
   \hline
   \end{tabular}
-   \caption{Results for the reference system (RS) and the proposed system (NS-N for the negotiation mode and NS-A for the adaptation mode). Number of incompatible decisions between the human and the robot (i.e. either both agents decide to perform the same action or both decide not to perform a given action). The numbers correspond to means in 10 runs and their associated standard deviations.}
+   \caption{\textbf{Number of incompatible decisions} between the human and the robot (i.e. either both agents decide to perform the same action or both decide not to perform a given action). Results for the reference system (RS) and the proposed system (NS-N for the negotiation mode and NS-A for the adaptation mode). The numbers correspond to means in 10 runs and their associated standard deviations.}
    \label{tab:incompatibleDecisions} 
 \end{table*}
 
 \paragraph{RS-all performance:}
-In this mode, as expected, there is a lot of verbal interactions. Indeed, the robot informs not only about who should perform the actions but also about all actions that the human missed. However, even with the "kind" human, it is not enough to get ride of all conflicts. Indeed, there are still conflicts concerning the scan areas as the robot has to stop its action if the human puts his cube in the area it was aiming for. There are even more conflicts with the "stubborn" human as, even if the robot gives information, the human does not change his choices.
+In this mode, as expected, there is a lot of verbal interactions. Indeed, the robot informs not only about who should perform the actions but also about all actions that the human missed. However, even with the "kind" human, it is not enough to get rid of all conflicts. Indeed, there are still conflicts concerning the scan areas as the robot has to stop its action if the human puts his cube in the area it was aiming for. There are even more conflicts with the "stubborn" human as, even if the robot gives information, the human does not change his choices.
 
 Concerning the execution times, they are low for the "kind" human as the human follows what the robot asks. However, with the "stubborn" human (not with the "hurry" one as the human takes the initiative to execute all possible actions), the execution times become higher. Indeed, when the robot has decided that the human has to perform an action, the robot wastes time to wait for the human to perform it before looking for another plan. These execution times are still lower than with RS-NONE because, as the robot informs for all missed actions, there is no time where the human waits to know that a cube has been scanned.
 
@@ -156,15 +158,94 @@ Concerning the verbal interactions, they are higher for the negotiation mode as 
 
 \section{User study}
 
+\subsection{Background on evaluating human-robot interaction}
+
+
+\paragraph{The UX Model:}
+The acceptability of complex technological systems as computer or robots is studied by researchers in social sciences. To do so they define what they call the User eXperience \cite{hassenzahl2006user} as:
+
+\begin{quote}
+"a consequence of a user's internal state (predispositions, expectations, needs, motivation, mood, etc.), the characteristics of the designed system (e.g. complexity, purpose, usability, functionality, etc.) and the context (or the environment) within which the interaction occurs (e.g. organisational/social setting, meaningfulness of the activity, voluntariness of use, etc.)."
+\end{quote}
+
+This definition has been designed as a model by \cite{mahlke2008user} as presented in Fig.~\ref{fig:modelUX}.
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.50\textwidth]{figs/Chapter5/ModelUX.png}
+    \caption{UX model by \cite{mahlke2008user}. The user experience is based on the human-technology interaction and is composed of three parts: the perception of instrumental qualities, the emotional user reaction and the perception of non-instrumental qualities.}
+    \label{fig:modelUX}
+\end{figure}
+
+This model is based on the human-technology interaction and is composed of three parts:
+\begin{itemize}
+\item \textbf{Perception of instrumental qualities:}
+The instrumental qualities of a technology, or also called pragmatic attributes, are strongly linked to the acceptability of the technology defined in \cite{dillon2001user} as:
+\begin{quote}
+"the demonstrable willingness within a user group to employ information technology for the task it is designed to support."
+\end{quote} 
+One well known model of acceptability is the one presented in \cite{davis1989perceived} which can be found in Fig.~\ref{fig:TAM}. We can see on this model that the intention of the user to use the technology is linked to the perceived usefulness and ease of use (or usability) of the technology.
+\item \textbf{Perception of non-instrumental qualities:}
+In the definition of \cite{hassenzahl2003thing}, the non-instrumental qualities of a technology, or also called hedonic attributes, depend of the user and refer to the pleasure obtained by the use of the technology. It includes several notions such as the stimulation procured during the interaction, identification mechanisms and representations. This aspect is evaluated through the perception of the technology by the user. In the human-robot interaction context, the criteria to take into account are the esthetics of the robot, symbolic aspects and motivational aspects during the interaction.
+\item \textbf{Emotional user reaction:}
+The emotions of the user after the interaction with the technology will impact the final use of the technology. A positive emotion will support a future use while a negative emotion can lead to a reject of the technology.
+\end{itemize}
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.53\textwidth]{figs/Chapter5/TAM.png}
+    \caption{TAM model of \cite{davis1989perceived}. This model shows that the intention of use of the technology by the user depends of the perceived usefulness and ease of use of the technology.}
+    \label{fig:TAM}
+\end{figure}
+
+
+\paragraph{Questionnaires to evaluate human-robot interaction:}
+
+Several questionnaires have already been developed to evaluate human-robot interaction. \cite{hoffman2013evaluating} allows to evaluate several aspects such as the "trust" in the robot or the "fluency" of the interaction. It has been used in several studies such as \cite{gombolay2015decision} or \cite{dragan2015effects}. However, this questionnaire does not deal with some aspects such as acceptability or usability. The Godspeed questionnaire \cite{bartneck2009measurement} allows to measure the perception of the robot by the human with questions relative to anthropomorphism or perceived intelligence. However, this questionnaire is focused on the evaluation of the perception of the robot and does not deal with the evaluation of the interaction and the usability of the system. The SUS (System Usability Scale) questionnaire \cite{brooke1986system} allows to measure the interaction of a user with an electronic system with 10 claims that subjects need to evaluate using  Lickert scale from "totally agree" to "totally disagree". On the contrary of the Godspeed, the SUS questionnaire measures the usability of the system but lacks of measure concerning the perception of the robot or the interaction. \cite{heerink2009measuring} presents a toolkit to measure acceptance for assistive social robots. This toolkit is based on the UTAUT (Unified Theory of Acceptance and Use of Technology) questionnaire \cite{venkatesh2003user}. It has been well conceived in order to evaluate the perception and usability of the robot and more particularly for social robots. However, the questionnaire is more oriented toward the perception of the robot than the interaction and the collaboration. Finally, several studies as \cite{heerink2010relating,fischer2016between} use "homemade" questionnaire conceived for their experiment and not always easily reusable.
+
+\subsection{Construction of a new questionnaire}
+
+
+\paragraph{Why do we need it?}
+We saw in the previous subsection that several questionnaires already exist to evaluate human-robot interaction. However, they mainly focus either on some specific basic behaviors or on evaluating human-robot interaction without concrete physical interaction. Even if these questionnaires are interesting in their respective fields of application, when it comes to evaluate high level decisions of a robot, few works have been done in the subject. 
+
+The decisions that we consider here correspond to physical (e.g. pick$\&$place ..) and verbal actions that are involved when a human and a robot have to satisfy a joint goal: what action to perform, who will do and when.
+Indeed, when the task is a little complex, when various ways exist to achieve a same goal or when the spatial resource itself is shared by the human and the robot, it is important for the human to have a robot partner:
+\begin{itemize}
+\item that tracks and is permanently aware of the current state of the task
+\item that can comply with the human decisions
+\item that makes explicit its internal state
+\item that does all this with minimal intrusive behavior
+\end{itemize}
+The objective of researchers who contribute to the development of the robot high level decision abilities for Human-robot joint action is to come up with a robot that is able make the right decisions at the right time. 
+
+We need here a questionnaire which allows to evaluate the pertinence of high level decisions of the robot during human-robot Joint Action. We want the questionnaire to evaluate all aspects of the user experience in this context as well as specific aspects linked to the robot high level decisional abilities. 
+
+\paragraph{The questionnaire:}
+
+In order to evaluate the user experience concerning the robot and the interaction, we have chosen to build a questionnaire where subjects have to place themselves in a self-assessment scale. This kind of questionnaire is often used in HRI because it allows to have quantitative measures on which it is possible to make statistical analysis. We organized the questionnaire on several dimensions, each one allowing to measure a specific aspect of the interaction. The first four dimensions allow to measure the different components of the UX model presented before:
+\begin{itemize}
+\item \textit{Evaluation of perception of the instrumental qualities:} we constructed two different dimensions of the questionnaire based on the TAM model (Fig.~\ref{fig:TAM}). The first one, based on \cite{weistroffer2014etude} and called the \textbf{Collaboration} dimension afterward, allows to evaluate how the subject perceived the utility and the usability of the interaction (ergonomic criteria). The second one, based on the French version of the AttrakDiff questionnaire \cite{lallemand2015creation} and called the \textbf{Interaction} dimension afterward, allows to evaluate the behavioral intention of use.
+\item \textit{Evaluation of the perception of non-instrumental qualities:} we based this part on the Godspeed questionnaire \cite{bartneck2009measurement}. It allows to  evaluate how the human perceived the robot in general. The associated dimension of the questionnaire will be called the \textbf{Robot perception} dimension afterward.
+\item \textit{Evaluation of the emotional user reaction:} we used the AffectButton from \cite{broekens2013affectbutton}. The associated dimension of the questionnaire will be called the \textbf{Emotions} dimension afterward.
+\end{itemize}
+
+In addition to these dimensions, we have added two other dimensions that are more specific to the context of high level decision and physical human-robot Joint Action:
+\begin{itemize}
+\item \textbf{Verbal:} this dimension allows to evaluate how the human perceived the verbal interaction with the robot (did the robot verbalized the good information at the right time).
+\item \textbf{Acting:} this dimension allows to evaluate how the human perceived the decisions of the robot concerning its actions (did the robot choose to perform the right actions at the right time).
+\end{itemize}
+
+Concerning the emotions dimension of the questionnaire, as said previously, we use the AffectButton from \cite{broekens2013affectbutton}. Subjects have to choose between five emoticons the one which corresponds the most to their feelings. Concerning the other dimensions, several antonym items are used by dimension (between 3 and 8). Subjects have to answer a question by placing themselves in a scale of 100 between these antonym items. The English translation of the questionnaire can be found in Appendix~\ref{chap:annexe3}.
+
 \subsection{Adaptations of the task for the study}
 
+Before realizing the real study, we have made some pre-tests by running the task in the robot with few subjects. During these pre-tests we noticed several possible problems that we fixed by proceeding to small adaptations of the task.
 
-Before realizing the real study, we made some pre-tests by running the task in the robot with few subjects. During these pre-tests we noticed several possible problems that we fixed by proceeding to small adaptations of the task.
+\paragraph{Introduction of a red video tape box:}
+In certain cases, the configuration coupled to the decision of the subjects led to not having any decision in the task concerning the red cubes. Indeed, there were cases where, each time there was a red cube to store, one of the two agents were busy (either the human was in another room to pick or store an object or the robot was performing another action). 
 
-\paragraph{Introduction of a red tape:}
-In certain cases, the configuration coupled to the decision of the subjects led to not having any decision in the task concerning the red cubes. Indeed, there were cases where, each time there was a red cube to store, one of the two agents were busy (either the human were in another room to pick or store an object or the robot was performing another action). 
-
-To ensure that, at each interaction, there is at least one decision to take between the human and the robot, we added to the objects to scan and store a red tape. The human and the robot both have a red tape in the same emplacement as their stacks of cubes. At the end of the task, when all the cubes are scanned and stored (and so both agent are available), \textbf{only one} of the two tapes (the one of the human or the one of the robot) needs to be put on a scan area. Then, as well as for the cubes, the robot scans the tape. Finally, as the tape is red, it needs to be stored in a red box either by the human or the robot.
+To ensure that, at each interaction, there is at least one decision to take between the human and the robot, we added to the objects to scan and store a red video tape box. The human and the robot both have a red video tape box in the same placement as their stacks of cubes. At the end of the task, when all the cubes are scanned and stored (and so both agent are available), \textbf{only one} of the two video tape boxes (the one of the human or the one of the robot) needs to be put on a scan area. Then, as well as for the cubes, the robot scans the video tape box. Finally, as the video tape box is red, it needs to be stored in a red box either by the human or the robot.
 
 
 \begin{figure}[!t]
@@ -176,93 +257,36 @@ To ensure that, at each interaction, there is at least one decision to take betw
 
 
 \paragraph{Distraction task:}
-We noticed that some subjects tried not to miss any action of the robot (they stayed in front of the robot each time there was a cube to scan and they hurried in the places where they cannot see the robot). Consequently, there was no missing knowledge during the task for these subjects. To ensure that all subjects miss some actions of the robot, at one predefined point of the task, the experimenter asked the subject to leave the task for a while to perform another task. In this task, the subject has to build a construction shown in a picture with Lego bricks. Once the construction achieved, the subject is free to go back to the main task.
+We noticed that some subjects tried not to miss any action of the robot (they stayed in front of the robot each time there was a cube to scan and they hurried in the places where they cannot see the robot). Consequently, there was not missing knowledge during the task for these subjects. To ensure that all subjects miss some actions of the robot, at one predefined point of the task, the experimenter asked the subject to leave the task for a while to perform another task. In this task, the subject has to build a construction shown in a picture with Lego bricks. Once the construction achieved, the subject is free to go back to the main task.
 
-\subsection{Protocol}
 
-Each subject of the study had to interact with the robot to achieve the task previously described, and in the four conditions described in Sec.~\ref{sec:task_us}. The order in which they were confronted to the different conditions was randomized. There were four different compositions for the stacks of the human and the robot. The attribution of each composition to a condition was also randomized for each participant.
+\subsection{Questionnaire and protocol}
 
-At their arrival, the participants were introduced to the robot and the environment of the study by the experimenter. Then, participants were asked to read instructions explaining the task and its constraints. The experimenter checked the good understanding of the instructions and showed the emplacements of the different objects of the task. The participants were then asked to perform a quick familiarization task. In this task, the human and the robot had only one cube in their stacks (a blue for the human and a green for the robot). They had to put them in the scan areas, scan them and then store them in the appropriate boxes. There was no tape in the familiarization task. 
+Each subject of the study had to interact with the robot to achieve the task previously described, and in the four conditions described in Sec.~\ref{sec:task_us}. The order in which they were confronted to the different conditions was randomized. There were four different configurations for the stacks of the human and the robot. The attribution of each configuration to a condition was also randomized for each participant.
 
-After each interaction with the robot (for each condition), the participants were asked to fill a questionnaire in order to evaluate their feeling concerning the robot and the interaction. To do so, several questionnaires have already been developed to evaluate human-robot interaction. \cite{hoffman2013evaluating} allows to evaluate several aspects of the interaction as the "trust" in the robot or the "fluency" of the interaction. It has been used in several studies as \cite{gombolay2015decision} or \cite{dragan2015effects}. However, this questionnaire lacks some aspects needed in our evaluation as "acceptability" or "usability". The Godspeed questionnaire \cite{bartneck2009measurement} allows to measure the perception of the robot by the human with questions relative to "anthropomorphism" or "perceived intelligence". However, this questionnaire is focused on the evaluation of the perception of the robot and lacks parts on the evaluation of the interaction and on the usability of the system. The SUS (System Usability Scale) questionnaire \cite{brooke1986system} allows to measure the interaction of a user with an electronic system with 10 affirmations which subjects need to evaluate with a Lickert scale from "totally agree" to "totally disagree". On the contrary of the Godspeed, the SUS questionnaire measures the usability of the system but lacks of measure concerning the perception of the robot or the interaction. Finally, \cite{heerink2009measuring} presents a toolkit to measure acceptance for assistive social robots. This toolkit is based on the UTAUT (Unified Theory of Acceptance and Use of Technology) questionnaire \cite{venkatesh2003user}. It has been well conceived in order to evaluate the perception and usability of the robot and more particularly for social robots. However, the questionnaire is more oriented toward the perception of the robot than the interaction and the collaboration. 
+At their arrival, the participants were introduced to the robot and the environment of the study by the experimenter. Then, participants were asked to read instructions explaining the task and its constraints. The experimenter checked the good understanding of the instructions and showed the placements of the different objects of the task. The participants were then asked to perform a quick familiarization task. In this task, the human and the robot had only one cube in their stacks (a blue for the human and a green for the robot). They had to put them in the scan areas, scan them and then store them in the appropriate boxes. There was no video tape box in the familiarization task. 
 
-For this study, like in \cite{heerink2010relating, fischer2016between}, we use a questionnaire that we conceived for the experiment. This questionnaire is composed of several dimensions:
+After each interaction with the robot (for each condition), the participants were asked to fill the questionnaire presented above. In addition to this questionnaire, after each interaction with the robot (including the familiarization task), we asked participants to answer a small yes/no questionnaire. This questionnaire contains general questions about what happened during the interaction (e.g. "Do you think all the cubes have been scanned?"). The aim of this questionnaire was to remind the key points of the interaction to the subjects (because we noticed during the pre-tests that subjects were kind of "lost" and did not know on what to focus their attention). This questionnaire can also be found in Appendix~\ref{chap:annexe3}.
+
+
+\subsection{Hypothesis} 
+\label{subsec:hypothesis}
+
+The results expected of the user study are:
 \begin{itemize}
-\item \textit{Verbal:} this dimension, composed of 3 questions allows to evaluate how the human perceived the verbal interaction with the robot.
-\item \textit{Acting:} this dimension, composed of 3 questions allows to evaluate how the human perceived the decisions of the robot concerning its actions.
-\item \textit{Collaboration:} this part, based on \cite{weistroffer2014etude} and composed of 5 questions, allows to evaluate how the human perceived the collaboration between the human and the robot.
-\item \textit{Interaction:} this dimension, based on the AttrakDiff questionnaire \cite{lallemand2015creation} and composed of 5 questions, allows to evaluate how the human perceived the interaction between the human and the robot.
-\item \textit{Robot perception:} this dimension, based on the Godspeed questionnaire \cite{bartneck2009measurement} and composed of 8 questions, allows to evaluate how the human perceived the robot in general.
+\item \textbf{Hypothesis 1:} The new system will be preferred to the old one by the users.
+\item \textbf{Hypothesis 2:} For the new system, the negotiation mode will be preferred by the user to the adaptation one. Indeed, even if in simulation better results where found for the adaptation mode in Chapter~\ref{ch:SP}, we strongly believe that naive users will be more comfortable with a robot asking whenever there is a choice.
 \end{itemize}
-For all the questions, the subject was asked to place himself in a scale of 100 between two antonym adjectives. The English translation of the questionnaire can be found in Appendix~\ref{chap:annexe3}.
 
-In addition to these two questionnaires, after each interaction with the robot (including the familiarization task), we asked participants to answer a small yes/no questionnaire. This questionnaire contains general questions about what happened during the interaction (e.g. "Do you think all the cubes have been scanned?"). The aim of this questionnaire was to remind the key points of the interaction to the subjects (because we noticed during the pre-tests that subjects were kind of "lost" and did not know on what to focus their attention). This questionnaire can also be found in Appendix~\ref{chap:annexe3}.
 
+\newpage
 \subsection{Results}
 
-21 subjects took part in the study (8 women and 13 men). They were all fluent in french and had no significant experience in robotics. The results for the questionnaire evaluating the subjects feeling concerning the robot and the interaction can be found in Fig.~\ref{fig:resUS}. We will discuss the results here bellow.
+21 subjects took part in the study (8 women and 13 men). They were all fluent in french and had no significant experience in robotics.
 
-\begin{figure*}[!h]
-\centering
-	\subfigure[Scores for the "Verbal" dimension of the questionnaire]{
-        \centering
-        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Verbal.png}
-       \label{subfig:resVerbal}
-   }
-    %~
-	\subfigure[Scores for the "Acting" dimension of the questionnaire]{
-        \centering
-        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Acting.png}
-       \label{subfig:resActing}
-   }
-    %~
-	\subfigure[Scores for the "Collaboration" dimension of the questionnaire]{
-        \centering
-        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Collaboration.png}
-       \label{subfig:resCollaboration}
-   }
-    %~
-	\subfigure[Scores for the "Interaction" dimension of the questionnaire]{
-        \centering
-        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Interaction.png}
-       \label{subfig:resInteraction}
-   }
-    %~
-	\subfigure[Scores for the "Robot perception" dimension of the questionnaire]{
-        \centering
-        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Robot.png}
-       \label{subfig:resRobot}
-   }
-    \caption{Results on the questionnaire evaluating the subjects feeling concerning the robot and the interaction given to the participants during the user study. The different modes are for the reference system RS-all when the robot verbalizes everything and RS-none when the robot verbalize nothing and for the proposed system NS-N for the negotiation mode and NS-A for the adaptation mode.}
-    \label{fig:resUS}
-\end{figure*}
-
-\paragraph{Verbal dimension:} 
-The scores of the different modes for the verbal dimension of the questionnaire can be found in Fig.~\ref{subfig:resVerbal}. The negotiation mode of the new system (NS-N) has been found significantly better than the RS-none condition and the adaptation mode (NS-A) (p < 0.05\footnote{The p values have been calculated with the Student's t-test when the data were normally distributed and with the Wilcoxon test otherwise}). Even if the negotiation mode had a higher score than the RS-all condition, the difference was not found significant. Indeed, when discussing with subjects after the experiment, we found that, for some of them, the fact that the robot was speaking a lot was reassuring. However, they also point out the fact that, even if they found it reassuring the first time, if they had to interact with the robot several time in this mode, they would quickly find it "annoying". Indeed, if we look at some details of the questions asked into the verbal part of the questionnaire, the verbal interaction of the robot have been found more superfluous in the RS-all mode than in the other modes (see Fig.~\ref{subfig:resSuperflus}). Moreover, the verbal interactions in the RS-none mode and the adaptation mode have been found less sufficient than in the other modes (see Fig.~\ref{subfig:resSuficient}). Indeed, the fact that the robot does not inform about its choices (and more particularly concerning the red objects) was found disturbing by the participants. 
-
-\begin{figure*}[!h]
-\centering
-	\subfigure[Score for the question concerning the verbal interactions where subjects were asked to choose between "insufficient" (0) and "sufficient" (100)]{
-        \centering
-        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Suficient.png}
-       \label{subfig:resSuficient}
-   }
-    %~
-	\subfigure[Score for the question concerning the verbal interactions where subjects were asked to choose between "superfluous" (0) and "pertinent" (100)]{
-        \centering
-        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Superflus.png}
-       \label{subfig:resSuperflus}
-   }
-    \caption{Details of the results on the verbal dimension of the questionnaire. The different modes are for the reference system RS-all when the robot verbalizes everything and RS-none when the robot verbalize nothing and for the proposed system NS-N for the negotiation mode and NS-A for the adaptation mode.}
-    \label{fig:resUS}
-\end{figure*}
-
-
-\paragraph{Other dimension:}
-Concerning the rest of the questionnaire, in all other dimension, the new system (combination of the negotiation and adaptation modes) had scored significantly higher (p < 0.05) than the reference system (combination of RS-all and RS-none). The difference was particularly visible for the \textit{Acting} part of the questionnaire (p $\simeq$ 0.003). It shows that the algorithms developed for the robot to be able to take the appropriate decisions at the right time during Shared Plan achievement have been appreciated by the subjects.
 
 \paragraph{Questionnaire validation:}
-In order to validate the coherence and uniformity of the questionnaire used during the study, we calculated Cronbach's alpha for each dimension of the questionnaire. We calculated these values for the RS-none condition which is the closest of based condition. These values can be found in Tab.~\ref{tab:validationQuestionnaire}. To consider that the coherence of a dimension is validated, alpha should be of 0.7 or higher. We can see that all dimensions of questionnaire (the french version) are validated here. 
+In order to validate the coherence and uniformity of the questionnaire used during the study, we calculated Cronbach's alpha for each dimension of the questionnaire \cite{cronbach1951coefficient}. We calculated these values for the RS-none condition which is the closest of based condition. These values can be found in Tab.~\ref{tab:validationQuestionnaire}. To consider that the coherence of a dimension is validated, alpha should be of 0.7 or higher. We can see that all dimensions of questionnaire (the french version) are validated here. 
 
 \begin{table*}[!h]
 \centering
@@ -285,14 +309,118 @@ In order to validate the coherence and uniformity of the questionnaire used duri
    \label{tab:validationQuestionnaire}
 \end{table*}
 
+
+Concerning the scores of the questionnaire, the total results for the questionnaire evaluating the subjects feeling concerning the robot and the interaction can be found in Fig~\ref{fig:resUSTotal} and the details for each dimension in Fig~\ref{fig:resUS}. We will discuss the results here below.
+
+\begin{figure}[!h]
+	\centering
+    \includegraphics[width=0.7\textwidth]{figs/Chapter5/Total.png}
+    \caption{Total scores of the questionnaire. It is calculated by adding the scores of all dimensions previously harmonized in a 100 scale. The different modes are for the reference system RS-all when the robot verbalizes everything and RS-none when the robot verbalize nothing and for the proposed system NS-N for the negotiation mode and NS-A for the adaptation mode. The RS and the NS columns are the means respectively for the Reference System and the New System.}
+    \label{fig:resUSTotal}
+\end{figure}
+
+\paragraph{Comparison of the two systems:} We first compared the Reference System (RS) to the New System (NS) in order to validate the first hypothesis. We compared the two systems looking at the total score of the questionnaire and each dimension individually. We applied student T-test when the data where normally distributed and Wilcoxon tests when the data where not normally distributed. The obtained results can be found in the first column of Tab.~\ref{tab:Wilcoxon}. We can see that for the total of the questionnaire and for all dimensions except the Verbal one, the new system has been evaluated significantly better than the reference system (p < 0.05). Consequently, we can consider the first hypothesis as validated. The difference was particularly visible for the \textit{Acting} dimension of the questionnaire (p $\simeq$ 0.003). It shows that the algorithms developed for the robot to be able to take the appropriate decisions at the right time during Shared Plan achievement have been appreciated by the subjects. The reasons why no significant difference was found for the verbal dimension will be explained below. 
+
+
+\begin{table}[h]
+ \centering\label{tab:Wilcoxon}
+  \begin{tabular}{|l|c|c|} \hline
+   \textbf{Dimension} & \textbf{RS/NS} & \textbf{NEGO/ADAPT} \\\hline
+   Total & (W) p = 1.002e-3* & (W) p = 0.147 \\\hline
+   Emotion & (W) p = 2.513e-2* & (W) p = 0.830\\\hline
+   Collaboration & (T) p = 4.321e-3* &  (W) p = 0.434\\\hline
+   Interaction & (T) p = 3.605e-2* & (W) p = 0.237  \\\hline
+   Robot perception & (W) p = 2.080e-2* & (W) p = 0.531 \\\hline
+   Verbal & (T) p = 0.308 & (W) p = 8.966e-3* \\\hline
+   Acting & (T) p = 3.537e-3* & (W) p = 0.222 \\\hline
+  \end{tabular}
+  \caption{P-values from the student T-tests and Wilcoxon tests. The first column corresponds to the comparison of the Reference System (RS) and the New System (NS). The second column corresponds to the comparison of the negotiation and the adaptation modes of the new system. (T) means a student T-test has been applied and (W) means a Wilcoxon test has been applied. * means the difference between the results is significant ($p$-value < 0.05).}
+\end{table}
+
+
+\begin{figure*}[!t]
+\centering
+	\subfigure[Scores for the "Emotion" dimension of the questionnaire. The scores have been put in a 100 scale for harmonization (each emoticons corresponding to a score of 20, 40, 60, 80 or 100).]{
+        \centering
+        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Emotions.png}
+       \label{subfig:resEmotions}
+   }\hfill
+    %~
+	\subfigure[Scores for the "Collaboration" dimension of the questionnaire]{
+        \centering
+        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Collaboration.png}
+       \label{subfig:resCollaboration}
+   }
+    %~
+	\subfigure[Scores for the "Interaction" dimension of the questionnaire]{
+        \centering
+        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Interaction.png}
+       \label{subfig:resInteraction}
+   }\hfill
+    %~
+	\subfigure[Scores for the "Robot perception" dimension of the questionnaire]{
+        \centering
+        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Robot.png}
+       \label{subfig:resRobot}
+   }
+    %~
+	\subfigure[Scores for the "Verbal" dimension of the questionnaire]{
+        \centering
+        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Verbal.png}
+       \label{subfig:resVerbal}
+   }\hfill
+    %~
+	\subfigure[Scores for the "Acting" dimension of the questionnaire]{
+        \centering
+        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Acting.png}
+       \label{subfig:resActing}
+   }
+    \caption{Results on the questionnaire evaluating the subjects feeling concerning the robot and the interaction given to the participants during the user study. The different modes are for the reference system RS-all when the robot verbalizes everything and RS-none when the robot verbalize nothing and for the proposed system NS-N for the negotiation mode and NS-A for the adaptation mode. The RS and the NS columns are the means respectively for the Reference System and the New System.}
+    \label{fig:resUS}
+\end{figure*}
+
+
+\paragraph{Comparison of the negotiation and adaptation modes:} We then compared the negotiation and the adaptation modes of the new system in order to validate the second hypothesis. We compared the two modes looking at the total score of the questionnaire and each dimension individually. We applied student T-test when the data where normally distributed and Wilcoxon tests when the data where not normally distributed. The obtained results can be found in the second column of Tab.~\ref{tab:Wilcoxon}. Here we can see that, even if the means of the negotiation mode are higher than the ones of the adaptation mode, no significant difference was found except for the Verbal dimension. Indeed, the principal difference between the two modes consists in the way the robot deals with the choices concerning the red objects. In the negotiation mode the robot asks to the human if he wants to perform the action and in the adaptation mode the robot does not speak and simply adapts. We can deduce that maybe the naive users of the study preferred the negotiation mode mainly because it was comforting to have the robot asking when there was a choice. In conclusion, looking at these results and previous results in simulation, maybe the negotiation mode should be preferred for first or punctual interactions with the robot, and, when the user becomes more used to the robot, the adaptation mode may be preferred.
+
+\begin{figure}[!t]
+\centering
+	\subfigure[Score for the question concerning the verbal interactions where subjects were asked to choose between "insufficient" (0) and "sufficient" (100)]{
+        \centering
+        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Suficient.png}
+       \label{subfig:resSuficient}
+   }\hfill
+    %~
+	\subfigure[Score for the question concerning the verbal interactions where subjects were asked to choose between "superfluous" (0) and "pertinent" (100)]{
+        \centering
+        \includegraphics[width=0.45\textwidth]{figs/Chapter5/Superflus.png}
+       \label{subfig:resSuperflus}
+   }
+    \caption{Details of the results on the verbal dimension of the questionnaire. The different modes are for the reference system RS-ALL when the robot verbalizes everything and RS-NONE when the robot verbalize nothing and for the new system the NEGO mode and the ADAPT mode.}
+    \label{fig:resVerbal}
+\end{figure}
+
+\paragraph{Focus on the verbal dimension:}
+We applied a Friedman ANOVA test to compare the different conditions of the Verbal dimension. The negotiation mode of the new system had scored significantly higher than the RS-NONE condition and the adaptation mode (p < 0.05). Even if the negotiation mode had a higher score than the RS-ALL condition, the difference was not found significant. Indeed, when discussing with subjects after the experiment, we found that, for some of them, as they felt stressed, the fact that the robot was speaking a lot was comforting because they did not have to take decisions nor to interpret robot actions. However, they also point out the fact that, even if they found it comforting the first time, if they had to interact with the robot several time in this mode, they would quickly find it "annoying". Indeed, if we look at some details of the questions asked into the verbal part of the questionnaire, the verbal interaction of the robot have been found more superfluous in the RS-ALL mode than in the other modes (see Fig.~\ref{subfig:resSuperflus}). Moreover, the verbal interactions in the RS-NONE mode and the adaptation mode have been found less sufficient than in the other modes (see Fig.~\ref{subfig:resSuficient}). Indeed, the fact that the robot does not inform about its choices (and more particularly concerning the red objects) was found disturbing by the participants.
+
+
+
 \newpage
 \section{Conclusion}
 
 The aim of this chapter was to evaluate the algorithms presented in the last two chapters in order to improve the Shared Plan elaboration and execution by the robot. The new system, with its two possible modes (negotiation and adaptation) has been compared to a reference system corresponding to the state of the art before the ameliorations (with two possible options for verbalization). The evaluation has been done both in simulation and with a real study in the real robot. 
 
-Both evaluations have shown that the new system performs better than the old one. In simulation, the adaptation mode performed a little better than the negotiation mode (a little less verbalizations). However, the naive users during the user study preferred the negotiation mode mainly because it was reassuring to have the robot asking when there was a choice. In conclusion, maybe the negotiation mode should be preferred for first or punctual interactions with the robot, and, when the user becomes more used to the robot, the adaptation mode should be preferred.
+Both evaluations have shown that the new system performs better than the old one. In simulation, the adaptation mode performed a little better than the negotiation mode (a little less verbalizations). However, the naive users during the user study preferred the negotiation mode mainly because it was comforting to have the robot asking when there was a choice. In conclusion, maybe the negotiation mode should be preferred for first or punctual interactions with the robot, and, when the user becomes more used to the robot, the adaptation mode should be preferred.
 
-Moreover, during the user study, we constructed a questionnaire in order to evaluate users feeling concerning the collaboration with the robot which has been validated (in therm of intern coherence) thanks to the study data. This tool is generic enough to be used for other studies where a robot collaborates with a human.
+Moreover, during the user study, we constructed a questionnaire in order to evaluate users feeling concerning the collaboration with the robot which has been validated (in term of intern coherence) thanks to the study data. This tool is generic enough to be used for other studies where a robot collaborates with a human.
+
+The user study presented in this chapter also allows us to get more insights on experiments with naive subjects. Indeed, there is a real difficulty to correctly evaluate works in decision for human-robot interaction due to several reasons:
+\begin{itemize}
+\item one of the first challenge is to find a task for the human and the robot to perform together. Indeed, this task should be sufficiently interesting to allow the evaluation of the system but not too complex if we do not want the subject to focus too much on the task rather than on the robot behavior. Moreover, the task should be adapted to the perception and manipulation abilities of the robot.
+\item another difficulty when the robot interacts with a human is to isolate the decisional aspect from the other robot abilities. Indeed, we figured out that, because they are not used to interact with robots, it is very hard for the subjects to distinguish two different behaviors of the robot (even if the difference seems huge to roboticists) because they have too much things to observe in the robot behavior.
+\item as the implementation of the robot decisional abilities usually relies on the other components of the robotics architecture (e.g. perception, manipulation), it is complicated and time consuming to obtain a global system sufficiently robust for a user study.
+\item finally, as the subjects during the user studies are naive, we can question the obtained results. 
+Indeed, we have experimented the fact that it is difficult, in a one session, while trying to avoid introducing heavy biases, to ask naive users to distinguish between a one-shot use of a robot and its potential daily use.  Then "annoying", "repetitive", "intrusive", "delayed" , "lacking of fluidity", "superfluous" behaviors will be certainly more severely evaluated. For the time being, the users are basically happy to "play" with the robot. This was perhaps enforced by the fact that in all the versions that we have proposed to the users, since the robot observes correctly the state and produces valid plans, the tasks is always finally achieved. Some UX models take into account the temporal aspect of the interaction\cite{kim2015user}, however, it usually implies to make long term user studies which are not easily feasible in our research context. One challenge would be to find a way to evaluate this aspect without a need of a long term study, maybe by performing user studies with subjects who are not naive but more used to robotics systems.
+\end{itemize}
 
 \ifdefined\included
 \else

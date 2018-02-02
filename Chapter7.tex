@@ -16,7 +16,7 @@
 
 \section{Motivation}
 
-When it comes to decisional process in robotics, two main schools of though can be distinguished: machine learning and deterministic processes such as planning or states machines. Both ways have their advantages and disadvantages. Learning is usually "cheap" (the decision process is quick) and always proposes a solution to a given problem. However, learning requires either a big amount of data or a long period of learning. Moreover, during the learning period, the robot can produce inconsistent behavior which can be confusing for a potential human collaborator. On the other hand, planning can take into account humans through social rules and ensure the validity of a whole solution. However, planning does not learn from human behavior, and, when it comes to complex tasks or environments, it can become slow to propose a solution. The idea of this work is to propose a solution where we combine planning and learning in the context of human-robot interaction in order to take advantage of both. 
+When it comes to decisional process in robotics, two main schools of thought can be distinguished: machine learning and deterministic processes such as planning or states machines. Both ways have their advantages and disadvantages. Learning is usually "cheap" (the decision process is quick) and always proposes a solution to a given problem. However, learning requires either a big amount of data or a long period of learning. Moreover, during the learning period, the robot can produce inconsistent behavior which can be confusing for a potential human collaborator. On the other hand, planning can take into account humans through social rules and ensure the validity of a whole solution. However, planning does not learn from human behavior, and, when it comes to complex tasks or environments, it can become slow to propose a solution. The idea of this work is to propose a solution where we combine planning and learning in the context of human-robot interaction in order to take advantage of both. 
 
 This work has been done in collaboration with ISIR at Paris and more particularly with another PhD student Erwan Renaudo. It has been done in the context of the RoboErgoSum ANR project\footnote{http://roboergosum.isir.upmc.fr/}. This work is based on the work of \cite{renaudo2014design} and has been the subject of a publication in a workshop at the RoMan conference \cite{renaudo2015learning} as well as a part of a journal article \cite{khamassi2016integration}.
 
@@ -24,7 +24,7 @@ This work has been done in collaboration with ISIR at Paris and more particularl
 
 \subsection{Inspiration from neurosciences}
 
-Seminal works on living being behaviors have been done in the late 19th century - beginning of the 20th century - with experiments on mammals. One pioneer work concerning the learning process is the experiment of the cat in a box \cite{thorndike1998animal}. In this experiment, a cat is put in a box each time it is hungry. The cat can see food outside of the box and a system of lever allows it to open the box. Each time the cat is put in the box it takes less time to go out. This experiment allows to show the principle of learning through trial and error. 
+Several works on living being behaviors have been done in the late 19th century - beginning of the 20th century - with experiments on mammals. One pioneer work concerning the learning process is the experiment of the cat in a box \cite{thorndike1911animal}. In this experiment, a cat is put in a box each time it is hungry. The cat can see food outside of the box and a system of lever allows it to open the box. Each time the cat is put in the box it takes less time to go out. This experiment allows to show the principle of learning through trial and error. 
 
 Latter, studies have highlighted two main kinds of behavior during decision-making tasks. \textbf{Goal-directed behaviors} are governed by estimates of action-outcome contingencies (i.e. decision-making relies on the prior estimation of the outcome expected after an action or an action sequence) and are mainly active at the beginning of the task. Then, when the animal is well trained in the task under stable conditions, a transfer of control to \textbf{habitual behaviors} governed by stimulus-response associations occurs  \cite{dickinson1985actions}. When rodents, monkeys or humans start a new decision-making task, they appear to initially rely on their goal-directed system. They take time to analyse the structure of the task in order to build an internal model of it, and make slow decisions by planning and inferring the long-term consequences of their possible actions before deciding what to do next. Then as their performance gradually improve, they appear to make quicker and quicker decisions, relying on their habitual system which slowly acquires simple stimulus-response associations to solve the task. Finally, when subjects restart to make errors after a task change, they appear to restart planning within their internal model and thus slow down their decision process before acquiring the new task contingencies \cite{balleine2010human, dolan2013goals}. The coordination of these two learning systems allows mammals to avoid long and costly computations when the environment is sufficiently stable, while still enabling animals to detect environmental changes requiring to update their internal model and replan.
 
@@ -42,7 +42,7 @@ Even if we can find more and more interesting works in HRI concerning planning a
 
 \section{Experts presentation}
 
-Inspired from neuroscience theories and based on the previous work of \cite{renaudo2014design} the aim of this work is to combine goal-directed and habitual behaviors in the context of human-robot Joint Action. To do so, we use two experts which implement these two kinds of behavior. The goal-directed behavior is produced here by HATP (Human-Aware Task Planer), a task planner which has proved its efficiency in the field of human-robot interaction. A Qlearning algorithm allows to implement the habitual behavior. We will describe in this section these two experts and their respective strengths and weakness. The next sections will show how we combined those two experts into two different architectures.
+Inspired from neuroscience theories and based on the previous work of \cite{renaudo2014design} the aim of this work is to combine goal-directed and habitual behaviors in the context of human-robot Joint Action. To do so, we use two experts which implement these two kinds of behavior. The goal-directed behavior is produced here by HATP (Human-Aware Task Planer), a task planner which has proved its efficiency in the field of human-robot interaction. A Qlearning algorithm allows to implement the habitual behavior. We will describe in this section these two experts and their respective strengths and weaknesses. The next sections will show how we combined those two experts into two different architectures.
 
 \subsection{HATP}
 
@@ -51,9 +51,10 @@ In our work, the goal-directed behavior is provided by HATP, an HTN (Hierarchica
 \begin{figure}[!h]
 	\centering
     \includegraphics[width=0.9\textwidth]{figs/Chapter7/SharedPlan.png}
-    \caption{An example of a Shared Plan computed by HATP. This plan allows a human and a robot to build a stack of colored objects together by placing them one on-top of the others.}
+    \caption{An example of a Shared Plan computed by HATP. This plan allows a human and a robot to clean a table by removing all objects on it, cleaning it and then putting back all previous objects.}
     \label{fig:examplePlan}
 \end{figure}
+
 
 \subsection{Qlearning algorithm (MF)}
 
@@ -80,7 +81,7 @@ with $r_t$ the instant reward received for performing a in $S_{t−1}$ , $\alpha
 
 The two different experts have really different ways to decide of the next action to execute. Both methods have their advantages and disadvantages:
 \begin{itemize}
-\item HATP looks for a complete solution to achieve the given goal while the MF only looks for the next action which maximize the probability to get a reward. Consequently, HATP ensures the feasibility of the solution proposed but could find itself in a state where it does not find a valid solution and so where it will not be able to propose an action. In the other hand, the MF does not ensure that its proposed action allows to achieve the goal but will always propose an action to perform.
+\item HATP looks for a complete solution to achieve the given goal while the MF only looks for the next action which maximizes the probability to get a reward. Consequently, HATP ensures the feasibility of the solution proposed but could find itself in a state where it does not find a valid solution and so where it will not be able to propose an action. In the other hand, the MF does not ensure that its proposed action allows to achieve the goal but will always propose an action to perform.
 \item As HATP computes a whole plan to achieve the goal, its cost, in the sense of time to take a decision, is far bigger than the one of the MF which only proposes the next action. However, this difference needs to be weighed by the fact that as an HATP plan is composed of several actions, this cost is not needed at each step of the task. Moreover, this cost stay acceptable in a not so complex task.
 \item HATP is conceived to produce a robot behavior understandable and acceptable by the human. The actions it proposes will produce a consistent behavior of the robot with which one the human can easily collaborate. For its part, the MF has a long period of learning during which one the behavior produced is inconsistent and can be really disturbing for a human collaborating with the robot. Moreover, each time a change happens in the task, a new learning phase is needed. However, the MF is able to learn to adapt its behavior to the human whereas the HATP policy is defined off-line and can not be updated with the behavior of the human during the interaction.
 \end{itemize}
@@ -99,7 +100,7 @@ The two different experts have really different ways to decide of the next actio
     \label{fig:FirstArchi}
 \end{figure}
 
-The first architecture we tried to combine the two experts is the one Fig.~\ref{fig:FirstArchi}. In this architecture the two experts are placed in parallel. The execution of a task by the architecture follows several steps:
+The first architecture in which we tried to combine the two experts is the one illustrated in Fig.~\ref{fig:FirstArchi}. In this architecture the two experts are placed in parallel. The execution of a task by the architecture follows several steps:
 \begin{itemize}
 \item The Situation Assessment module receives data from perception and maintains the world state representation. This world state is represented with predicates (see Sec.~\ref{subsec:taskOne}).
 \item The supervisor uses the current world state to compute the reward sent to the MF. This reward is a boolean which is true if the current goal is achieved (see Sec.~\ref{subsec:taskOne}). The supervisor also sends to the MF the last tried action (which was not necessarily the one proposed by the MF) in order to update the learning.
@@ -123,7 +124,7 @@ This first architecture has been tried in a simple task. Moreover, as the learni
         \centering
         \includegraphics[width=0.45\textwidth]{figs/Chapter7/initFirstTask.png}
        \label{subfig:initFirst}
-   }
+   }\hfill
     %~
 	\subfigure[Final situation]{
         \centering
@@ -137,7 +138,7 @@ This first architecture has been tried in a simple task. Moreover, as the learni
 In the chosen task a human and a robot have to "clean a table" together. To do so, they need to remove all the objects from the table and put them in a box (see Fig.~\ref{fig:firstTask}). At the beginning of the interaction two objects are accessible only by the robot and another one only by the human. The box is accessible only by the robot. To achieve the goal, several actions can be executed by the agents:
 \begin{itemize}
 \item \textbf{Pick an object:} both agents can pick an object accessible by them.
-\item \textbf{Throw an object:} the robot can throw an object it has in hand in the box near itself. 
+\item \textbf{Store an object:} the robot can store an object it has in hand in the box near itself. 
 \item \textbf{Give an object:} the robot can give an object to the human.
 \item \textbf{Take an object:} the robot can receive an object from the human
 \item \textbf{Wait:} the robot can wait for the human to execute an action.
@@ -145,12 +146,12 @@ In the chosen task a human and a robot have to "clean a table" together. To do s
 All these actions have an impact into the world state. This world state is estimated by the Situation Assessment module and represented with predicates which can be either true or false. For this task, we consider the following predicates:
 \begin{itemize}
 \item \textbf{<Object, isReachableBy, Agent>:} these predicates represent for each object if it is reachable by the human or the robot.
-\item \textbf{<Object, isIn, Box>:} these predicates represent the fact that an object has been thrown in the box.
+\item \textbf{<Object, isIn, Box>:} these predicates represent the fact that an object has been stored in the box.
 \item \textbf{<Agent, hasInHand, Object>}: these predicates represent the fact that the human or the robot holds an object.
 \end{itemize}
 These predicates allow the experts to take their decisions but also the supervisor to compute the reward needed by the MF. The robot will receive a reward whenever all objects are in the box and it performs the \textit{Wait} action. We chose to impose to the robot to perform a \textit{Wait} action at the end of the task in order for it to learn that the task is over and that no more action is needed.
 
-To test our architecture, we compare its performances to the performances of the system running with only the MF and only HATP. We run the experiment in all conditions with a fixed time limit. At the beginning of an experiment the set-up was put at the initial situation (Fig.~\ref{subfig:initFirst}). Once the task is achieved and reward is obtained by the robot, the set-up is put back to the initial situation and the task can be performed again.
+To test our architecture, we compare its performances to the performances of the system running with only the MF and only HATP. We run the experiment in all conditions with a fixed time limit. At the beginning of an experiment the set-up was put at the initial situation (Fig.~\ref{subfig:initFirst}). Once the task is achieved and a reward is obtained by the robot, the set-up is put back to the initial situation and the task can be performed again.
 
 As we run the task in simulation, the behavior of the human is also simulated. We chose here to have a collaborative human: it performs all actions HATP planned for him and participates to handover whenever the robot requires one.
 
@@ -162,7 +163,7 @@ As we run the task in simulation, the behavior of the human is also simulated. W
         \centering
         \includegraphics[width=0.45\textwidth]{figs/Chapter7/rewardsFirstTask.pdf}
        \label{subfig:rewardsFirstTask}
-   }
+   }\hfill
     %~
 	\subfigure[Number of actions tried per experiment. Dashed line is the mean number of action depending on the control method (MF only, HATP only or combination)]{
         \centering
@@ -180,7 +181,7 @@ As we run the task in simulation, the behavior of the human is also simulated. W
 \end{figure*}
 
 The main criteria used to evaluate our system is the cumulative reward obtained in each run (i.e. the number of time the human and the robot manage to achieve the task in a fixed amount of time). We run 10 times the experiment in each condition (MF only, HATP only and the combination of both) for a duration of approximately 30 minutes. The number of rewards obtained are presented in Fig.~\ref{subfig:rewardsFirstTask}. All experiments last the same fixed time, but the number of decisions taken at the end may vary.  We observe a poor performance of the MF alone, which is not able to solve the task more than three times. As the MF has no initial knowledge, it has to discover the right sequence of actions, which is non trivial with the given number of possible states and actions.
-The random combination HATP-MF is performing much better than the MF alone, solving the task 25 times in average. However, HATP alone performs even better solving the task 34 times in average. Indeed, the task is easy enough to solve for HATP and the time required to find a plan is negligible here. As the simulated human always performs the actions planned by HATP, the plan found by HATP is always optimal and will never change during the task execution. Accordingly, the random combination of HATP and the MF performs worst as it can include actions proposed by the MF that make the plan non optimal.
+The random combination HATP-MF is performing much better than the MF alone, solving the task 25 times in average. However, HATP alone performs even better solving the task 34 times in average. Indeed, the task is easy enough to solve for HATP and the time required to find a plan is negligible here. As the simulated human always performs the actions planned by HATP, the plan found by HATP is always optimal and will never change during the task execution. Accordingly, the random combination of HATP and the MF performs worse as it can include actions proposed by the MF that make the plan non optimal.
 
 Fig.~\ref{subfig:decisionsFirstTask} shows the number of actions proposed to the supervision system during each experiment. We can see that the MF alone suggests twice to three times more actions than HATP or the combination in the same given time. This is mainly due to the way each Expert decides: the MF only needs to compute the values of each action (which is propagating the state activity to action neurons) and to draw an action from the resulting probability distribution. It proposes a lot of unfeasible actions and the supervision system will not spend time to execute them as it will stop to the preconditions verification. HATP checks for action preconditions when planning and so, for each of the action proposed by HATP, the supervisor spend time to execute it (or try to execute it if the action is not really feasible according to the geometry). The number of actions suggested by the combination of Experts is closer to the one with HATP alone while remaining lightly higher. It can be explained by the fact that a part of the actions proposed by the combination comes from HATP and, for the ones coming from the MF, HATP helps it to learn a solution faster, causing it to propose less unfeasible actions.
 
@@ -204,13 +205,13 @@ However, this task is too simple for HATP to be in difficulty when deciding alon
     \label{fig:SecondArchi}
 \end{figure}
 
-One of the advantage of the MF against HATP is its computation time. In the previous architecture, both experts where consulted before the meta controller took a decision. Consequently, even if the MF was chosen, we still lost time to compute plans with HATP. In order to solve this issue, we modified the previous architecture as shown in Fig.~\ref{fig:SecondArchi}. 
+One of the advantage of the MF against HATP is its computation time. In the previous architecture, both experts where consulted before the meta controller took a decision. Consequently, even if the MF was chosen, we still lose time to compute plans with HATP. In order to solve this issue, we modified the previous architecture as shown in Fig.~\ref{fig:SecondArchi}. 
 
 In the new architecture, the meta controller is placed upstream from the two experts. Consequently, the order of the previous steps during a task is also slightly modified:
 \begin{itemize}
 \item The Situation Assessment module still receives data from perception and maintains the world state representation. 
-\item The supervisor sends the needed data concerning both experts to the meta controller in order for it to take a decision (see bellow). 
-\item Once the meta controller decision taken, we look for the action proposed by the selected expert. If the MF is chosen it directly sends its action to the supervisor as well as data concerning its decision (see bellow). If HATP is chosen, if needed, the supervisor asks for a new plan, else it directly executes the next action of the current plan. A new plan is needed at the beginning of the task or whenever an unexpected situation happen (an action from the plan fails, the human executes an unexpected action or the robot executes an action proposed by the MF which is not in the current plan).
+\item The supervisor sends the needed data concerning both experts to the meta controller in order for it to take a decision (see below). 
+\item Once the meta controller decision taken, we look for the action proposed by the selected expert. If the MF is chosen it directly sends its action to the supervisor as well as data concerning its decision (see below). If HATP is chosen, if needed, the supervisor asks for a new plan, else it directly executes the next action of the current plan. A new plan is needed at the beginning of the task or whenever an unexpected situation happen (an action from the plan fails, the human executes an unexpected action or the robot executes an action proposed by the MF which is not in the current plan).
 \item The supervisor still executes the chosen action with the help of lower execution modules (motion planning, control, ...). 
 \end{itemize}
 
@@ -235,10 +236,10 @@ table", however, there are now two different boxes where to put the objects. The
 We also add some new possible actions for the robot:
 \begin{itemize}
 \item \textbf{Pick an object:} both agents can still pick the objects accessible by them.
-\item \textbf{Throw an object:} the robot can throw an object it has in hand in a box of the same color accessible by itself. The human can throw an object it has in hand in the blue box. 
+\item \textbf{Store an object:} the robot can store an object it has in hand in a box of the same color accessible by itself. The human can store an object it has in hand in the blue box. 
 \item \textbf{Give an object:} the robot can still give an object to the human.
 \item \textbf{Take an object:} the robot can still receive an object from the human
-\item \textbf{Place an object on a placement:} the robot can place an object it has in hand on a placement accessible by itself.
+\item \textbf{Place an object on a placement:} both agents can place an object they have in hand on a placement accessible by themselves.
 \item \textbf{Navigate to another position:} the robot can navigate to another position in order to change the objects it can reach. The two possible positions for the robot are the one in Fig.~\ref{subfig:InitSecondScenario1} and Fig.~\ref{subfig:InitSecondScenario2}) and the one in Fig.~\ref{subfig:solutionSecondScenario}.
 \item \textbf{Wait:} the robot can still wait for the human to execute an action.
 \end{itemize}
@@ -247,7 +248,7 @@ The predicates used to represent the world state also changed. They are now comp
 \item \textbf{<Object, isReachableBy, Agent>:} these predicates represent for each objects if they are reachable by the human or the robot.
 \item \textbf{<Placement, isReachableBy, Agent>:} these predicates represent for each placement if they are reachable by the human or the robot.
 \item \textbf{<Box, isReachableBy, Agent>:} these predicates represent for each box if they are reachable by the human or the robot.
-\item \textbf{<Object, isIn, Box>:} these predicates represent the fact that an object has been throw in a box.
+\item \textbf{<Object, isIn, Box>:} these predicates represent the fact that an object has been stored in a box.
 \item \textbf{<Agent, hasInHand, Object>}: these predicates represent the fact that the human or the robot holds an object.
 \item \textbf{<Object, isOn, Placement>}: these predicates represent the fact that an object is on a specific placement.
 \item \textbf{<Robot, isAt, Position>}: these predicates represent the position of the robot (Position are the two possible places it can navigate to).
@@ -258,19 +259,19 @@ In this task, a reward is given to the robot whenever all objects are in a box.
 \centering
 	\subfigure[One possible initial set-up. In this situation the robot can access four objects (two blue and two green) as well as the green box.]{
         \centering
-        \includegraphics[width=0.3\textwidth]{figs/Chapter7/InitSecondScenario1.png}
+        \includegraphics[width=0.45\textwidth]{figs/Chapter7/InitSecondScenario1.png}
        \label{subfig:InitSecondScenario1}
-   }
+   }\hfill
     %~
 	\subfigure[Another possible initial set-up. In this situation the robot thinks it can access the blue object in the middle of the table. However, the green object in front of it blocks its access.]{
         \centering
-        \includegraphics[width=0.3\textwidth]{figs/Chapter7/InitSecondScenario2.png}
+        \includegraphics[width=0.45\textwidth]{figs/Chapter7/InitSecondScenario2.png}
        \label{subfig:InitSecondScenario2}
    }
     %~
 	\subfigure[One possible way for the robot to access the blue object it was not able to reach is to move to another position.]{
         \centering
-        \includegraphics[width=0.3\textwidth]{figs/Chapter7/solutionSecondScenario.png}
+        \includegraphics[width=0.45\textwidth]{figs/Chapter7/solutionSecondScenario.png}
        \label{subfig:solutionSecondScenario}
    }
     \caption{Description of the task used with the second architecture. In this task, the human and the robot have to remove all the objects of the table and put them in the box of the same color. At the beginning of the interaction several objects are accessible by the robot, others by the human and others by both agents. The green box is accessible by the robot and the blue one by the human. The placements are the white squares on the table.}
@@ -281,7 +282,7 @@ As there are more objects and more actions to perform for the robot, the number 
 
 \paragraph{Difference between planning and geometry}
 
-In order to get closer from possible real life situation, we introduced a geometrical problem in the task. Indeed, sometimes it can happen that the knowledge computed by the robot is not accurate and that, consequently, the computed plan is not valid at execution. In our task, there are two placements in the middle of the table (accessible both by the human and the robot) which are close to each other. Each time an object is on one of these placement, the robot thinks it can reach it. when there is an object in only one of the placement (as in Fig.~\ref{subfig:InitSecondScenario1}) the robot can effectively reach the object. However, when there is an object in both placements, the robot cannot reach the one in the farthest placement as the other one blocks its access (see Fig.~\ref{subfig:InitSecondScenario2}). The Situation Assessment is not able to differentiate the two situations and in each case it will estimate that all objects in these placements are reachable by the robot. The robot will discover that it can not reach an object at motion planning time and so, the initial HATP plan will not take this into account (but when the action to pick the object not reachable failed, the robot will update its knowledge and so the new HATP plan). To access an object not reachable by it the robot can either navigate to another position (as in Fig.~\ref{subfig:solutionSecondScenario}), remove the object which blocks the access or get the object from the human (through handover).
+In order to get closer from possible real life situation, we introduced a geometrical problem in the task. Indeed, sometimes it can happen that the knowledge computed by the robot is not accurate and that, consequently, the computed plan is not valid at execution. In our task, there are two placements in the middle of the table (accessible both by the human and the robot) which are close to each other. Each time an object is on one of these placement, the robot thinks it can reach it. When there is an object in only one of the placement (as in Fig.~\ref{subfig:InitSecondScenario1}) the robot can effectively reach the object. However, when there is an object in both placements, the robot cannot reach the one in the farthest placement as the other one blocks its access (see Fig.~\ref{subfig:InitSecondScenario2}). The Situation Assessment is not able to differentiate the two situations and in each case it will estimate that all objects in these placements are reachable by the robot. The robot will discover that it can not reach an object at motion planning time and so, the initial HATP plan will not take this into account (but when the action to pick the object not reachable failed, the robot will update its knowledge and so the new HATP plan). To access an object not reachable by it the robot can either navigate to another position (as in Fig.~\ref{subfig:solutionSecondScenario}), remove the object which blocks the access or get the object from the human (through handover).
 
 The MF should allow the robot to learn in which case an object is really reachable by the robot and in which case another solution is preferred to get the object.
 
@@ -289,9 +290,9 @@ The MF should allow the robot to learn in which case an object is really reachab
 
 Finally, in the previous task, one of the reason HATP was performing very well was that the human always executed the actions planned for him. In real life, even if the human is collaborative, he does not necessarily take the same decisions as the ones HATP took for him. In this task, we introduced three different kinds of human behavior:
 \begin{itemize}
-\item \textbf{The collaborative human:} it picks all objects accessible by him (with a priority for blue ones), throws the blue objects in the blue box and participates to all handover engaged by the robot.
-\item \textbf{The anti-handover human:} it picks all the blue objects accessible by him, throws the blue objects in the blue box but does not participate to handover engaged by the robot (he does not react when the robot tries to execute a handover, the robot waits a few time and abort the action).
-\item \textbf{The lazy human:} it picks the blue objects accessible only by him (and not the ones the robot can access), throws the blue objects in the blue box and does not participate to handover engaged by the robot.
+\item \textbf{The collaborative human:} he picks all objects accessible by him (with a priority for blue ones), throws the blue objects in the blue box and participates to all handover engaged by the robot.
+\item \textbf{The anti-handover human:} he picks all the blue objects accessible by him, throws the blue objects in the blue box but does not participate to handover engaged by the robot (he does not react when the robot tries to execute a handover, the robot waits a few time and abort the action).
+\item \textbf{The lazy human:} he picks the blue objects accessible only by him (and not the ones the robot can access), throws the blue objects in the blue box and does not participate to handover engaged by the robot.
 \end{itemize}
 
 \subsection{Results}
@@ -302,7 +303,7 @@ Finally, in the previous task, one of the reason HATP was performing very well w
         \centering
         \includegraphics[width=0.45\textwidth]{figs/Chapter7/reward_HATP.pdf}
        \label{subfig:reward_HATP}
-   }
+   }\hfill
     %~
 	\subfigure[Mean cumulative reward for the system with only the MF. Different values for the MF parameters have been tested in order to find the best configuration in this task]{
         \centering
@@ -326,14 +327,20 @@ Then, we tested the system with the MF alone and with different parameters of th
 
 Then, we tested the combination of both experts. In a first step, we tested it with the collaborative human and with only one possible initial set-up without geometrical complications. We tested several parametrisations of the arbitration criteria in order to get the best implementation for this task. However, we noticed that, even when we put the system in the best possible situation, it performs barely as well as HATP in its worst case (the task was solved around 45 times in each cases, see Fig.~\ref{subfig:reward_combo}). Indeed, with a more complex task, the bootstrap effect of HATP was not enough for the MF to learn a sufficiently good action policy. We tried with some runs way longer (several hours) but it was still not sufficient for the MF to learn a correct policy. 
 
-Moreover, even if we tried to reduce computation time by putting the meta controller upstream from the experts, the effect was not the one expected. Indeed, the meta controller here is probabilist and so, even if the probability to choose the MF becomes higher than HATP, it can still happen for HATP to be chosen. In this case, a whole plan is computed by HATP even if we ask it only one action during the task. Consequently, the planning time remains the same than if HATP follows its plan alone to achieve the task.
+Moreover, even if we tried to reduce computation time by putting the meta controller upstream from the experts, the effect was not the one expected. Indeed, the meta controller here is probabilistic and so, even if the probability to choose the MF becomes higher than HATP, it can still happen for HATP to be chosen. In this case, a whole plan is computed by HATP even if we ask it only one action during the task. Consequently, the planning time remains the same than if HATP follows its plan alone to achieve the task.
 
 \section{Conclusion}
 
-In this chapter, we presented an architecture allowing to combine learning (a model free algorithm) and planning (a human-aware task planer HATP) during the robot decisional process. First results shown that HATP allows to bootstrap the learning and so to quickly learn a consistent and acceptable behavior for the robot.
+In this chapter, we presented an architecture allowing to combine learning (a model free algorithm) and planning (a human-aware task planer HATP) during the robot decisional process. First results have shown that HATP allows to bootstrap the learning and so to quickly learn a consistent and acceptable behavior for the robot.
 
-Secondly, we tried to show the benefits of the learning in the system. Despite the facts that the result was not the one expected, we can still learn some lessons from this work and think of solutions to improve the system. One first possible modification would be to rework on the learning algorithm in order to study if there is method more adapted to this context. Then, another amelioration would be to look for a new arbitration criteria between the two experts. Maybe a criteria with an hysteresis in order to reduce switches between experts in a task and allow them to have time to develop their own strategy (and not having one expert breaking the strategy the other tried to set-up) would be a good idea. Finally, one interesting idea would be to allow HATP to have a feedback on what is learned by the MF. Indeed, the knowledge of HATP concerning the actions is put off-line and is not updated during the interaction. For example, maybe the learning can provide the real time needed to execute an action or its probability of success given what was learned from previous interactions.
+Secondly, we tried to show the benefits of the learning in the system. The result was not the one expected but we can still learn some lessons from this work and think of solutions to improve the system. One first possible modification would be to rework on the learning algorithm in order to study if there is method more adapted to this context. Then, another improvement would be to look for a new arbitration criteria between the two experts.  Maybe a criteria with an hysteresis in order to reduce switches between experts in a task and allow them to have time to develop their own strategy (and not having one expert breaking the strategy the other tried to set-up) would be a good idea. Finally, one interesting idea would be to allow HATP to have a feedback on what is learned by the MF. Indeed, the knowledge of HATP concerning the actions is put off-line and is not updated during the interaction. For example, maybe the learning can provide the real time needed to execute an action or its probability of success given what was learned from previous interactions.
 
+Despite the mixed results on the second system, we can still draw conclusions for this work:
+\begin{itemize}
+\item We have shown that the combination of HATP and the MF allows effectively to improve drastically the learning phase of the MF. Indeed, it allows the MF to quickly learn a policy and to adapt it to possible changes in the task.
+\item Thanks to its pertinent model of human-robot Joint Action, HATP allows the MF to learn whenever it is more efficient for the robot to \textit{Wait} for an action of the human rather than trying to achieve the goal by itself.
+\item There are still some difficulties and this topic is far from being solved. However, the work presented here makes a step forward and gives clues on how to combine task learning and planning into future architecture.
+\end{itemize}
 
 \ifdefined\included
 \else

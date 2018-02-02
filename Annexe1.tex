@@ -2,12 +2,13 @@
 \label{chap:annexe1}
 
 
-\textbf{$TS$:} state of the task from the robot point of view.
+\hspace{18pt} \textbf{$TS$:} state of the task from the robot point of view.
 $$TS = <g_R, SP, WS>$$
 
 \textbf{$MS(H)$:} mental state of the human $H$.
 $$MS(H) = <g_H, g_R(H), SP(H), WS(H)>$$
 
+\bigskip
 \textbf{Goals:}
 
 \textbf{$g_R$:} current goal of the robot
@@ -17,7 +18,7 @@ $$MS(H) = <g_H, g_R(H), SP(H), WS(H)>$$
 \textbf{$g_R(H)$:} current goal of the robot from the human $H$ point of view
 
 $$g = <Name_g, Actors_g, Params_g, Obj_g>$$
-\textbf{$Name_g$:} identifier of the goal $g$
+\indent \textbf{$Name_g$:} identifier of the goal $g$
 
 \textbf{$Actors_g$:} actors of the goal $g$
 
@@ -27,7 +28,7 @@ $$g = <Name_g, Actors_g, Params_g, Obj_g>$$
 
 \textbf{$label_g$:} state of a goal $g$ already over (DONE or ABORTED)
 
-
+\bigskip
 \textbf{Shared Plan:}
 
 \textbf{$SP$:} current Shared Plan
@@ -47,7 +48,8 @@ $$A_p = <A_{prev}, A_{cur}, A_{next}, A_{later}>$$
 
 \textbf{$next_l$:} identifier of the action to execute next (after $prev_l$)
 
-\textbf{Actions:}
+\bigskip
+\textbf{Actions sets:}
 
 \textbf{$A_{prev}$:} actions already executed
 
@@ -55,56 +57,61 @@ $$A_p = <A_{prev}, A_{cur}, A_{next}, A_{later}>$$
 
 \textbf{$A_{prev}^R$:} actions already executed by the robot
 
-\textbf{$A_{prev}(H)^R$:} actions already executed by the robot from the human $H$ point of view
+\textbf{$A_{prev}^R(H)$:} actions already executed by the robot from the human $H$ point of view
 
 \textbf{$A_{prev}^H$:} actions already executed by the human $H$
 
-\textbf{$A_{prev}(H)^H$:} actions already executed by the human $H$ from the human $H$ point of view
+\textbf{$A_{prev}^H(H)$:} actions already executed by the human $H$ from the human $H$ point of view
 
+\bigskip
 \textbf{$A_{cur}$:} actions in progress
 
 \textbf{$A_{cur}(H)$:} actions in progress from the human $H$ point of view
 
 \textbf{$A_{cur}^R$:} actions in progress and executed by the robot
 
-\textbf{$A_{cur}(H)^R$:} actions in progress and executed by the robot from the human $H$ point of view
+\textbf{$A_{cur}^R(H)$:} actions in progress and executed by the robot from the human $H$ point of view
 
 \textbf{$A_{cur}^H$:} actions in progress and executed by the human $H$
 
-\textbf{$A_{cur}(H)^H$:} actions in progress and executed by the human $H$ from the human $H$ point of view
+\textbf{$A_{cur}^H(H)$:} actions in progress and executed by the human $H$ from the human $H$ point of view
 
+\bigskip
 \textbf{$A_{next}$:} actions from the plan which need to be performed
 
 \textbf{$A_{next}(H)$:} actions from the plan which need to be performed from the human $H$ point of view
 
 \textbf{$A_{next}^R$:} actions from the plan which need to be performed by the robot
 
-\textbf{$A_{next}(H)^R$:} actions from the plan which need to be performed by the robot from the human $H$ point of view
+\textbf{$A_{next}^R(H)$:} actions from the plan which need to be performed by the robot from the human $H$ point of view
 
 \textbf{$A_{next}^H$:} actions from the plan which need to be performed by the human $H$
 
-\textbf{$A_{next}(H)^H$:} actions from the plan which need to be performed by the human $H$ from the human $H$ point of view
+\textbf{$A_{next}^H(H)$:} actions from the plan which need to be performed by the human $H$ from the human $H$ point of view
 
 \textbf{$A_{next}^X$:} actions from the plan which need to be performed and are not yet allocated
 
-\textbf{$A_{next}(H)^X$:} actions from the plan which need to be performed and are not yet allocated from the human $H$ point of view
+\textbf{$A_{next}^X(H)$:} actions from the plan which need to be performed and are not yet allocated from the human $H$ point of view
 
+\bigskip
 \textbf{$A_{later}$:} actions from the plan which need to be performed later
 
 \textbf{$A_{later}(H)$:} actions from the plan which need to be performed later from the human $H$ point of view
 
 \textbf{$A_{later}^R$:} actions from the plan which need to be performed later by the robot
 
-\textbf{$A_{later}(H)^R$:} actions from the plan which need to be performed later by the robot from the human $H$ point of view
+\textbf{$A_{later}^R(H)$:} actions from the plan which need to be performed later by the robot from the human $H$ point of view
 
 \textbf{$A_{later}^H$:} actions from the plan which need to be performed later by the human $H$
 
-\textbf{$A_{later}(H)^H$:} actions from the plan which need to be performed later by the human $H$ from the human $H$ point of view
+\textbf{$A_{later}^H(H)$:} actions from the plan which need to be performed later by the human $H$ from the human $H$ point of view
 
 \textbf{$A_{later}^X$:} actions from the plan which need to be performed later and are not yet allocated
 
-\textbf{$A_{later}(H)^X$:} actions from the plan which need to be performed later and are not yet allocated from the human $H$ point of view
+\textbf{$A_{later}^X(H)$:} actions from the plan which need to be performed later and are not yet allocated from the human $H$ point of view
 
+\bigskip
+\textbf{Action:}
 $$a = < id_{a}, \ Name_{a}, \ Ag_{a}, \ Params_{a}, \ Precs_{a}, \ Effects_{a} >$$
 
 \textbf{$id_{a}$:} identifier of the action $a$
@@ -121,6 +128,7 @@ $$a = < id_{a}, \ Name_{a}, \ Ag_{a}, \ Params_{a}, \ Precs_{a}, \ Effects_{a} >
 
 \textbf{$label_{a}$:} state of an action $a$ already executed (DONE, FAILED or ABORTED)
 
+\bigskip
 \textbf{World State:}
 
 \textbf{$WS$:} current world state from the robot point of view

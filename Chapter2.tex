@@ -18,7 +18,7 @@
 
 \label{sec:globalArchi}
 
-One of the goals of my research group at LAAS-CNRS is to build a fully autonomous robot which interacts and performs Joint Actions with humans. To do so, an architecture for human-robot interaction has been developed and is constantly improved by the group. This architecture is composed of several modules and a simplified scheme of it can be found in Fig.~\ref{fig:GlobalArchi}.
+One of the goals of our research group at LAAS-CNRS is to build a fully autonomous robot which interacts and performs Joint Actions with humans. To do so, an architecture for human-robot interaction has been developed and is constantly improved by the group. This architecture is composed of several modules and a simplified scheme of it can be found in Fig.~\ref{fig:GlobalArchi}.
 
 \begin{figure}[!h]
 	\centering
@@ -31,7 +31,7 @@ One of the goals of my research group at LAAS-CNRS is to build a fully autonomou
 The lower level of the architecture is composed of modules which allow to communicate and control sensors and actuators. Among others, this layer is composed of modules interpreting sensors data to detect humans and objects and a module allowing to execute given trajectories by calling the adequate actuators.
 
 \paragraph{Situation Assessment:}
-The situation assessment is done by a software called TOASTER \cite{milliezThesis}. One of the functionalities of TOASTER is to build and maintain a consistent world state based on data coming from the sensorimotor layer. Geometric computations are done on this world state to compute symbolic predicates concerning the environment (e.g. \textit{<object, isOn, support>}, \textit{<object, isIn, box>}) and agents abilities and behaviors (e.g. \textit{<object, isVisibleBy, human>}, \textit{<object, isReachableBy, robot>}, \textit{human, isLookingToward, object}). TOASTER is also in charge of perspective taking: the previous predicates are constantly estimated and maintained not only from the robot’s point of view but also from the point of view of all humans concerned and perceived in the current context. All the data concerning the world state are stored and accessible through a temporal database.
+The situation assessment is done by a software called TOASTER \cite{milliezThesis}. One of the functionalities of TOASTER is to build and maintain a consistent world state based on data coming from the sensorimotor layer. Geometric computations are done on this world state to compute symbolic predicates concerning the environment (e.g. \textit{<object, isOn, support>}, \textit{<object, isIn, box>}) and agents abilities and behaviors (e.g. \textit{<object, isVisibleBy, human>}, \textit{<object, isReachableBy, robot>}, \textit{human, isLookingToward, object}). TOASTER is also in charge of perspective taking: the previous predicates are constantly estimated and maintained not only from the robot’s point of view but also from the point of view of all humans concerned and perceived in the current context. All the data concerning the world state are stored and accessible through a database.
 
 
 \paragraph{Geometric Planner:}
@@ -44,7 +44,7 @@ HATP has been specially designed to integrate a number of features that are mean
 \begin{figure}[!h]
 	\centering
     \includegraphics[width=0.9\textwidth]{figs/Chapter2/SharedPlan.png}
-    \caption{An example of a Shared Plan computed by HATP. This plan allows a human and a robot to build a stack of coloured objects together by placing them one on-top of the others.}
+    \caption{An example of a Shared Plan computed by HATP. This plan allows a human and a robot to clean a table by removing all objects on it, cleaning it and then putting back all previous objects.}
     \label{fig:planHATP}
 \end{figure}
 
@@ -59,20 +59,20 @@ The last module of the architecture is the supervisor. It is the one in charge o
 \newpage
 \section{The supervisor architecture}
 
-The supervisor is composed of several modules and is fully implemented in ROS\footnote{http://www.ros.org/}. The complete scheme of its architecture can be found in Fig.~\ref{fig:archiSup}, however, as the figure is quite complex, each composing part of the supervisor will be represented and described individually in the next subsections. 
+The supervisor is composed of several modules and is fully implemented in ROS\footnote{http://www.ros.org/}. The complete scheme of its architecture can be found in Fig.~\ref{fig:archiSup}, however, since the figure is quite complex, each composing part of the supervisor will be represented and described individually in the next subsections. 
 
 \begin{figure}[!h]
 	\centering
     \includegraphics[width=\textwidth]{figs/Chapter2/ArchiSup.png}
-    \caption{Architecture of the supervisor.}
+    \caption{Architecture of the supervisor. The modules in bolt are the ones developed in this manuscript.}
     \label{fig:archiSup}
 \end{figure}
 
 \subsection{Goal Manager}
 
-The goal manager allows the robot to select and prioritize goals. It maintains a priority list of goals to perform. This list is updated with insert, abort or halt commands from dialogue or command line.
+The \textbf{Goal Manager} allows the robot to select and prioritize goals. It maintains a priority list of goals to perform. This list is updated with \textit{insert}, \textit{abort} or \textit{halt} commands from dialogue or command line.
 
-The chosen goal is published in order for the Plan Elaboration module to find a Shared Plan to perform it. The module sends stop and suspend orders to the Plan Elaboration from which it receives reports concerning the success of the plan or the impossibility to find a plan.
+The chosen goal is published in order for the \textbf{Plan Elaboration} module to compute a Shared Plan to satisfy it. The \textbf{Goal Manager} sends \textit{stop} and \textit{suspend} orders to the \textbf{Plan Elaboration} from which it receives reports concerning the success of the plan or the impossibility to find a plan.
 
 \begin{figure}[!h]
 	\centering
@@ -85,7 +85,7 @@ This module is, for now, really basic. An interesting extension would be to inte
 
 \subsection{Plan elaboration}
 
-Once a goal received from the Goal Manager, the Plan Elaboration module is in charge of finding a Shared Plan to perform it. To do so, the module is able to call HATP (the Human Aware Task Planner described in Sec.~\ref{sec:globalArchi}) to compute a plan and the dialogue module to validate the plan or ask for missing information. One of the contributions of this thesis concerns the elaboration of more flexible Shared Plans where some decisions are left to the execution. This work is in part done in this module and will be developed in Chapter~\ref{ch:SP}.
+Once a goal received from the \textbf{Goal Manager}, the \textbf{Plan Elaboration} module is in charge of finding a Shared Plan to perform it. To do so, the module is able to call HATP (the Human Aware Task Planner described in Sec.~\ref{sec:globalArchi}) to compute a plan and the dialogue module to validate the plan or ask for missing information. One of the contributions of this thesis concerns the elaboration of more flexible Shared Plans where some decisions are left to the execution. This work is in part done in this module and will be developed in Chapter~\ref{ch:SP}.
 
 \begin{figure}[!h]
 	\centering
@@ -94,11 +94,12 @@ Once a goal received from the Goal Manager, the Plan Elaboration module is in ch
     \label{fig:planElaboration}
 \end{figure}
 
-The computed Shared Plan is then published in order for the Plan Maintainer module to deal with it. The stop and suspend orders received from the Goal Manager are transmitted to the Plan Maintainer module from which it receives reports concerning the success, failure or need of adaptation of the Shared Plan.
+The computed Shared Plan is then published in order for the \textbf{Plan Maintainer} module to deal with it. The \textit{stop} and \textit{suspend} orders received from the \textbf{Goal Manager} are transmitted to the \textbf{Plan Maintainer} module from which it receives reports concerning the success, failure or need of adaptation of the Shared Plan.
 
+\newpage
 \subsection{Plan Maintainer}
 
-The Plan Maintainer module is in charge of monitoring the execution of the Shared Plan based on the current world state and current and past actions. It publishes the list of actions from the Shared Plan which need to be performed at a given moment and the list of actions from the Shared Plan which need to be done later. It also checks the consistency of the plan and reports to the Plan Elaboration module in case of failure or unexpected situations.
+The \textbf{Plan Maintainer} module is in charge of monitoring the execution of the Shared Plan based on the current world state and current and past actions. It publishes the list of actions from the Shared Plan which need to be performed at a given moment and the list of actions from the Shared Plan which need to be done later. It also checks the consistency of the plan and reports to the \textbf{Plan Elaboration} module in case of failure or unexpected situations.
 
 \begin{figure}[!h]
 	\centering
@@ -109,7 +110,7 @@ The Plan Maintainer module is in charge of monitoring the execution of the Share
 
 \subsection{Human Monitor}
 
-The Human Monitor module allows to interpret the current world state which contains humans activity information in order to recognize basic humans actions like Pick or Place. This module is, for now, really basic as it is based mainly on distances between humans and objects. However, there is room for improvements by taking into account the context (e.g. the action the agent is supposed to perform) during action recognition or using probabilistic models.
+The \textbf{Human Monitor} module allows to interpret the current world state which contains humans activity information in order to recognize basic humans actions like Pick or Place. This module is, for now, really basic as it is based mainly on distances between humans and objects. However, there is room for improvements by taking into account the context (e.g. the action the agent is supposed to perform) during action recognition or using probabilistic models.
 
 
 \begin{figure}[!h]
@@ -121,7 +122,7 @@ The Human Monitor module allows to interpret the current world state which conta
 
 \subsection{Mental State Manager}
 
-The Mental State Manager estimates the humans mental states concerning the current goal and Shared Plan. It bases its reasoning on all data published by the other supervisor modules and on the world states from all agents point of view given by TOASTER (see Sec.~\ref{sec:globalArchi}). This work is one of the thesis contribution and will be developed in Chapter \ref{ch:MS}. The composition of the estimated mental states will be given in Sec.~\ref{sec:data}. 
+The \textbf{Mental State Manager} estimates the humans mental states concerning the current goal and Shared Plan. It bases its reasoning on all data published by the other supervisor modules and on the world states from all agents point of view given by TOASTER (see Sec.~\ref{sec:globalArchi}). This work is one of the thesis contributions and will be developed in Chapter \ref{ch:MS}. The composition of the estimated mental states will be given in Sec.~\ref{sec:data}. 
 
 \begin{figure}[!h]
 	\centering
@@ -130,26 +131,27 @@ The Mental State Manager estimates the humans mental states concerning the curre
     \label{fig:MSManager}
 \end{figure}
 
-\subsection{Robot Decision}
-
-The Robot Decision module allows the robot to decide which action to execute and which information to give. Its decisions are based on the lists of current, planned and to execute actions as well as on the humans mental states. The way the robot uses these mental states to give pertinent information to humans is one of the thesis contribution and will be developed in Chapter \ref{ch:MS}. The decision of which action to execute has also been studied in this thesis and will be developed in Chapter \ref{ch:SP}.
+\subsection{Actions and Information Decision}
 
 \begin{figure}[h]
 	\centering
     \includegraphics[width=0.7\textwidth]{figs/Chapter2/RobotDecision.png}
-    \caption{Interaction of the Robot Decision module with the rest of the supervisor.}
+    \caption{Interaction of the Actions and Information Decision module with the rest of the supervisor.}
     \label{fig:robotDecition}
 \end{figure}
 
-The Robot Decision module sends commands to the Action Executor from which it receives reports. It also communicates with the dialogue module and the Non-Verbal Behavior module to give the correct information.
+The \textbf{Actions and Information Decision} module allows the robot to decide which action to execute and which information to give. Its decisions are based on the lists of current, planned and to execute actions as well as on the humans mental states. The way the robot uses these mental states to give pertinent information to humans is one of the thesis contribution and will be developed in Chapter \ref{ch:MS}. The decision of which action to execute has also been studied in this thesis and will be developed in Chapter \ref{ch:SP}.
+
+
+The \textbf{Actions and Information Decision} module sends commands to the \textbf{Action Executor} from which it receives reports. It also communicates with the dialogue module and the \textbf{Non-Verbal Behavior} module to give the correct information.
 
 \subsection{Action Executor}
 
-The Action Executor is in charge of supervising robot actions. It receives actions to execute and stop or suspend orders from the robot decision and calls lower level modules to perform the given action in the best possible way. The action execution has been studied in this thesis and will be developed in Chapter \ref{ch:Acting}.
+The \textbf{Action Executor} is in charge of supervising robot actions. It receives actions to execute and \textit{stop} or \textit{suspend} orders from the \textbf{Actions and Information Decision} and calls lower level modules to perform the given action in the best possible way.
 
 \begin{figure}[!h]
 	\centering
-    \includegraphics[width=0.5\textwidth]{figs/Chapter2/ActionExecutor.png}
+    \includegraphics[width=0.6\textwidth]{figs/Chapter2/ActionExecutor.png}
     \caption{Interaction of the Action Executor with the rest of the supervisor.}
     \label{fig:actionExecutor}
 \end{figure}
@@ -157,11 +159,11 @@ The Action Executor is in charge of supervising robot actions. It receives actio
 
 \subsection{Non-Verbal Behavior}
 
-This module allows to control the non-verbal behavior of the robot. In the current supervisor version, only the robot head behavior is concerned, but other type of non-verbal behaviors can be envisioned. The principles behind this module will be developed in Chapter \ref{ch:Acting}.
+This module allows to control the non-verbal behavior of the robot. In the current supervisor version, only the robot head behavior is concerned, but other types of non-verbal behaviors can be envisioned. The principles behind this module will be developed in Chapter \ref{ch:Acting}.
 
 \begin{figure}[!h]
 	\centering
-    \includegraphics[width=0.5\textwidth]{figs/Chapter2/NVBehavior.png}
+    \includegraphics[width=0.6\textwidth]{figs/Chapter2/NVBehavior.png}
     \caption{Interaction of the Non-Verbal Behavior with the rest of the supervisor.}
     \label{fig:NVBehavior}
 \end{figure}
@@ -176,40 +178,49 @@ As seen in the previous section, several types of data are produced and used by 
 
 The current state of the world from the robot point of view $WS$ is composed of a set of predicates $p$:
 $$p = <entity, attribute, value>$$
-For example, the fact that an object is on a table will be represented as $<object, isOn, table>$.
+For example, the fact that an object is on a table will be represented as $$<object, isOn, table>$$.
 
+\bigskip
 A goal $g$ is represented as:
 $$g = <Name_g, Actors_g, Params_g, Obj_g>$$
 where $Name_g$ allows to identify the goal, $Actors_g$ are the agents involved in the goal achievement, $Params_g$ are entities  (agents or objects) used to define precisely the goal and $Obj_g$ is a set of predicates representing the objective of the goal.
 For example, if the robot has for goal to clean the table of the kitchen in collaboration with Bob by removing all items on it, this goal will be represented as:
-$<Clean, <Robot, Bob>, <Kitchen\_table>, <<NULL, isOn, Kitchen\_table>>>$.
+$$<Clean, <Robot, Bob>, <Kitchen\_table>, <<NULL, isOn, Kitchen\_table>>>$$.
 Finally, at its end, each goal $g$ is stored and associated with a label noted $label_g$ which can be equal either to DONE or ABORTED.
 
+\bigskip
 Then, a Shared Plan $SP$ is represented as:
 $$SP = <id_p, A_p, L_p>$$
 where $id_p$ is used to identify the plan, $A_p$ are the actions composing the plan and $L_p$ the links representing the order the actions should be executed (causal links).
 
-A link $l \in L_p$ can be describe as:
+\bigskip
+A link $l \in L_p$ is described as:
  $$l = \langle prev_l, \ next_l \rangle$$
 where $prev_l$ is the id of the action which needs to be achieved before the action with the id $next_l$ is performed. 
 
+\bigskip
 The actions composing the plan $A_p$ can be decomposed as:
 $$A_p = <A_{prev}, A_{cur}, A_{next}, A_{later}>$$
 where $A_{prev}$ are the actions of the plan already executed, $A_{cur}$ the actions currently executed, $A_{next}$ the actions which can be performed according to causal links and actions preconditions and $A_{later}$ the actions to be executed in the future.
 Each of the set of actions previously introduced can be decomposed as:
 $$<A = A^R, A^H, A^X>$$
 where $A^R$ are the actions assigned to the robot, $A^H$ the actions assigned to the human and $A^X$ the actions not yet assigned. Indeed, we will see in Chapter~\ref{ch:SP} that not all actions are assigned to an actor during plan elaboration.
+
 Finally, each action $a$ in $A_{prev}$ is associated with a label noted $label_a$ which can be equal either to DONE, FAILED or ABORTED.
 
-An action $a$ can be represented as: 
+\bigskip
+An action $a$ is represented as: 
 $$a = < id_{a}, \ Name_{a}, \ Ag_{a}, \ Params_{a}, \ Precs_{a}, \ Effects_{a} >$$
 Where $id_{a}$ is the action identifier and $Name_{a}$ represents its name. $Actors_{a}$ are the actors of the actions and $Params_{a}$ a set of parameters (objects or agents) which allows to define precisely the action. $Precs_{a}$ and $Effects_{a}$ are sets of predicates representing respectively the action preconditions and effects.
-For example the action for the robot to place an object on a support will be defined as:$<0, place, Robot, <object, support>, <<object, isHoldBy, Robot>>, <<object, isOn, support>>>$.
+For example the action for the robot to place an object on a support will be defined as:$$<0, place, Robot, <object, support>, <<object, isHoldBy, Robot>>,$$
+$$<<object, isOn, support>>>$$.
 
-The information concerning the state of the task is regrouped in what will be called the Task State $TS$:
+\bigskip
+The information concerning the state of the task is grouped in what will be called the Task State $TS$:
 $$TS = <g_R, SP, WS>$$
 with $g_R$ the current goal of the robot, $SP$ the current Shared Plan and $WS$ the current world state from the robot point of view.
 
+\bigskip
 The robot also have a representation of humans mental state. The representation of the mental state $MS(H)$ of a human H is represented as:
 $$MS(H) = <g_H, g_R(H), SP(H), WS(H)>$$
 where $g_H$ is the goal the robot estimates the human is engaged in, $g_R(H)$ is the goal the robot estimates the human thinks the robot is performing, and $SP(H)$ and $WS(H)$ are the estimation of the Shared Plan and the World State from the human point of view.

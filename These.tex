@@ -35,14 +35,33 @@
 % formatAndDefs.tex file. You too can create sections of your thesis that is
 % language dependend this way, although you probably won't need it. Another use
 % of \iftoggle can be found at the end of this file.
+
 \iftoggle{ThesisInEnglish}{%
-\chapter*{Acknowledgments}
+\chapter*{Remerciements}
 }{%
 \chapter*{Remerciements}
 }
 
-TODO
+\selectlanguage{francais}
+Je tiens tout d'abord à remercier les deux personnes qui ont participé activement à l'encadrement de ma thèse,
+Rachid ALAMI et Aurélie CLODIC. Ils ont toujours su me donner des conseils avisés et ont été un soutien sans faille durant ces trois années.
 
+Je remercie Peter FORD DOMINEY et Vanessa EVERS, tout deux rapporteurs de mon manuscrit de thèse, pour m’avoir fait l’honneur d’accepter d’évaluer mon travail et de me faire bénéficier de leur expertise.
+Je remercie également Raja CHATILA, Julie SHAH et Malik GHALLAB pour avoir accepté de siéger en tant qu’examinateur au sein mon jury.
+
+Je souhaite remercier les autres doctorants, ingénieurs et stagiaires de l'équipe HRI avec qui j'ai pu travailler pour leurs idées, leur support et la bonne ambiance au sein du groupe. Merci Jules, Grégoire, Michelangelo, Harmish, Renaud, Raphaël, Camille, Yoan, Amandine, Mamoun, Erwan, Théo et Jean-François. Je remercie également Aurélie, Matthieu et Jérôme pour avoir répondu à mes nombreux appels à l'aide durant mes manipulations sur le robot.
+
+Je remercie Amélie, Ellon, Nicolas, Laurent, Arthur, Arthur, Christophe, Rafael, Alexandre, Alejandro pour leur bonne humeur et la bonne ambiance apportée au laboratoire et en dehors ainsi que pour les parties de tarot.
+
+Je remercie le CETAM, mon club de judo, pour leur soutien sans faille sur le tatami et en dehors sans lequel je ne serais sûrement pas arrivé au bout de cette thèse. Merci Greg, Etienne, Claire, Cyril, Olivier, Eric, Hugues, Baptise, Mimine, Jérôme, Edwin, Micka, Rachel, Yasushi et tous les autres.
+
+Je remercie mes parents qui ont su faire de moi ce que je suis aujourd’hui.
+
+Je tiens à remercier plus particulièrement Etienne, pour son soutien dans la vie de tous les jours durant ces trois années et ses nombreuses relectures.
+
+Enfin, je remercie Arnaud, pour son soutien sur la fin de la thèse, son amour et bien sûr, pour l'eau du jury.
+
+\selectlanguage{english}
 \include{Abstract}
 
 \tableofcontents
@@ -59,10 +78,15 @@ TODO
 
 \mainmatter
 
+\fancyhead[RE, LO]{\bfseries\nouppercase{Introduction}}      % Chapter in the right on even pages
+
 
 \include{Introduction}
 
 \setcounter{mtc}{1}
+
+\fancyhead[RE]{\bfseries\nouppercase{\leftmark}}      % Chapter in the right on even pages
+\fancyhead[LO]{\bfseries\nouppercase{\rightmark}}     % Section in the left on odd pages
 
 \part{From Human-Human Joint Action to a supervisor for Human-Robot Interaction}
 
@@ -75,7 +99,7 @@ TODO
 \include{Chapter4}
 \include{Chapter5}
 
-\part{Other contributions on Human-Robot Joint Action}
+\part{Other contributions to Human-Robot Joint Action}
 
 \include{Chapter6}
 \include{Chapter7}
@@ -89,6 +113,7 @@ TODO
 \include{Annexe1}
 \include{Annexe2}
 \include{Annexe3}
+\include{Resume}
 
 \bibliographystyle{StyleThese}
 %\bibliographystyle{plain}
